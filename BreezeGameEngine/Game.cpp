@@ -15,7 +15,6 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
@@ -37,6 +36,7 @@ void Game::Play()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
 	if (AtTitle)
 	{
 		Satoru.ROCKETMODE = 0;

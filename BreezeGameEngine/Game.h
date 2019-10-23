@@ -17,6 +17,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include <random>
+#include "FrameTimer.h"
 
 #include "Coin.h"
 #include "Satoru.h"
@@ -49,6 +50,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	FrameTimer ft;
 	std::random_device dev;
 	std::mt19937 rng;
 	std::uniform_real_distribution<float> xDist;
