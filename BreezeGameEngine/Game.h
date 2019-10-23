@@ -17,6 +17,11 @@
 #include "Mouse.h"
 #include "Graphics.h"
 
+#include <random>
+#include "Board.h"
+#include "Snake.h"
+#include "Goal.h"
+
 class Game
 {
 public:
@@ -38,4 +43,15 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	std::mt19937 rng;
+	Board brd;
+	Snake Snake;
+	Location dLoc = { 1, 0 };
+	Goal goal;
+	static constexpr int MovePeriod = 20;
+	int MoveCnt = 0;
+	int Eats = 0;
+	bool AtTitle = 1;
+	bool Death = 0;
+	bool ReInit = 0;
 };
