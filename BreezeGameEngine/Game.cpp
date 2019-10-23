@@ -19,11 +19,9 @@
 
 Game::Game(MainWindow& wnd)
 	:
-	wnd(wnd),
-	gfx(wnd),
+	wnd(wnd), gfx(wnd), ft(),
 	brd(gfx), rng( std::random_device()() ),
-	Snake({2,2}),
-	goal(rng, brd, Snake)
+	Snake({2,2}), goal(rng, brd, Snake)
 {
 }
 
@@ -39,6 +37,9 @@ void Game::Play()
 
 void Game::UpdateModel()
 {
+	dt = ft.Mark();
+	MoveDelay += dt;
+
 	if (AtTitle)
 	{
 		if (ReInit)
@@ -50,6 +51,7 @@ void Game::UpdateModel()
 		{
 			AtTitle = 0;
 			Eats = 0;
+			MoveDelay = 0;
 		}
 	}
 	else
@@ -81,9 +83,9 @@ void Game::UpdateModel()
 				Snake.SetMoveBuffer({ 1,0 });
 			}
 
-			if (++MoveCnt >= MovePeriod)
+			if (MoveDelay >= MovePeriod)
 			{
-				MoveCnt = Eats/2;
+				MoveDelay -= MovePeriod - std::min(float(Eats)/120.0f, 15.0f);
 				const Location Next = Snake.GetNextHead();
 				if (!brd.InBoard(Next) || Snake.InTileExcEnd(Next))
 				{

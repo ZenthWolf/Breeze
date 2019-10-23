@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Doom.h" />
+    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Colors.h" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />

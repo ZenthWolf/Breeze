@@ -16,6 +16,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "FrameTimer.h"
 
 #include <random>
 #include "Board.h"
@@ -43,13 +44,15 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	FrameTimer ft;
+	float dt;
 	std::mt19937 rng;
 	Board brd;
 	Snake Snake;
 	Location dLoc = { 1, 0 };
 	Goal goal;
-	static constexpr int MovePeriod = 20;
-	int MoveCnt = 0;
+	static constexpr float MovePeriod = 0.33333f;
+	float MoveDelay = 0.0f;
 	int Eats = 0;
 	bool AtTitle = 1;
 	bool Death = 0;

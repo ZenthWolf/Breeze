@@ -1,5 +1,7 @@
 #pragma once
 
+//Holds Grid Space Position
+
 class Location
 {
 public:
