@@ -163,7 +163,7 @@ void Game::UpdateModel()
 			if (Game::BoxColl(Satoru.X, Satoru.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
 				Coin[i].Get();
-				Beep(300+300*vDist(rng), 200);
+				Beep(300+300*int(vDist(rng)), 200);
 			}
 		}
 	}
@@ -187,22 +187,22 @@ void Game::ComposeFrame()
 			}
 		}
 
-    	Game::DrawSatoru(Satoru.X, Satoru.Y);
+    	Game::DrawSatoru(int(Satoru.X), int(Satoru.Y));
 	}
 }
 
 
-bool Game::BoxColl(int box0x, int box0y, int box0W, int box0H, int box1x, int box1y, int box1W, int box1H )
+bool Game::BoxColl(float box0x, float box0y, float box0W, float box0H, float box1x, float box1y, float box1W, float box1H )
 {
-	int b0left = box0x - box0W;
-	int b0right = box0x + box0W;
-	int b0top = box0y - box0H;
-	int b0bot = box0y + box0H;
+	float b0left = box0x - box0W;
+	float b0right = box0x + box0W;
+	float b0top = box0y - box0H;
+	float b0bot = box0y + box0H;
 
-	int b1left = box1x - box1W;
-	int b1right = box1x + box1W;
-	int b1top = box1y - box1H;
-	int b1bot = box1y + box1H;
+	float b1left = box1x - box1W;
+	float b1right = box1x + box1W;
+	float b1top = box1y - box1H;
+	float b1bot = box1y + box1H;
 
 	return (b0left <= b1right &&
 		    b0right >= b1left &&

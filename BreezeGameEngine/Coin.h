@@ -18,29 +18,29 @@
 class Coin
 {
 public:
-	Coin(int x, int y, int vx, int vy);
+	Coin(float x, float y, float vx, float vy);
 	Coin();
-	void Init(int x, int y, int vx, int vy);
+	void Init(float x, float y, float vx, float vy);
 	void Update();
 	void Draw( Graphics& gfx );
 	bool IsGot() const;
 	void Get();
-	int PollX();
-	int PollY();
-	void SetX(int x);
-	void SetY(int y);
-	int PollVx();
-	int PollVy();
-	void SetVx(int vx);
-	void SetVy(int vy);
+	float PollX();
+	float PollY();
+	void SetX(float x);
+	void SetY(float y);
+	float PollVx();
+	float PollVy();
+	void SetVx(float vx);
+	void SetVy(float vy);
 	void CoinColl(Coin& TCoin);
-	static constexpr int W = 5;
-	static constexpr int H = 7;
+	static constexpr float W = 5.0f;
+	static constexpr float H = 7.0f;
 
 private:
-	int X;
-	int Y;
-	int Vx;
-	int Vy;
+	float X;
+	float Y;
+	float Vx;
+	float Vy;
 	bool Got = false;
 };

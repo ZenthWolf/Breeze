@@ -17,15 +17,14 @@ class Satoru
 {
 public:
 	void Update();
-	int X;
-	int Y;
-	int Vx;
-	int Vy;
+	float X;
+	float Y;
+	float Vx;
+	float Vy;
 	bool ROCKETMODE = false;
-	static constexpr int W = 9;
-	static constexpr int H = 9;
-	bool CoinGot = false;
+	static constexpr float W = 9.0f;
+	static constexpr float H = 9.0f;
 
-	int DefX = 100;
-	int DefY = 550;
+	float DefX = 100.0f;
+	float DefY = 550.0f;
 };
