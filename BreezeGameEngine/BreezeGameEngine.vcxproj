@@ -143,6 +143,7 @@
     <ClInclude Include="Satoru.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="Vec.h" />
     <ClInclude Include="WinDefs.h" />
     <ClInclude Include="MainWindow.h" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Satoru.cpp" />
     <ClCompile Include="Tone.cpp" />
+    <ClCompile Include="Vec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FramebufferPS.shh" />
