@@ -16,6 +16,10 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include <random>
+
+#include "Coin.h"
+#include "Satoru.h"
 
 class Game
 {
@@ -30,7 +34,15 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	bool BoxColl(int box0x, int box0y, int box1x, int box1y);
+	void DrawTitle();
+	
+	bool BoxColl(int box0x, int box0y, int box0w, int box0h, int box1x, int box1y, int box1w, int box1h );
+	void DrawSatoru(int x, int y);
+	void DrawCoin(int x, int y);
+	int WallX(int x, int w);
+	int WallY(int y, int h);
+	int BounceX(int x, int vx, int w);
+	int BounceY(int y, int vy, int h);
 
 private:
 	MainWindow& wnd;
@@ -38,4 +50,16 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	std::random_device dev;
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> xDist;
+	std::uniform_int_distribution<int> yDist;
+	std::uniform_int_distribution<int> vDist;
+	bool AtTitle = 1;
+	bool DoneWon = 0;
+	static  constexpr int NCoins = 25;
+
+	Coin Coin[NCoins];
+
+	Satoru Satoru;
 };
