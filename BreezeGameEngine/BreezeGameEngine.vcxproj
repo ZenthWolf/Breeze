@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Coin.h" />
+    <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Game.h" />
@@ -138,12 +138,12 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Satoru.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="WinDefs.h" />
     <ClInclude Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -151,7 +151,6 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="Satoru.cpp" />
     <ClCompile Include="Tone.cpp" />
   </ItemGroup>
   <ItemGroup>
