@@ -59,10 +59,6 @@ private:
 	bool AtTitle = 1;
 	bool DoneWon = 0;
 	static  constexpr int NCoins = 25;
-	bool inhibitLeft = 0;
-	bool inhibitRight = 0;
-	bool inhibitUp = 0;
-	bool inhibitDown = 0;
 
 	Coin Coin[NCoins];
 

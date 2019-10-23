@@ -74,68 +74,7 @@ void Game::UpdateModel()
 	}
 	else
 	{
-		if (wnd.kbd.KeyIsPressed(VK_UP))
-		{
-			if (!Satoru.ROCKETMODE)
-			{
-				Satoru.Y = Satoru.Y - 2;
-			}
-			else if(!inhibitUp)
-			{
-				Satoru.Vy = Satoru.Vy - 60.0f;
-			}
-			else
-			{
-				inhibitUp = 0;
-			}
-		}
-		if (wnd.kbd.KeyIsPressed(VK_DOWN))
-		{
-			if (!Satoru.ROCKETMODE)
-			{
-				Satoru.Y = Satoru.Y + 2;
-			}
-			else if(!inhibitDown)
-			{
-				Satoru.Vy = Satoru.Vy + 60.0f;
-			}
-			else 
-			{
-				inhibitDown = 0;
-			}
-		}
-		if (wnd.kbd.KeyIsPressed(VK_LEFT))
-		{
-			if (!Satoru.ROCKETMODE)
-			{
-				Satoru.X = Satoru.X - 2;
-			}
-			else if(!inhibitLeft)
-			{
-				Satoru.Vx = Satoru.Vx - 60.0f;
-			}
-			else
-			{
-				inhibitLeft = 0;
-			}
-		}
-		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-		{
-			if (!Satoru.ROCKETMODE)
-			{
-				Satoru.X = Satoru.X + 2;
-			}
-			else if(!inhibitRight)
-			{
-				Satoru.Vx = Satoru.Vx + 60.0f;
-			}
-			else
-			{
-				inhibitRight = 0;
-			}
-		}
-
-		Satoru.Update( dt );
+		Satoru.Update( wnd.kbd, dt );
 
 		for (int i = 0; i < NCoins; i++)
 		{
@@ -179,7 +118,7 @@ void Game::UpdateModel()
 			if (Game::BoxColl(Satoru.X, Satoru.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
 				Coin[i].Get();
-				Beep(300+300*int(vDist(rng)), 200);
+				Beep(300+300*int(vDist(rng)/60.0f), 200);
 			}
 		}
 	}

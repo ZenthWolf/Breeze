@@ -13,10 +13,12 @@
 /***************************************************************************/
 #pragma once
 
+#include "Keyboard.h"
+
 class Satoru
 {
 public:
-	void Update(float dt);
+	void Update(Keyboard& kbd, float dt);
 	float X;
 	float Y;
 	float Vx;
@@ -27,4 +29,10 @@ public:
 
 	float DefX = 100.0f;
 	float DefY = 550.0f;
+
+private:
+	bool inhibitLeft = 0;
+	bool inhibitRight = 0;
+	bool inhibitUp = 0;
+	bool inhibitDown = 0;
 };
