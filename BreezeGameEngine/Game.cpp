@@ -19,7 +19,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	rng(dev()), xDist(15, 799 - 15), yDist(15, 599 - 15), vDist(-5, 5)
+	rng(dev()), xDist(15, 799 - 15), yDist(15, 599 - 15), vDist(-5.0f*60.0f, 5*60.0f)
 {
 }
 //,
@@ -80,9 +80,13 @@ void Game::UpdateModel()
 			{
 				Satoru.Y = Satoru.Y - 2;
 			}
+			else if(!inhibitUp)
+			{
+				Satoru.Vy = Satoru.Vy - 60.0f;
+			}
 			else
 			{
-				Satoru.Vy = Satoru.Vy - 1;
+				inhibitUp = 0;
 			}
 		}
 		if (wnd.kbd.KeyIsPressed(VK_DOWN))
@@ -91,9 +95,13 @@ void Game::UpdateModel()
 			{
 				Satoru.Y = Satoru.Y + 2;
 			}
-			else
+			else if(!inhibitDown)
 			{
-				Satoru.Vy = Satoru.Vy + 1;
+				Satoru.Vy = Satoru.Vy + 60.0f;
+			}
+			else 
+			{
+				inhibitDown = 0;
 			}
 		}
 		if (wnd.kbd.KeyIsPressed(VK_LEFT))
@@ -102,9 +110,13 @@ void Game::UpdateModel()
 			{
 				Satoru.X = Satoru.X - 2;
 			}
+			else if(!inhibitLeft)
+			{
+				Satoru.Vx = Satoru.Vx - 60.0f;
+			}
 			else
 			{
-				Satoru.Vx = Satoru.Vx - 1;
+				inhibitLeft = 0;
 			}
 		}
 		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
@@ -113,17 +125,21 @@ void Game::UpdateModel()
 			{
 				Satoru.X = Satoru.X + 2;
 			}
+			else if(!inhibitRight)
+			{
+				Satoru.Vx = Satoru.Vx + 60.0f;
+			}
 			else
 			{
-				Satoru.Vx = Satoru.Vx + 1;
+				inhibitRight = 0;
 			}
 		}
 
-		Satoru.Update();
+		Satoru.Update( dt );
 
 		for (int i = 0; i < NCoins; i++)
 		{
-			Coin[i].Update();
+			Coin[i].Update( dt );
 		}
 
 		for (int i = 0; i < NCoins; i++)

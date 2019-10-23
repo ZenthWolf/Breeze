@@ -140,10 +140,10 @@ bool Coin::IsGot() const
 	return Got;
 }
 
-void Coin::Update()
+void Coin::Update(float dt)
 {
-	X += Vx;
-	Y += Vy;
+	X += Vx*dt;
+	Y += Vy*dt;
 
 	if (X < W)
 	{

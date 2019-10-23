@@ -21,7 +21,7 @@ public:
 	Coin(float x, float y, float vx, float vy);
 	Coin();
 	void Init(float x, float y, float vx, float vy);
-	void Update();
+	void Update(float dt);
 	void Draw( Graphics& gfx );
 	bool IsGot() const;
 	void Get();

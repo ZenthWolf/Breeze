@@ -16,7 +16,7 @@
 class Satoru
 {
 public:
-	void Update();
+	void Update(float dt);
 	float X;
 	float Y;
 	float Vx;

@@ -16,12 +16,12 @@
 #include "Graphics.h"
 
 
-void Satoru::Update()
+void Satoru::Update(float dt)
 {
 	if (ROCKETMODE)
 	{
-		X = X + Vx;
-		Y = Y + Vy;
+		X = X + Vx * dt;
+		Y = Y + Vy * dt;
 	}
 	if (X < W)
 	{
