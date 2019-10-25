@@ -118,7 +118,7 @@ void Game::UpdateModel()
 			if (Game::BoxColl(Satoru.X, Satoru.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
 				Coin[i].Get();
-				Beep(300+300*int(vDist(rng)/60.0f), 200);
+				Beep(300+300*int(abs(vDist(rng))/60.0f), 200);
 			}
 		}
 	}
