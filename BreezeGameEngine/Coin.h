@@ -25,6 +25,7 @@ public:
 	void Draw( Graphics& gfx );
 	bool IsGot() const;
 	void Get();
+	void Nab();
 	float PollX();
 	float PollY();
 	void SetX(float x);

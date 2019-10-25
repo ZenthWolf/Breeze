@@ -50,8 +50,8 @@ void Game::UpdateModel()
 				Coin[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
 			}
 
-			Satoru.X = Satoru.DefX;
-			Satoru.Y = Satoru.DefY;
+			Satoru.Pos.X = Satoru.DefX;
+			Satoru.Pos.Y = Satoru.DefY;
 		}
 
 		else if (wnd.kbd.KeyIsPressed('R'))
@@ -65,11 +65,11 @@ void Game::UpdateModel()
 				Coin[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
 			}
 
-			Satoru.X = Satoru.DefX;
-			Satoru.Y = Satoru.DefY;
+			Satoru.Pos.X = Satoru.DefX;
+			Satoru.Pos.Y = Satoru.DefY;
 
-			Satoru.Vx = 0;
-			Satoru.Vy = 0;
+			Satoru.Vel.X = 0;
+			Satoru.Vel.Y = 0;
 		}
 	}
 	else
@@ -115,7 +115,7 @@ void Game::UpdateModel()
 
 		for (int i = 0; i < NCoins; i++)
 		{
-			if (Game::BoxColl(Satoru.X, Satoru.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
+			if (Game::BoxColl(Satoru.Pos.X, Satoru.Pos.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
 				Coin[i].Get();
 				Beep(300+300*int(abs(vDist(rng))/60.0f), 200);
