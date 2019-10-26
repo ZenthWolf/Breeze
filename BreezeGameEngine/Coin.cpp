@@ -18,117 +18,126 @@
 Coin::Coin(float x, float y, float vx, float vy)
 {
 	{
-		X = x;
-		Y = y;
-		Vx = vx;
-		Vy = vy;
+		Pos.X = x;
+		Pos.Y = y;
+		Vel.X = vx;
+		Vel.Y = vy;
 	}
+}
+
+Coin::Coin(Vec pos, Vec vel)
+{
+	Pos = pos;
+	Vel = vel;
 }
 
 Coin::Coin()
 {
 	{
-		X = W;
-		Y = H;
-		Vx = 0;
-		Vy = 0;
+		Pos.X = W;
+		Pos.Y = H;
+		Vel.X = 0;
+		Vel.Y = 0;
 	}
 }
 
 void Coin::Init(float x, float y, float vx, float vy)
 {
 	{
-		X = x;
-		Y = y;
-		Vx = vx;
-		Vy = vy;
+		Pos.X = x;
+		Pos.Y = y;
+		Vel.X = vx;
+		Vel.Y = vy;
 
 		Got = 0;
 	}
 }
 
-void Coin::CoinColl(Coin& TCoin)
+bool Coin::CoinColl(const Coin& TCoin) const
 {
 	{
-		float TLeft = TCoin.PollX() - Coin::W;
-		float TRight = TCoin.PollX() + Coin::W;
-		float TTop = TCoin.PollY() - Coin::H;
-		float TBot = TCoin.PollY() + Coin::H;
+		Vec tpos = TCoin.PollPos();
+		Vec tvel = TCoin.PollVel();
 
-		float MLeft = X - W;
-		float MRight = X + W;
-		float MTop = Y - H;
-		float MBot = Y + H;
+		float TLeft =tpos.X - Coin::W;
+		float TRight = tpos.X + Coin::W;
+		float TTop = tpos.Y - Coin::H;
+		float TBot = tpos.Y + Coin::H;
 
-		if (MLeft <= TRight && MRight >= TLeft &&
-			MTop <= TBot && MBot >= TTop)
-		{
-			float Tvx = abs(Vx) + abs(TCoin.PollVx());
-			float Tvy = abs(Vy) + abs(TCoin.PollVy());
+		float MLeft = Pos.X - W;
+		float MRight = Pos.X + W;
+		float MTop = Pos.Y - H;
+		float MBot = Pos.Y + H;
 
-			if (X > TCoin.PollX())
-			{
-				Vx = Tvx / 2;
-				TCoin.SetVx(-Vx);
-			}
-			else
-			{
-				Vx = -Tvx / 2;
-				TCoin.SetVx(-Vx);
-			}
-
-			if (Y > TCoin.PollY())
-			{
-				Vy = Tvy / 2;
-				TCoin.SetVy(-Vy);
-			}
-			else
-			{
-				Vy = -Tvy / 2;
-				TCoin.SetVy(-Vy);
-			}
-		}
+		return (MLeft <= TRight && MRight >= TLeft &&
+			MTop <= TBot && MBot >= TTop);
 	}
 }
 
-float Coin::PollX()
+void Coin::CoinBounce(Coin& TCoin)
 {
-	return X;
+	Vec tpos = TCoin.PollPos();
+	Vec tvel = TCoin.PollVel();
+
+	float Tvx = abs(Vel.X) + abs(tvel.X);
+	float Tvy = abs(Vel.Y) + abs(tvel.Y);
+
+	if (Pos.X > tpos.X)
+	{
+		Vel.X = Tvx / 2;
+		TCoin.SetVel(-Vel.X, tvel.Y);
+	}
+	else
+	{
+		Vel.X = -Tvx / 2;
+		TCoin.SetVel(-Vel.X, tvel.Y);
+	}
+
+	if (Pos.Y > tpos.Y)
+	{
+		Vel.Y = Tvy / 2;
+		TCoin.SetVel(tvel.X, -Vel.Y);
+	}
+	else
+	{
+		Vel.Y = -Tvy / 2;
+		TCoin.SetVel(tvel.X, -Vel.Y);
+	}
 }
 
-float Coin::PollY()
+Vec Coin::PollPos() const
 {
-	return Y;
+	return Pos;
 }
 
-float Coin::PollVx()
+Vec Coin::PollVel() const
 {
-	return Vx;
+	return Vel;
 }
 
-float Coin::PollVy()
+
+void Coin::SetPos(const float x, const float y)
 {
-	return Vy;
+	Pos.X = x;
+	Pos.Y = y;
 }
 
-void Coin::SetX(float x)
+void Coin::SetPos(const Vec pos)
 {
-	X = x;
+	Pos.X = pos.X;
+	Pos.Y = pos.Y;
 }
 
-void Coin::SetY(float y)
+void Coin::SetVel(const float vx, const float vy)
 {
-	Y = y;
+	Vel.X = vx;
+	Vel.Y = vy;
 }
 
-void Coin::SetVx(float vx)
+void Coin::SetVel(const Vec vel)
 {
-	Vx = vx;
-}
-
-void Coin::SetVy(float vy)
-{
-	Vy = vy;
+	Vel.X = vel.X;
+	Vel.Y = vel.X;
 }
 
 void Coin::Get()
@@ -142,31 +151,31 @@ bool Coin::IsGot() const
 
 void Coin::Update(float dt)
 {
-	X += Vx*dt;
-	Y += Vy*dt;
+	Pos.X += Vel.X*dt;
+	Pos.Y += Vel.Y*dt;
 
-	if (X < W)
+	if (Pos.X < W)
 	{
-		Vx = -Vx;
-		X = W;
+		Vel.X = -Vel.X;
+		Pos.X = W;
 	}
 	
-	else if (X >= Graphics::ScreenWidth - W)
+	else if (Pos.X >= Graphics::ScreenWidth - W)
 	{
-		Vx = -Vx;
-		X = Graphics::ScreenWidth - W - 1;
+		Vel.X = -Vel.X;
+		Pos.X = Graphics::ScreenWidth - W - 1;
 	}
 
-	if (Y < H)
+	if (Pos.Y < H)
 	{
-		Vy = -Vy;
-		Y = H;
+		Vel.Y = -Vel.Y;
+		Pos.Y = H;
 	}
 
-	else if (Y >= Graphics::ScreenHeight - H)
+	else if (Pos.Y >= Graphics::ScreenHeight - H)
 	{
-		Vy = -Vy;
-		Y = Graphics::ScreenHeight - H - 1;
+		Vel.Y = -Vel.Y;
+		Pos.Y = Graphics::ScreenHeight - H - 1;
 	}
 }
 
@@ -176,7 +185,7 @@ void Coin::Draw( Graphics& gfx )
 	{
 		for (int py = -5; py <= 5; py++)
 		{
-			gfx.PutPixel(int(X) + px, int(Y) + py, 203, 153, 34);
+			gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 203, 153, 34);
 		}
 	}
 
@@ -184,7 +193,7 @@ void Coin::Draw( Graphics& gfx )
 	{
 		for (int py = -5; py <= 5; py++)
 		{
-			gfx.PutPixel(int(X) + px, int(Y) + py, 203, 153, 34);
+			gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 203, 153, 34);
 		}
 	}
 
@@ -192,7 +201,7 @@ void Coin::Draw( Graphics& gfx )
 	{
 		for (int py = -7; py <= 7; py++)
 		{
-			gfx.PutPixel(int(X) + px, int(Y) + py, 255, 180, 00);
+			gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 180, 00);
 		}
 	}
 }

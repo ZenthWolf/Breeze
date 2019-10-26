@@ -14,11 +14,13 @@
 #pragma once
 
 #include "Graphics.h"
+#include "Vec.h"
 
 class Coin
 {
 public:
 	Coin(float x, float y, float vx, float vy);
+	Coin(Vec pos, Vec vel);
 	Coin();
 	void Init(float x, float y, float vx, float vy);
 	void Update(float dt);
@@ -26,22 +28,19 @@ public:
 	bool IsGot() const;
 	void Get();
 	void Nab();
-	float PollX();
-	float PollY();
-	void SetX(float x);
-	void SetY(float y);
-	float PollVx();
-	float PollVy();
-	void SetVx(float vx);
-	void SetVy(float vy);
-	void CoinColl(Coin& TCoin);
+	Vec PollPos() const;
+	void SetPos(const float x, const float y);
+	void SetPos(const Vec pos);
+	Vec PollVel() const;
+	void SetVel(const float vx, const float vy);
+	void SetVel(const Vec vel);
+	bool CoinColl(const Coin& TCoin) const;
+	void CoinBounce(Coin& TCoin);
 	static constexpr float W = 5.0f;
 	static constexpr float H = 7.0f;
 
 private:
-	float X;
-	float Y;
-	float Vx;
-	float Vy;
+	Vec Pos;
+	Vec Vel;
 	bool Got = false;
 };

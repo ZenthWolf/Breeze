@@ -85,7 +85,10 @@ void Game::UpdateModel()
 		{
 			for (int j = i + 1; j < NCoins; j++)
 			{
-				Coin[i].CoinColl(Coin[j]);
+				if (Coin[i].CoinColl(Coin[j]))
+				{
+					Coin[i].CoinBounce(Coin[j]);
+				}
 			}
 		}
 
@@ -115,7 +118,7 @@ void Game::UpdateModel()
 
 		for (int i = 0; i < NCoins; i++)
 		{
-			if (Game::BoxColl(Satoru.Pos.X, Satoru.Pos.Y, Satoru.W, Satoru.H, Coin[i].PollX(), Coin[i].PollY(), Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
+			if (Game::BoxColl(Satoru.Pos.X, Satoru.Pos.Y, Satoru.W, Satoru.H, Coin[i].PollPos().X, Coin[i].PollPos().Y, Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
 				Coin[i].Get();
 				Beep(300+300*int(abs(vDist(rng))/60.0f), 200);
