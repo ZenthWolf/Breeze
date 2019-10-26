@@ -38,7 +38,6 @@ private:
 	void DrawTitle();
 	
 	bool BoxColl(float box0x, float box0y, float box0w, float box0h, float box1x, float box1y, float box1w, float box1h );
-	void DrawSatoru(int x, int y);
 	int WallX(int x, int w);
 	int WallY(int y, int h);
 	int BounceX(int x, int vx, int w);

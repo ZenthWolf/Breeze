@@ -13,19 +13,20 @@
 /***************************************************************************/
 #pragma once
 
+#include "Graphics.h"
 #include "Keyboard.h"
+#include "Vec.h"
 
 class Satoru
 {
 public:
 	void Update(Keyboard& kbd, float dt);
-	float X;
-	float Y;
-	float Vx;
-	float Vy;
+	Vec Pos;
+	Vec Vel;
 	bool ROCKETMODE = false;
 	static constexpr float W = 9.0f;
 	static constexpr float H = 9.0f;
+	void Draw(Graphics& gfx);
 
 	float DefX = 100.0f;
 	float DefY = 550.0f;
