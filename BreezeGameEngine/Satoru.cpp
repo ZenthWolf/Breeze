@@ -118,281 +118,281 @@ void Satoru::Draw(Graphics& gfx)
 	int py = -9;
 	for (int px = -7; px <= 7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 
 	py = -8;
 	for (int px = -9; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 
 	py = -7;
 	for (int px = -9; px <= -2; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 	for (int px = 2; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 	py = -6;
 	for (int px = -9; px <= -2; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 	for (int px = 4; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 
 	py = -5;
 	for (int px = -9; px <= -7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 	for (int px = 8; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 
 	py = -4;
 	for (int px = -9; px <= -7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 	for (int px = 8; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 94, 44, 44);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 94, 44, 44);
 	}
 
 	//Eye White
 	py = -3;
 	for (int px = -5; px <= -3; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 	for (int px = 3; px <= 5; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	py = 1;
 	for (int px = -5; px <= -3; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 	for (int px = 3; px <= 5; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	int px = -5;
 	for (int py = -3; py <= 1; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	px = -3;
 	for (int py = -3; py <= 1; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	px = 3;
 	for (int py = -3; py <= 1; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	px = 5;
 	for (int py = -3; py <= 1; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 255, 255, 255);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 255, 255, 255);
 	}
 
 	//skin
 	py = -7;
 	for (int px = -1; px <= 1; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	py = -6;
 	for (int px = -1; px <= 4; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	py = -5;
 	for (int px = -6; px <= 7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	py = -4;
 	for (int px = 6; px <= 7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 	for (int px = -2; px <= 2; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
-	gfx.PutPixel(Pos.X - 6, Pos.Y + py, 209, 169, 109);
+	gfx.PutPixel(int(Pos.X) - 6, int(Pos.Y) + py, 209, 169, 109);
 
 	py = -3;
 	for (int px = -8; px <= -7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 	for (int px = 7; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
-	gfx.PutPixel(Pos.X + 1, Pos.Y + py, 209, 169, 109);
-	gfx.PutPixel(Pos.X - 1, Pos.Y + py, 209, 169, 109);
+	gfx.PutPixel(int(Pos.X) + 1, int(Pos.Y) + py, 209, 169, 109);
+	gfx.PutPixel(int(Pos.X) - 1, int(Pos.Y) + py, 209, 169, 109);
 
 	py = -2;
 	for (int px = -9; px <= -7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
-	gfx.PutPixel(Pos.X, Pos.Y + py, 209, 169, 109);
+	gfx.PutPixel(int(Pos.X), int(Pos.Y) + py, 209, 169, 109);
 
 	py = 9;
 	for (int px = -7; px <= 7; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	py = 8;
 	for (int px = -8; px <= 8; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	py = 7;
 	for (int px = -9; px <= -3; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 	for (int px = 3; px <= 9; px++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -9;
 	for (int py = -1; py <= 7; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -8;
 	for (int py = -1; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -7;
 	for (int py = -1; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -6;
 	for (int py = 2; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -5;
 	for (int py = 3; py <= 4; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -4;
 	for (int py = 3; py <= 4; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -3;
 	for (int py = 3; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -2;
 	for (int py = 2; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = -1;
 	for (int py = -1; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 0;
 	for (int py = -1; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 1;
 	for (int py = -1; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 2;
 	for (int py = 2; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 3;
 	for (int py = 3; py <= 5; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 4;
 	for (int py = 3; py <= 4; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 5;
 	for (int py = 3; py <= 4; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 6;
 	for (int py = 2; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 7;
 	for (int py = -1; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 8;
 	for (int py = -1; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 
 	px = 9;
 	for (int py = -1; py <= 6; py++)
 	{
-		gfx.PutPixel(Pos.X + px, Pos.Y + py, 209, 169, 109);
+		gfx.PutPixel(int(Pos.X) + px, int(Pos.Y) + py, 209, 169, 109);
 	}
 }
