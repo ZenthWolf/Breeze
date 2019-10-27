@@ -91,6 +91,11 @@ void Ball::BounceY(const Vec off)
 	SetDir(off);
 }
 
+void Ball::MoveX(const float dx)
+{
+	Pos.X += dx;
+}
+
 Vec Ball::GetPos() const
 {
 	return Pos;
@@ -101,6 +106,11 @@ Vec Ball::GetVel() const
 	return Vel;
 }
 
+void Ball::SetHeldPos(const Vec& padPos, const float padHeight)
+{
+	Pos = padPos + Vec{ 0, -R - padHeight };
+}
+
 void Ball::SetDir(const Vec Dir)
 {
 	Vel = Dir.Norm() * speed;
@@ -109,6 +119,24 @@ void Ball::SetDir(const Vec Dir)
 float Ball::GetRad() const
 {
 	return R;
+}
+
+int Ball::SayState() const
+{
+	return ballState;
+}
+
+void Ball::HeldUpdate(Keyboard& kbd)
+{
+	if ( (kbd.KeyIsPressed(VK_LEFT) && Vel.X > 0.0f) || (kbd.KeyIsPressed(VK_RIGHT) && Vel.X < 0.0f) )
+	{
+		BounceX();
+	}
+
+	if (kbd.KeyIsPressed(VK_SPACE))
+	{
+		ballState = 1;
+	}
 }
 
 RectF Ball::GetRect() const

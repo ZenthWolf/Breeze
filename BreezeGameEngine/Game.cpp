@@ -69,54 +69,65 @@ void Game::UpdateModel(float dt)
 	Player.Move(wnd.kbd, dt);
 	Player.CollWall(Wall.GetBound());
 
-	Ball.Move(dt);
-	if (Ball.CollWall(Wall.GetBound()))
+	if (Ball.SayState() == 0)
 	{
-		Player.Cool();
-		sndPad.Play();
+		Ball.SetHeldPos(Player.GetPos(), Player.height());
+
+		Ball.HeldUpdate(wnd.kbd);
 	}
 
-	if (Player.CollBall(Ball))
+	if (Ball.SayState() == 1)
 	{
-		sndPad.Play();
-	}
-
-	bool doColl = false;
-	float closeColl;
-	int whichColl[2];
-
-	for (int i = 0; i < Columns; i++)
-	{
-		for (int j = 0; j < Rows; j++)
+		Ball.Move(dt);
+		if (Ball.CollWall(Wall.GetBound()))
 		{
-			if (Block[i][j].CollCheck(Ball))
+			Player.Cool();
+			sndPad.Play();
+		}
+
+		if (Player.CollBall(Ball))
+		{
+			sndPad.Play();
+		}
+
+
+		bool doColl = false;
+		float closeColl;
+		int whichColl[2];
+
+		for (int i = 0; i < Columns; i++)
+		{
+			for (int j = 0; j < Rows; j++)
 			{
-				const float newDist = (Ball.GetPos() - Block[i][j].Rect.Cent()).GetLengthSq();
-				if (doColl)
+				if (Block[i][j].CollCheck(Ball))
 				{
-					if (newDist < closeColl)
+					const float newDist = (Ball.GetPos() - Block[i][j].Rect.Cent()).GetLengthSq();
+					if (doColl)
+					{
+						if (newDist < closeColl)
+						{
+							closeColl = newDist;
+							whichColl[0] = i;
+							whichColl[1] = j;
+						}
+					}
+					else
 					{
 						closeColl = newDist;
 						whichColl[0] = i;
 						whichColl[1] = j;
+						doColl = 1;
 					}
-				}
-				else
-				{
-					closeColl = newDist;
-					whichColl[0] = i;
-					whichColl[1] = j;
-					doColl = 1;
 				}
 			}
 		}
-	}
 
-	if (doColl)
-	{
-		Player.Cool();
-		Block[whichColl[0]][whichColl[1]].Break(Ball);
-		sndBreak.Play();
+		if (doColl)
+		{
+			Player.Cool();
+			Block[whichColl[0]][whichColl[1]].Break(Ball);
+			sndBreak.Play();
+		}
 	}
 
 	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))

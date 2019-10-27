@@ -27,6 +27,8 @@ void Paddle::Move(const Keyboard& kbd, const float dt)
 	{
 		Pos.X += Vx * dt * 60.0f;
 	}
+
+	
 }
 
 bool Paddle::checkColl(Ball& ball) const
@@ -90,4 +92,9 @@ void Paddle::Cool()
 float Paddle::height() const
 {
 	return halfHeight;
+}
+
+Vec Paddle::GetPos()
+{
+	return Pos;
 }

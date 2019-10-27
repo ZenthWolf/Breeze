@@ -18,6 +18,7 @@ public:
 	RectF GetRect() const;
 	void Cool();
 	float height() const;
+	Vec GetPos();
 
 private:
 	static constexpr float wingWidth = 15.0f;
