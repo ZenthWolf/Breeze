@@ -1,3 +1,4 @@
+
 #include "Vec.h"
 #include<cmath>
 
@@ -18,7 +19,7 @@ float Vec::GetLength() const
 
 Vec Vec::operator+(const Vec& rhs) const
 {
-	return Vec(X+rhs.X, Y+rhs.Y);
+	return Vec(X + rhs.X, Y + rhs.Y);
 }
 
 Vec& Vec::operator+=(const Vec& rhs)
@@ -42,7 +43,13 @@ Vec& Vec::operator-=(const Vec& rhs)
 
 Vec Vec::operator*(const float scale) const
 {
-	return Vec(X*scale, Y*scale);
+	return Vec(X * scale, Y * scale);
+}
+
+Vec Vec::Norm() const
+{
+	float mag = GetLength();
+	return {X/mag, Y/mag};
 }
 
 float Vec::GetLengthSq() const
