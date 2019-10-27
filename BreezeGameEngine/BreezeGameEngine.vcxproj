@@ -139,11 +139,15 @@
     <ClInclude Include="DXErr.h" />
     <ClInclude Include="BreezeException.h" />
     <ClInclude Include="Location.h" />
+    <ClInclude Include="RectF.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="SpriteCodex.h" />
+    <ClInclude Include="Vec.h" />
     <ClInclude Include="WinDefs.h" />
     <ClInclude Include="MainWindow.h" />
   </ItemGroup>
@@ -158,9 +162,12 @@
     <ClCompile Include="DXErr.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="RectF.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteCodex.cpp" />
     <ClCompile Include="Tone.cpp" />
+    <ClCompile Include="Vec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FramebufferPS.shh" />
