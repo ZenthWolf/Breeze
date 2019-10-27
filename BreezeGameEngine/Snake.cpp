@@ -11,6 +11,8 @@ void Snake::ReInit(const Location& loc)
 {
 	nSeg = InitSegs;
 	segment[0].InitHead(loc);
+	dLoc = { 0,0 };
+	dLocBuff = { 0,0 };
 }
 
 void Snake::SetMoveBuffer(const Location& newdloc)
