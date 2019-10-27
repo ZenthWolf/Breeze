@@ -52,7 +52,6 @@ void Game::UpdateModel()
 			AtTitle = 0;
 			Eats = 0;
 			MoveDelay = 0;
-			goal.Spawn(rng, brd, Snake);
 		}
 	}
 	else
@@ -68,6 +67,13 @@ void Game::UpdateModel()
 		}
 		else
 		{
+			if ((wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed(VK_DOWN) ||
+				wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed(VK_RIGHT))
+				&& !goal.isPlaced())
+			{
+				goal.Spawn(rng, brd, Snake);
+			}
+
 			if (wnd.kbd.KeyIsPressed(VK_UP))
 			{
 				Snake.SetMoveBuffer({ 0,-1 });
