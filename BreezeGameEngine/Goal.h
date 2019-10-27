@@ -7,12 +7,10 @@
 class Goal
 {
 public:
-	Goal(std::mt19937& rng, const Board& brd, const Snake& snake);
-	void Spawn(std::mt19937& rng, const Board& brd, const Snake& snake);
-	void Draw(Board& brd) const;
+	Goal(std::mt19937& rng, Board& brd, const Snake& snake);
+	void Spawn(std::mt19937& rng, Board& brd, const Snake& snake);
 	const Location& GetLoc() const;
 
 private:
-	static constexpr Color c = Colors::White;
 	Location loc;
 };

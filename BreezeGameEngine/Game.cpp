@@ -52,6 +52,7 @@ void Game::UpdateModel()
 			AtTitle = 0;
 			Eats = 0;
 			MoveDelay = 0;
+			goal.Spawn(rng, brd, Snake);
 		}
 	}
 	else
@@ -62,6 +63,7 @@ void Game::UpdateModel()
 			{
 				AtTitle = 1;
 				Death = 0;
+				brd.ClearObstacles();
 			}
 		}
 		else
@@ -87,7 +89,7 @@ void Game::UpdateModel()
 			{
 				MoveDelay -= MovePeriod - std::min(float(Eats)/120.0f, 15.0f);
 				const Location Next = Snake.GetNextHead();
-				if (!brd.InBoard(Next) || Snake.InTileExcEnd(Next))
+				if (!brd.InBoard(Next) || Snake.InTileExcEnd(Next) || brd.CheckObstacle(Next) == 2)
 				{
 					Snake.DeadHead();
 					Death = 1;
@@ -97,6 +99,7 @@ void Game::UpdateModel()
 				{
 					if (Next == goal.GetLoc())
 					{
+						brd.Consume(Next);
 						Snake.Grow();
 						Eats++;
 						Snake.Update();
@@ -126,7 +129,6 @@ void Game::ComposeFrame()
 	}
 	else
 	{
-		goal.Draw(brd);
 		if (Death)
 		{
 			SpriteCodex::DrawGameOver(200, 200, gfx);

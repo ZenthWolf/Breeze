@@ -98,7 +98,7 @@ int Board::CheckObstacle(const Location& loc) const
 	return Obstacle[loc.y*width + loc.x];
 }
 
-void Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& snake)
+Location Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& snake)
 {
 	std::uniform_int_distribution<int> xDist(0, width - 1);
 	std::uniform_int_distribution<int> yDist(0, height - 1);
@@ -112,6 +112,8 @@ void Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& snake)
 	} while (snake.InTile(procLoc) || !(Obstacle[procLoc.y * width + procLoc.x] ==0));
 	
 	Obstacle[procLoc.y * width + procLoc.x] = type;
+
+	return procLoc;
 }
 
 void Board::DrawBoard()
@@ -120,10 +122,23 @@ void Board::DrawBoard()
 	{
 		for (int i = 0; i < height; i++)
 		{
-			if (CheckObstacle({i, j}) )
+			if (int col = CheckObstacle({ i, j }))
 			{
-				DrawCell({ i,j }, obstacleColor);
+				DrawCell({ i,j }, obstacleColor[col-1]);
 			}
 		}
+	}
+}
+
+void Board::Consume(const Location& loc)
+{
+	Obstacle[loc.y * width + loc.x] = 0;
+}
+
+void Board::ClearObstacles()
+{
+	for (int i = 0; i < width * height; i++)
+	{
+		Obstacle[i] = 0;
 	}
 }

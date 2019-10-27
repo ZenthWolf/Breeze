@@ -15,11 +15,13 @@ public:
 	int GetHeight() const;
 	bool InBoard(const Location& loc) const;
 	int CheckObstacle( const Location& loc) const;
-	void SpawnObstacle( std::mt19937& rng, const int type, const class Snake& snake);
+	Location SpawnObstacle( std::mt19937& rng, const int type, const class Snake& snake);
 	void DrawBoard();
+	void Consume(const Location& loc);
+	void ClearObstacles();
 	
 private:
-	static constexpr Color obstacleColor = Colors::Magenta;
+	static constexpr Color obstacleColor[2] = { Colors::White, Colors::Gray };
 	static constexpr int CellDim = 20;
 	static constexpr int width = 20;
 	static constexpr int height = 20;
