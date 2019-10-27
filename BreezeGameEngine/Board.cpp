@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "Snake.h"
 
 Board::Board(Graphics& gfx): gfx(gfx)
 {
@@ -90,4 +91,39 @@ bool Board::InBoard(const Location& loc) const
 {
 	return loc.x >= 0 && loc.x < width &&
      	   loc.y >= 0 && loc.y < height;
+}
+
+int Board::CheckObstacle(const Location& loc) const
+{
+	return Obstacle[loc.y*width + loc.x];
+}
+
+void Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& snake)
+{
+	std::uniform_int_distribution<int> xDist(0, width - 1);
+	std::uniform_int_distribution<int> yDist(0, height - 1);
+
+	Location procLoc;
+
+	do
+	{
+		procLoc.x = xDist(rng);
+		procLoc.y = yDist(rng);
+	} while (snake.InTile(procLoc) || !(Obstacle[procLoc.y * width + procLoc.x] ==0));
+	
+	Obstacle[procLoc.y * width + procLoc.x] = type;
+}
+
+void Board::DrawBoard()
+{
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < height; i++)
+		{
+			if (CheckObstacle({i, j}) )
+			{
+				DrawCell({ i,j }, obstacleColor);
+			}
+		}
+	}
 }

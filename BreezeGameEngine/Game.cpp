@@ -100,13 +100,12 @@ void Game::UpdateModel()
 						Snake.Grow();
 						Eats++;
 						Snake.Update();
-//						Snake.MoveBy(dLoc);
+						brd.SpawnObstacle(rng, 2, Snake);
 						goal.Spawn(rng, brd, Snake);
 					}
 					else
 					{
 						Snake.Update();
-//						Snake.MoveBy(dLoc);
 					}
 				}
 			}
@@ -118,6 +117,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	brd.DrawBound(Colors::White);
+	brd.DrawBoard();
 
 	Snake.Draw( brd );
 	if (AtTitle)
