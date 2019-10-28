@@ -15,6 +15,7 @@ public:
 		void Spawn(std::mt19937& rng, Board& brd, const class Snake& snake);
 		const Location& GetLoc() const;
 		bool isPlaced() const;
+		void unPlace();
 
 	private:
 		Location loc;

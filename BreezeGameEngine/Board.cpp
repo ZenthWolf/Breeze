@@ -24,6 +24,12 @@ bool Board::Goal::isPlaced() const
 {
 	return Placed;
 }
+
+void Board::Goal::unPlace()
+{
+	Placed = 0;
+}
+
 void Board::DrawCell(const Location& loc, Color c)
 {
 	assert(loc.x >= 0);
@@ -170,4 +176,6 @@ void Board::ClearObstacles()
 	{
 		Obstacle[i] = 0;
 	}
+
+	Goal.unPlace();
 }
