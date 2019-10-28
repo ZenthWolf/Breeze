@@ -4,6 +4,7 @@
 #include "Location.h"
 #include <assert.h>
 #include <random>
+#include "Beveler.h"
 
 struct Board
 {
@@ -43,4 +44,5 @@ private:
 	static constexpr int height = 20;
 	int Obstacle[width * height] = { 0 };
 	Graphics& gfx;
+	Beveler Bev;
 };

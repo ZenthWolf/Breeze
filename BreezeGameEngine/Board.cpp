@@ -44,6 +44,11 @@ void Board::DrawCell(const Location& loc, Color c)
 	int StartingY = (gfx.ScreenHeight / 2 - 1) - (CellDim * height)/2;
 	gfx.DrawRectDim(loc.x * CellDim + StartingX + buff, loc.y * CellDim + StartingY + buff, CellDim - buff - 1, CellDim - buff - 1, c);
 
+/* If you want to re-enable bevelling on tiles. Might be good on snek, or not.
+	RectF Rect = RectF{ float(loc.x * CellDim + StartingX + buff), float(loc.y * CellDim + StartingY + buff), float(loc.x * CellDim + StartingX + buff + CellDim - buff - 1), float(loc.y * CellDim + StartingY + buff + CellDim - buff - 1)};
+	Bev.ChangeBaseColor(c);
+	Bev.DrawBevBrick(Rect, 4, gfx);
+*/
 	int j = 0;
 	while (j < CellDim)
 	{
