@@ -51,9 +51,6 @@
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Doom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Location.h">
       <Filter>Header Files</Filter>
     </ClInclude>

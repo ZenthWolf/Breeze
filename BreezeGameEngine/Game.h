@@ -44,7 +44,7 @@ private:
 	/*  User Variables              */
 	/********************************/
 	FrameTimer ft;
-	float dt;
+	float dt = 0.0f;
 	std::mt19937 rng;
 	Board brd;
 	Snake Snake;

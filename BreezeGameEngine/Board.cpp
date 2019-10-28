@@ -7,6 +7,7 @@ Board::Board(Graphics& gfx): gfx(gfx)
 
 Board::Goal::Goal()
 {
+	loc = { 0,0 };
 }
 
 void Board::Goal::Spawn(std::mt19937& rng, Board& brd, const Snake& snake)
