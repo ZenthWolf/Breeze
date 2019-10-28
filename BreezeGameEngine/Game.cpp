@@ -103,7 +103,7 @@ void Game::UpdateModel()
 			{
 				MoveDelay -= MovePeriod - std::min(float(Eats)/120.0f, 15.0f);
 				const Location Next = Snake.GetNextHead();
-				if (!brd.InBoard(Next) || Snake.InTileExcEnd(Next) || brd.CheckObstacle(Next) == 2)
+				if (!brd.InBoard(Next) || Snake.InTileExcEnd(Next) || brd.CheckObstacle(Next) == Board::CellObstacle::Doom)
 				{
 					Snake.DeadHead();
 					Death = 1;
@@ -117,7 +117,7 @@ void Game::UpdateModel()
 						Snake.Grow();
 						Eats++;
 						Snake.Update();
-						brd.SpawnObstacle(rng, 2, Snake);
+						brd.SpawnObstacle(rng, Board::CellObstacle::Doom, Snake);
 						brd.Goal.Spawn(rng, brd, Snake);
 					}
 					else

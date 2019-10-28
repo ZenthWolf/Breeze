@@ -12,7 +12,7 @@ Board::Goal::Goal()
 
 void Board::Goal::Spawn(std::mt19937& rng, Board& brd, const Snake& snake)
 {
-	loc = brd.SpawnObstacle(rng, 1, snake);
+	loc = brd.SpawnObstacle(rng, CellObstacle::Food, snake);
 	Placed = 1;
 }
 
@@ -134,12 +134,12 @@ bool Board::InBoard(const Location& loc) const
      	   loc.y >= 0 && loc.y < height;
 }
 
-int Board::CheckObstacle(const Location& loc) const
+Board::CellObstacle Board::CheckObstacle(const Location& loc) const
 {
 	return Obstacle[loc.y*width + loc.x];
 }
 
-Location Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& snake)
+Location Board::SpawnObstacle(std::mt19937& rng, const CellObstacle type, const Snake& snake)
 {
 	std::uniform_int_distribution<int> xDist(0, width - 1);
 	std::uniform_int_distribution<int> yDist(0, height - 1);
@@ -150,7 +150,7 @@ Location Board::SpawnObstacle(std::mt19937& rng, const int type, const Snake& sn
 	{
 		procLoc.x = xDist(rng);
 		procLoc.y = yDist(rng);
-	} while (snake.InTile(procLoc) || !(Obstacle[procLoc.y * width + procLoc.x] ==0));
+	} while (snake.InTile(procLoc) || !(Obstacle[procLoc.y * width + procLoc.x] == CellObstacle::Empty));
 	
 	Obstacle[procLoc.y * width + procLoc.x] = type;
 
@@ -163,9 +163,18 @@ void Board::DrawBoard()
 	{
 		for (int i = 0; i < height; i++)
 		{
-			if (int col = CheckObstacle({ i, j }))
+			switch ( CheckObstacle({ i, j }) )
 			{
-				DrawCell({ i,j }, obstacleColor[col-1]);
+			case CellObstacle::Food:
+				DrawCell({ i,j }, obstacleColor[0]);
+				break;
+			case CellObstacle::Doom:
+			{
+				DrawCell({ i,j }, obstacleColor[1]);
+				break;
+			}
+			default:
+				break;
 			}
 		}
 	}
@@ -173,14 +182,14 @@ void Board::DrawBoard()
 
 void Board::Consume(const Location& loc)
 {
-	Obstacle[loc.y * width + loc.x] = 0;
+	Obstacle[loc.y * width + loc.x] = CellObstacle::Empty;
 }
 
 void Board::ClearObstacles()
 {
 	for (int i = 0; i < width * height; i++)
 	{
-		Obstacle[i] = 0;
+		Obstacle[i] = CellObstacle::Empty;
 	}
 
 	Goal.unPlace();

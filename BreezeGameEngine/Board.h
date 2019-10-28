@@ -22,7 +22,13 @@ public:
 		Location loc;
 		bool Placed = 0;
 	};
-
+public:
+	enum class CellObstacle
+	{
+	     Empty,
+		 Doom,
+		 Food
+	};
 public:
 	Board(Graphics& gfx);
 	void DrawCell(const Location& loc, Color c);
@@ -30,8 +36,8 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 	bool InBoard(const Location& loc) const;
-	int CheckObstacle( const Location& loc) const;
-	Location SpawnObstacle( std::mt19937& rng, const int type, const class Snake& snake);
+	CellObstacle CheckObstacle( const Location& loc) const;
+	Location SpawnObstacle( std::mt19937& rng, const CellObstacle type, const class Snake& snake);
 	void DrawBoard();
 	void Consume(const Location& loc);
 	void ClearObstacles();
@@ -42,7 +48,7 @@ private:
 	static constexpr int CellDim = 20;
 	static constexpr int width = 20;
 	static constexpr int height = 20;
-	int Obstacle[width * height] = { 0 };
+	CellObstacle Obstacle[width * height] = { CellObstacle::Empty };
 	Graphics& gfx;
 	Beveler Bev;
 };
