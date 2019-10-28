@@ -14,9 +14,19 @@ void Board::DrawCell(const Location& loc, Color c)
 	assert(loc.y < height);
 	assert(loc.y * CellDim < gfx.ScreenHeight);
 
+	int buff = 2;
 	int StartingX = (gfx.ScreenWidth/2 -1) - (CellDim*width)/2;
 	int StartingY = (gfx.ScreenHeight / 2 - 1) - (CellDim * height)/2;
-	gfx.DrawRectDim(loc.x * CellDim + StartingX, loc.y * CellDim + StartingY, CellDim, CellDim, c);
+	gfx.DrawRectDim(loc.x * CellDim + StartingX + buff, loc.y * CellDim + StartingY + buff, CellDim - buff - 1, CellDim - buff - 1, c);
+
+	int j = 0;
+	while (j < CellDim)
+	{
+		gfx.DrawRectDim( loc.x * CellDim + StartingX, loc.y * CellDim + j + StartingY, CellDim, 0, Colors::Black );
+		gfx.DrawRectDim(loc.x * CellDim + StartingX + j, loc.y * CellDim + StartingY, 0, CellDim, Colors::Black);
+		j += 3;
+	}
+
 }
 
 void Board::DrawBound(Color c)
