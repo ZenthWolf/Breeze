@@ -8,6 +8,20 @@
 struct Board
 {
 public:
+	class Goal
+	{
+	public:
+		Goal();
+		void Spawn(std::mt19937& rng, Board& brd, const class Snake& snake);
+		const Location& GetLoc() const;
+		bool isPlaced() const;
+
+	private:
+		Location loc;
+		bool Placed = 0;
+	};
+
+public:
 	Board(Graphics& gfx);
 	void DrawCell(const Location& loc, Color c);
 	void DrawBound(Color c);
@@ -19,6 +33,7 @@ public:
 	void DrawBoard();
 	void Consume(const Location& loc);
 	void ClearObstacles();
+	Goal Goal;
 	
 private:
 	static constexpr Color obstacleColor[2] = { Colors::White, Colors::Gray };

@@ -21,7 +21,7 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd), gfx(wnd), ft(),
 	brd(gfx), rng( std::random_device()() ),
-	Snake({2,2}), goal(rng, brd, Snake)
+	Snake({2,2})
 {
 }
 
@@ -69,9 +69,9 @@ void Game::UpdateModel()
 		{
 			if ((wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed(VK_DOWN) ||
 				wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed(VK_RIGHT))
-				&& !goal.isPlaced())
+				&& !brd.Goal.isPlaced())
 			{
-				goal.Spawn(rng, brd, Snake);
+				brd.Goal.Spawn(rng, brd, Snake);
 			}
 
 			if (wnd.kbd.KeyIsPressed(VK_UP))
@@ -103,14 +103,14 @@ void Game::UpdateModel()
 				}
 				else
 				{
-					if (Next == goal.GetLoc())
+					if (Next == brd.Goal.GetLoc())
 					{
 						brd.Consume(Next);
 						Snake.Grow();
 						Eats++;
 						Snake.Update();
 						brd.SpawnObstacle(rng, 2, Snake);
-						goal.Spawn(rng, brd, Snake);
+						brd.Goal.Spawn(rng, brd, Snake);
 					}
 					else
 					{

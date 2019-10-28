@@ -5,6 +5,25 @@ Board::Board(Graphics& gfx): gfx(gfx)
 {
 }
 
+Board::Goal::Goal()
+{
+}
+
+void Board::Goal::Spawn(std::mt19937& rng, Board& brd, const Snake& snake)
+{
+	loc = brd.SpawnObstacle(rng, 1, snake);
+	Placed = 1;
+}
+
+const Location& Board::Goal::GetLoc() const
+{
+	return loc;
+}
+
+bool Board::Goal::isPlaced() const
+{
+	return Placed;
+}
 void Board::DrawCell(const Location& loc, Color c)
 {
 	assert(loc.x >= 0);

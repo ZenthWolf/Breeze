@@ -21,7 +21,6 @@
 #include <random>
 #include "Board.h"
 #include "Snake.h"
-#include "Goal.h"
 
 class Game
 {
@@ -50,7 +49,6 @@ private:
 	Board brd;
 	Snake Snake;
 	Location dLoc = { 1, 0 };
-	Goal goal;
 	static constexpr float MovePeriod = 0.33333f;
 	float MoveDelay = 0.0f;
 	int Eats = 0;
