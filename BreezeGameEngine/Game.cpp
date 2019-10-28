@@ -47,7 +47,14 @@ void Game::UpdateModel()
 			Snake.ReInit({ 2,2 });
 		}
 
-		if (wnd.kbd.KeyIsPressed(VK_RETURN))
+		if (inhibitMenu && !wnd.kbd.KeyIsPressed(VK_RETURN)
+			&& !wnd.kbd.KeyIsPressed(VK_SPACE))
+		{
+			inhibitMenu = 0;
+		}
+
+		if ( (wnd.kbd.KeyIsPressed(VK_RETURN) || wnd.kbd.KeyIsPressed(VK_SPACE)) 
+			 && !inhibitMenu)
 		{
 			AtTitle = 0;
 			Eats = 0;
@@ -58,11 +65,12 @@ void Game::UpdateModel()
 	{
 		if (Death)
 		{
-			if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
+			if (wnd.kbd.KeyIsPressed(VK_RETURN) || wnd.kbd.KeyIsPressed(VK_SPACE))
 			{
 				AtTitle = 1;
 				Death = 0;
 				brd.ClearObstacles();
+				inhibitMenu = 1;
 			}
 		}
 		else

@@ -55,4 +55,5 @@ private:
 	bool AtTitle = 1;
 	bool Death = 0;
 	bool ReInit = 0;
+	bool inhibitMenu = 0;
 };
