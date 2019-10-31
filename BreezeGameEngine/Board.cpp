@@ -1,8 +1,16 @@
 #include "Board.h"
 #include "Snake.h"
+#include <string>
 
-Board::Board(Graphics& gfx): gfx(gfx)
+Board::Board(std::string filename, Graphics& gfx)
+	: gfx(gfx), gameSettings(filename),
+	  width(gameSettings.GetWidth()), height(gameSettings.GetHeight()),
+	  Obstacle(new CellObstacle[width * height])
 {
+	for (int i = 0; i < width * height; i++)
+	{
+		Obstacle[i] = CellObstacle::Empty;
+	}
 }
 
 Board::Goal::Goal()

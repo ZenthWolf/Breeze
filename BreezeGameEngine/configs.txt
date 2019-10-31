@@ -1,0 +1,12 @@
+[Board Size]
+20 20
+
+[Min Move Period]
+15
+
+[Snake Color : 0 - Natural, 1 - Rainbow]
+0
+
+[Snake Shape : 0 - Flat, 1 - 3D]
+0
+

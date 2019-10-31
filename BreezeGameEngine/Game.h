@@ -35,7 +35,6 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	bool BoxColl(int box0x, int box0y, int box1x, int box1y);
 
 private:
 	MainWindow& wnd;

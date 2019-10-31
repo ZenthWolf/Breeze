@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <random>
 #include "Beveler.h"
+#include "Settings.h"
 
 struct Board
 {
@@ -30,7 +31,8 @@ public:
 		 Food
 	};
 public:
-	Board(Graphics& gfx);
+	Board(std::string filename, Graphics& gfx);
+	Settings gameSettings;
 	void DrawCell(const Location& loc, Color c);
 	void DrawBound(Color c);
 	int GetWidth() const;
@@ -46,9 +48,9 @@ public:
 private:
 	static constexpr Color obstacleColor[2] = { Colors::White, Colors::Gray };
 	static constexpr int CellDim = 20;
-	static constexpr int width = 20;
-	static constexpr int height = 20;
-	CellObstacle Obstacle[width * height] = { CellObstacle::Empty };
+	int width;
+	int height;
+	CellObstacle* Obstacle;
 	Graphics& gfx;
 	Beveler Bev;
 };

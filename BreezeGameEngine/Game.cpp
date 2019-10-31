@@ -15,12 +15,13 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "SpriteCodex.h"
+#include <string>
 
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd), gfx(wnd), ft(),
-	brd(gfx), rng( std::random_device()() ),
+	brd(std::string("configs.txt"), gfx), rng( std::random_device()() ),
 	Snake({2,2})
 {
 }
@@ -41,7 +42,7 @@ void Game::UpdateModel()
 	MoveDelay += dt;
 
 	if (AtTitle)
-	{
+	{		
 		if (ReInit)
 		{
 			Snake.ReInit({ 2,2 });
@@ -60,6 +61,7 @@ void Game::UpdateModel()
 			Eats = 0;
 			MoveDelay = 0;
 		}
+
 	}
 	else
 	{
@@ -149,5 +151,3 @@ void Game::ComposeFrame()
 		}
 	}
 }
-
-
