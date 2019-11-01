@@ -169,7 +169,7 @@ void Board::DrawBoard()
 {
 	for (int j = 0; j < height; j++)
 	{
-		for (int i = 0; i < height; i++)
+		for (int i = 0; i < width; i++)
 		{
 			switch ( CheckObstacle({ i, j }) )
 			{

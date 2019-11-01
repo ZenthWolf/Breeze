@@ -21,21 +21,26 @@ Settings::Settings(std::string& filename)
 		{
 			config >> boardWidth;
 			config >> boardHeight;
+			initWidth = true;
+			initHeight = true;
 		}
 
 		else if (line == "[Min Move Period]")
 		{
 			config >> minMovePeriod;
+			initMinMove = true;
 		}
 
 		else if (line == "[Snake Color : 0 - Natural, 1 - Rainbow]")
 		{
 			config >> rainbowSnake;
+			initRainbow = true;
 		}
 
 		else if (line == "[Snake Shape : 0 - Flat, 1 - 3D]")
 		{
 			config >> bevelSnake;
+			initBevel = true;
 		}
 	}
 	config.close();

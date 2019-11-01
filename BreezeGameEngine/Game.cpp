@@ -100,6 +100,16 @@ void Game::UpdateModel()
 			{
 				Snake.SetMoveBuffer({ 1,0 });
 			}
+			else if (wnd.kbd.KeyIsPressed('B'))
+			{
+				int test;
+
+				test = 5;
+
+				int foobar;
+
+				foobar = test * test + 2;
+			}
 
 			if (MoveDelay >= MovePeriod)
 			{
