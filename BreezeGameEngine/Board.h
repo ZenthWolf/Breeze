@@ -31,9 +31,8 @@ public:
 		 Food
 	};
 public:
-	Board(std::string filename, Graphics& gfx);
-	Settings gameSettings;
-	void DrawCell(const Location& loc, Color c);
+	Board(Settings& gameSettings, Graphics& gfx);
+	void DrawCell(const Location& loc, Color c, bool bevel);
 	void DrawBound(Color c);
 	int GetWidth() const;
 	int GetHeight() const;

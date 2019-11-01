@@ -16,13 +16,14 @@
 #include "Game.h"
 #include "SpriteCodex.h"
 #include <string>
+#include "Settings.h"
 
 
 Game::Game(MainWindow& wnd)
 	:
-	wnd(wnd), gfx(wnd), ft(),
-	brd(std::string("configs.txt"), gfx), rng( std::random_device()() ),
-	Snake({2,2})
+	wnd(wnd), gfx(wnd), ft(), rng(std::random_device()()),
+	gameSettings(std::string("configs.txt")), brd(gameSettings, gfx), 
+	Snake(gameSettings, {2,2})
 {
 }
 

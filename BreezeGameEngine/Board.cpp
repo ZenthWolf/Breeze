@@ -2,8 +2,8 @@
 #include "Snake.h"
 #include <string>
 
-Board::Board(std::string filename, Graphics& gfx)
-	: gfx(gfx), gameSettings(filename),
+Board::Board(Settings& gameSettings, Graphics& gfx)
+	: gfx(gfx),
 	  width(gameSettings.GetWidth()), height(gameSettings.GetHeight()),
 	  Obstacle(new CellObstacle[width * height])
 {
@@ -39,7 +39,7 @@ void Board::Goal::unPlace()
 	Placed = 0;
 }
 
-void Board::DrawCell(const Location& loc, Color c)
+void Board::DrawCell(const Location& loc, Color c, bool bevel)
 {
 	assert(loc.x >= 0);
 	assert(loc.x < width);
@@ -51,13 +51,20 @@ void Board::DrawCell(const Location& loc, Color c)
 	int buff = 2;
 	int StartingX = (gfx.ScreenWidth/2 -1) - (CellDim*width)/2;
 	int StartingY = (gfx.ScreenHeight / 2 - 1) - (CellDim * height)/2;
-	gfx.DrawRectDim(loc.x * CellDim + StartingX + buff, loc.y * CellDim + StartingY + buff, CellDim - buff - 1, CellDim - buff - 1, c);
 
-/* If you want to re-enable bevelling on tiles. Might be good on snek, or not.
-	RectF Rect = RectF{ float(loc.x * CellDim + StartingX + buff), float(loc.y * CellDim + StartingY + buff), float(loc.x * CellDim + StartingX + buff + CellDim - buff - 1), float(loc.y * CellDim + StartingY + buff + CellDim - buff - 1)};
-	Bev.ChangeBaseColor(c);
-	Bev.DrawBevBrick(Rect, 4, gfx);
-*/
+	if (bevel)
+	{
+		//  If you want to re-enable bevelling on tiles. Might be good on snek, or not.
+		RectF Rect = RectF{ float(loc.x * CellDim + StartingX + buff), float(loc.y * CellDim + StartingY + buff), float(loc.x * CellDim + StartingX + buff + CellDim - buff - 1), float(loc.y * CellDim + StartingY + buff + CellDim - buff - 1) };
+		Bev.ChangeBaseColor(c);
+		Bev.DrawBevBrick(Rect, 4, gfx);
+	}
+	else
+	{
+		gfx.DrawRectDim(loc.x * CellDim + StartingX + buff, loc.y * CellDim + StartingY + buff, CellDim - buff - 1, CellDim - buff - 1, c);
+	}
+
+	// Retro-ize
 	int j = 0;
 	while (j < CellDim)
 	{
@@ -174,11 +181,11 @@ void Board::DrawBoard()
 			switch ( CheckObstacle({ i, j }) )
 			{
 			case CellObstacle::Food:
-				DrawCell({ i,j }, obstacleColor[0]);
+				DrawCell({ i,j }, obstacleColor[0], false);
 				break;
 			case CellObstacle::Doom:
 			{
-				DrawCell({ i,j }, obstacleColor[1]);
+				DrawCell({ i,j }, obstacleColor[1], false);
 				break;
 			}
 			default:

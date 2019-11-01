@@ -1,10 +1,13 @@
 #include "Snake.h"
 #include <assert.h>
 
-Snake::Snake(const Location& loc)
+Snake::Snake(Settings& gameSettings, const Location& loc)
 {
 	nSeg = InitSegs;
 	segment[0].InitHead(loc);
+
+	rainbowSnake = gameSettings.IsSnakeRainbow();
+	bevelSnake = gameSettings.IsSnakeBeveled();
 }
 
 void Snake::ReInit(const Location& loc)
@@ -62,7 +65,7 @@ void Snake::Grow()
 	if (nSeg < nSegMax)
 	{
 		Color c;
-		if (RainbowSnake)
+		if (rainbowSnake)
 		{
 			if (nSeg % 7 == 0)
 			{
@@ -127,7 +130,7 @@ void Snake::Draw(Board& brd) const
 {
 	for (int i = nSeg-1; i >= 0; i--)
 	{
-		segment[i].Draw( brd );
+		segment[i].Draw( bevelSnake, brd );
 	}
 }
 
@@ -183,9 +186,9 @@ void Snake::Segment::MoveBy(const Location& dloc)
 	loc.Add(dloc);
 }
 
-void Snake::Segment::Draw(Board& brd) const
+void Snake::Segment::Draw(bool bevel, Board& brd) const
 {
-	brd.DrawCell(loc, c);
+	brd.DrawCell(loc, c, bevel);
 }
 
 const Location& Snake::Segment::GetLoc() const

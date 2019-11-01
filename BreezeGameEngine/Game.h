@@ -17,8 +17,9 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "FrameTimer.h"
-
 #include <random>
+
+#include "Settings.h"
 #include "Board.h"
 #include "Snake.h"
 
@@ -42,6 +43,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	Settings gameSettings;
 	FrameTimer ft;
 	float dt = 0.0f;
 	std::mt19937 rng;

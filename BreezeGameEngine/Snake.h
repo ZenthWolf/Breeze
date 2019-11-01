@@ -14,14 +14,14 @@ private:
 		void Death();
 		void Follow(const Segment& next);
 		void MoveBy(const Location& dloc);
-		void Draw(Board& brd) const;
+		void Draw(bool bevel, Board& brd) const;
 		const Location& GetLoc() const;
 	private:
 		Location loc;
 		Color c;
 	};
 public:
-	Snake(const Location& loc);
+	Snake(Settings& gameSettings, const Location& loc);
 	void ReInit(const Location& loc);
 	void SetMoveBuffer(const Location& newdloc);
 	void Update();
@@ -48,5 +48,6 @@ private:
 	Segment segment[nSegMax];
 	int InitSegs = 1;
 	int nSeg;
-	bool RainbowSnake = 0;
+	bool rainbowSnake = false;
+	bool bevelSnake = false;
 };
