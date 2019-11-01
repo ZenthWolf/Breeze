@@ -3,7 +3,6 @@
 
 Snake::Snake(Settings& gameSettings, const Location& loc)
 {
-	nSeg = InitSegs;
 	segment[0].InitHead(loc);
 
 	rainbowSnake = gameSettings.IsSnakeRainbow();
@@ -12,7 +11,6 @@ Snake::Snake(Settings& gameSettings, const Location& loc)
 
 void Snake::ReInit(const Location& loc)
 {
-	nSeg = InitSegs;
 	segment[0].InitHead(loc);
 	dLoc = { 0,0 };
 	dLocBuff = { 0,0 };
@@ -30,7 +28,7 @@ void Snake::SetMoveBuffer(const Location& newdloc)
 void Snake::Update()
 {
 	dLoc = dLocBuff;
-	for (int i = nSeg - 1; i > 0; i--)
+	for (int i = segment.size() - 1; i > 0; i--)
 	{
 		segment[i].Follow(segment[i - 1]);
 	}
@@ -40,7 +38,7 @@ void Snake::Update()
 
 void Snake::MoveBy(const Location& dloc)
 {
-	for (int i = nSeg - 1; i > 0; i--)
+	for (int i = segment.size() - 1; i > 0; i--)
 	{
 		segment[i].Follow(segment[i - 1]);
 	}
@@ -62,73 +60,73 @@ Location Snake::GetNextHead() const
 
 void Snake::Grow()
 {
-	if (nSeg < nSegMax)
+	Color c;
+	int nSeg = segment.size() - 1;
+
+	if (rainbowSnake)
 	{
-		Color c;
-		if (rainbowSnake)
+		if (nSeg % 7 == 0)
 		{
-			if (nSeg % 7 == 0)
-			{
-				c = Colors::Red;
-			}
-			else if (nSeg % 7 == 1)
-			{
-				c = { 255, 165, 0 };
-			}
-			else if (nSeg % 7 == 2)
-			{
-				c = Colors::Yellow;
-			}
-			else if (nSeg % 7 == 3)
-			{
-				c = Colors::Green;
-			}
-			else if (nSeg % 7 == 4)
-			{
-				c = Colors::Cyan;
-			}
-			else if (nSeg % 7 == 5)
-			{
-				c = Colors::Blue;
-			}
-			else if (nSeg % 7 == 6)
-			{
-				c = { 128,0,128 };
-			}
+			c = Colors::Red;
+		}
+		else if (nSeg % 7 == 1)
+		{
+			c = { 255, 165, 0 };
+		}
+		else if (nSeg % 7 == 2)
+		{
+			c = Colors::Yellow;
+		}
+		else if (nSeg % 7 == 3)
+		{
+			c = Colors::Green;
+		}
+		else if (nSeg % 7 == 4)
+		{
+			c = Colors::Cyan;
+		}
+		else if (nSeg % 7 == 5)
+		{
+			c = Colors::Blue;
+		}
+		else if (nSeg % 7 == 6)
+		{
+			c = { 128,0,128 };
+		}
 			
-			segment[nSeg].InitBody(c);
-		}
-		else
+		segment.emplace_back(Segment());
+		segment[segment.size() - 1].InitBody(c);
+	}
+	else
+	{
+		if (nSeg % 5 == 1)
 		{
-			if (nSeg % 5 == 1)
-			{
-				c = Snake::natbodyColor1;
-			}
-			if (nSeg % 5 == 2)
-			{
-				c = Snake::natbodyColor2;
-			}
-			if (nSeg % 5 == 3)
-			{
-				c = Snake::natbodyColor3;
-			}
-			if (nSeg % 5 == 4)
-			{
-				c = Snake::natbodyColor4;
-			}
-			if (nSeg % 5 == 0)
-			{
-				c = Snake::natbodyColor5;
-			}
-			segment[nSeg].InitBody(c);
+			c = Snake::natbodyColor1;
 		}
-		nSeg++;
+		if (nSeg % 5 == 2)
+		{
+			c = Snake::natbodyColor2;
+		}
+		if (nSeg % 5 == 3)
+		{
+			c = Snake::natbodyColor3;
+		}
+		if (nSeg % 5 == 4)
+		{
+			c = Snake::natbodyColor4;
+		}
+		if (nSeg % 5 == 0)
+		{
+			c = Snake::natbodyColor5;
+		}
+		segment.emplace_back();
+		segment[segment.size() - 1].InitBody(c);
 	}
 }
 
 void Snake::Draw(Board& brd) const
 {
-	for (int i = nSeg-1; i >= 0; i--)
+	for (int i = segment.size()-1; i >= 0; i--)
 	{
 		segment[i].Draw( bevelSnake, brd );
 	}
@@ -137,7 +135,7 @@ void Snake::Draw(Board& brd) const
 bool Snake::InTile(const Location& targ) const
 {
     /* Checks ALL segs */
-	for (int i = 0; i < nSeg; i++)
+	for (int i = 0; i < segment.size(); i++)
 	{
 		if (segment[i].GetLoc() == targ)
 		{
@@ -150,7 +148,7 @@ bool Snake::InTile(const Location& targ) const
 bool Snake::InTileExcEnd(const Location& targ) const
 {
 	/* Checks all segs except tail */
-	for (int i = 0; i < nSeg - 1; i++)
+	for (int i = 0; i < segment.size() - 1; i++)
 	{
 		if (segment[i].GetLoc() == targ)
 		{

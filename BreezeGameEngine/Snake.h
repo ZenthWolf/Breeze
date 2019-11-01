@@ -2,6 +2,7 @@
 
 #include "Board.h"
 #include "Location.h"
+#include <vector>
 
 class Snake
 {
@@ -44,10 +45,8 @@ private:
 
 	Location dLoc = { 0,0 };
 	Location dLocBuff = { 0,0 };
-	static constexpr int nSegMax = 100;
-	Segment segment[nSegMax];
-	int InitSegs = 1;
-	int nSeg;
+	
+	std::vector<Segment> segment =  {Segment()};
 	bool rainbowSnake = false;
 	bool bevelSnake = false;
 };
