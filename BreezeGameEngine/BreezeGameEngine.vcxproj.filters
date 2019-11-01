@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{47bde5e8-1749-4ea5-ad2c-e162c52447ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Configs">
+      <UniqueIdentifier>{9aae9199-4948-4b76-8036-06172c8be08d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h">
@@ -142,5 +145,10 @@
     <None Include="FramebufferVS.shh">
       <Filter>Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configs.txt">
+      <Filter>Configs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

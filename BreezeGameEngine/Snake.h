@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Board.h"
-#include "Location.h"
 #include <vector>
 
 class Snake
@@ -10,8 +9,10 @@ private:
 	class Segment
 	{
 	public:
-		void InitHead(const Location& loc);
-		void InitBody(const Color& col);
+		/* For Head */
+		Segment(const Location& loc);
+		/* For Body */
+		Segment(const Color& col);
 		void Death();
 		void Follow(const Segment& next);
 		void MoveBy(const Location& dloc);
@@ -22,7 +23,7 @@ private:
 		Color c;
 	};
 public:
-	Snake(Settings& gameSettings, const Location& loc);
+	Snake(const Settings& gameSettings, const Location& loc);
 	void ReInit(const Location& loc);
 	void SetMoveBuffer(const Location& newdloc);
 	void Update();
@@ -46,7 +47,7 @@ private:
 	Location dLoc = { 0,0 };
 	Location dLocBuff = { 0,0 };
 	
-	std::vector<Segment> segment =  {Segment()};
+	std::vector<Segment> segment;
 	bool rainbowSnake = false;
 	bool bevelSnake = false;
 };

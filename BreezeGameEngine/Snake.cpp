@@ -1,9 +1,9 @@
 #include "Snake.h"
 #include <assert.h>
 
-Snake::Snake(Settings& gameSettings, const Location& loc)
+Snake::Snake(const Settings& gameSettings, const Location& loc)
 {
-	segment[0].InitHead(loc);
+	segment.emplace_back( loc );
 
 	rainbowSnake = gameSettings.IsSnakeRainbow();
 	bevelSnake = gameSettings.IsSnakeBeveled();
@@ -11,7 +11,8 @@ Snake::Snake(Settings& gameSettings, const Location& loc)
 
 void Snake::ReInit(const Location& loc)
 {
-	segment[0].InitHead(loc);
+	segment.resize(0, Segment( headColor ));
+	segment.emplace_back( loc );
 	dLoc = { 0,0 };
 	dLocBuff = { 0,0 };
 }
@@ -28,7 +29,7 @@ void Snake::SetMoveBuffer(const Location& newdloc)
 void Snake::Update()
 {
 	dLoc = dLocBuff;
-	for (int i = segment.size() - 1; i > 0; i--)
+	for (size_t i = segment.size() - 1; i > 0; i--)
 	{
 		segment[i].Follow(segment[i - 1]);
 	}
@@ -38,22 +39,22 @@ void Snake::Update()
 
 void Snake::MoveBy(const Location& dloc)
 {
-	for (int i = segment.size() - 1; i > 0; i--)
+	for (size_t i = segment.size() - 1; i > 0; i--)
 	{
 		segment[i].Follow(segment[i - 1]);
 	}
 
-	segment[0].MoveBy(dloc);
+	segment.front().MoveBy(dloc);
 }
 
 void Snake::DeadHead()
 {
-	segment[0].Death();
+	segment.front().Death();
 }
 
 Location Snake::GetNextHead() const
 {
-	Location l(segment[0].GetLoc());
+	Location l(segment.front().GetLoc());
 	l.Add(dLocBuff);
 	return l;
 }
@@ -61,7 +62,9 @@ Location Snake::GetNextHead() const
 void Snake::Grow()
 {
 	Color c;
-	int nSeg = segment.size() - 1;
+	int nSeg = int(segment.size()) - 1;
+
+	/* One day, I will array this trash. */
 
 	if (rainbowSnake)
 	{
@@ -94,8 +97,7 @@ void Snake::Grow()
 			c = { 128,0,128 };
 		}
 			
-		segment.emplace_back(Segment());
-		segment[segment.size() - 1].InitBody(c);
+		segment.emplace_back( c );
 	}
 	else
 	{
@@ -119,16 +121,15 @@ void Snake::Grow()
 		{
 			c = Snake::natbodyColor5;
 		}
-		segment.emplace_back();
-		segment[segment.size() - 1].InitBody(c);
+		segment.emplace_back( c );
 	}
 }
 
 void Snake::Draw(Board& brd) const
 {
-	for (int i = segment.size()-1; i >= 0; i--)
+	for ( const auto& s : segment )
 	{
-		segment[i].Draw( bevelSnake, brd );
+		s.Draw( bevelSnake, brd );
 	}
 }
 
@@ -158,13 +159,13 @@ bool Snake::InTileExcEnd(const Location& targ) const
 	return false;
 }
 
-void Snake::Segment::InitHead(const Location& in_loc)
+Snake::Segment::Segment(const Location& in_loc)
 {
 	loc = in_loc;
 	c = Snake::headColor;
 }
 
-void Snake::Segment::InitBody(const Color& col)
+Snake::Segment::Segment(const Color& col)
 {
 	c = col;
 }

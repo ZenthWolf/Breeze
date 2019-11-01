@@ -2,13 +2,9 @@
 #include <fstream>
 
 Settings::Settings(std::string& filename)
+	: initWidth(false), initHeight(false), initMinMove(false),
+      initRainbow(false), initBevel(false)
 {
-	initWidth = false;
-	initHeight = false;
-	initMinMove = false;
-	initRainbow = false;
-	initBevel = false;
-
 	std::ifstream config(filename);
 
 	while (config.good())
@@ -51,7 +47,7 @@ Settings::Settings(std::string& filename)
 	}
 }
 
-void Settings::MakeConfig()
+void Settings::MakeConfig() const
 {
 	std::ofstream config("configs.txt");
 
@@ -96,27 +92,27 @@ void Settings::MakeConfig()
 	}
 }
 
-int Settings::GetWidth()
+int Settings::GetWidth() const
 {
 	return boardWidth;
 }
 
-int Settings::GetHeight()
+int Settings::GetHeight() const
 {
 	return boardHeight;
 }
 
-float Settings::GetMovePeriod()
+float Settings::GetMovePeriod() const
 {
 	return minMovePeriod;
 }
 
-bool Settings::IsSnakeRainbow()
+bool Settings::IsSnakeRainbow() const
 {
 	return rainbowSnake;
 }
 
-bool Settings::IsSnakeBeveled()
+bool Settings::IsSnakeBeveled() const
 {
 	return bevelSnake;
 }

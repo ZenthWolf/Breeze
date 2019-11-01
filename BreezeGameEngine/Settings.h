@@ -6,12 +6,12 @@ class Settings
 {
 public:
 	Settings(std::string& filename);
-	void MakeConfig();
-	int GetWidth();
-	int GetHeight();
-	float GetMovePeriod();
-	bool IsSnakeRainbow();
-	bool IsSnakeBeveled();
+	void MakeConfig() const;
+	int GetWidth() const;
+	int GetHeight() const;
+	float GetMovePeriod() const;
+	bool IsSnakeRainbow() const;
+	bool IsSnakeBeveled() const;
 
 private:
 	int boardWidth;
