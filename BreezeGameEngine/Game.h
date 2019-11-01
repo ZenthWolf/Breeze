@@ -18,6 +18,7 @@
 #include "Graphics.h"
 #include <random>
 #include "FrameTimer.h"
+#include <vector>
 
 #include "Coin.h"
 #include "Satoru.h"
@@ -59,7 +60,7 @@ private:
 	bool DoneWon = 0;
 	static  constexpr int NCoins = 25;
 
-	Coin Coin[NCoins];
+	std::vector<Coin> Coin;
 
 	Satoru Satoru;
 };

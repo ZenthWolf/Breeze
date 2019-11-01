@@ -22,10 +22,7 @@ Game::Game(MainWindow& wnd)
 	rng(dev()), xDist(15, 799 - 15), yDist(15, 599 - 15), vDist(-5.0f*60.0f, 5*60.0f)
 {
 }
-//,
-//	Coin0(xDist(rng), yDist(rng), vDist(rng), vDist(rng)),
-//	Coin1(xDist(rng), yDist(rng), vDist(rng), vDist(rng)),
-//	Coin2(xDist(rng), yDist(rng), vDist(rng), vDist(rng))
+
 void Game::Play()
 {
 	gfx.BeginFrame();
@@ -45,9 +42,14 @@ void Game::UpdateModel()
 			AtTitle = !AtTitle;
 			DoneWon = 0;
 
+			if (Coin.capacity() != NCoins)
+			{
+				Coin.reserve(NCoins);
+			}
+
 			for (int i = 0; i < NCoins; i++)
 			{
-				Coin[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
+				Coin.emplace_back(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
 			}
 
 			Satoru.Pos.X = Satoru.DefX;
@@ -62,7 +64,7 @@ void Game::UpdateModel()
 
 			for (int i = 0; i < NCoins; i++)
 			{
-				Coin[i].Init(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
+				Coin.emplace_back(xDist(rng), yDist(rng), vDist(rng), vDist(rng));
 			}
 
 			Satoru.Pos.X = Satoru.DefX;
@@ -76,14 +78,14 @@ void Game::UpdateModel()
 	{
 		Satoru.Update( wnd.kbd, dt );
 
-		for (int i = 0; i < NCoins; i++)
+		for (int i = 0; i < Coin.size(); i++)
 		{
 			Coin[i].Update( dt );
 		}
 
-		for (int i = 0; i < NCoins; i++)
+		for (int i = 0; i < Coin.size(); i++)
 		{
-			for (int j = i + 1; j < NCoins; j++)
+			for (int j = i + 1; j < Coin.size(); j++)
 			{
 				if (Coin[i].CoinColl(Coin[j]))
 				{
@@ -92,13 +94,7 @@ void Game::UpdateModel()
 			}
 		}
 
-		int CoinCoint = 0;
-		while (Coin[CoinCoint].IsGot() && CoinCoint < NCoins)
-		{
-			CoinCoint++;
-		}
-
-	    if (CoinCoint >= NCoins && !DoneWon)
+	    if (Coin.size() == 0 && !DoneWon)
     	{
 		    Beep(900, 100);
 	    	Beep(600, 250);
@@ -116,11 +112,12 @@ void Game::UpdateModel()
 			AtTitle = 1;
 	    }
 
-		for (int i = 0; i < NCoins; i++)
+		for (int i = 0; i < Coin.size(); i++)
 		{
 			if (Game::BoxColl(Satoru.Pos.X, Satoru.Pos.Y, Satoru.W, Satoru.H, Coin[i].PollPos().X, Coin[i].PollPos().Y, Coin::W, Coin::H) && !DoneWon && !Coin[i].IsGot())
 			{
-				Coin[i].Get();
+				//Coin[i].Get();
+				Coin.erase(Coin.begin() + i, Coin.begin() + i + 1);
 				Beep(300+300*int(abs(vDist(rng))/60.0f), 200);
 			}
 		}
@@ -137,12 +134,9 @@ void Game::ComposeFrame()
 	}
 	else {
 
-		for (int i = 0; i < NCoins; i++)
+		for (int i = 0; i < Coin.size(); i++)
 		{
-			if (!Coin[i].IsGot())
-			{
-				Coin[i].Draw(gfx);
-			}
+			Coin[i].Draw(gfx);
 		}
 
     	Satoru.Draw(gfx);
