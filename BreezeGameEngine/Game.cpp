@@ -63,16 +63,13 @@ void Game::UpdateModel(float dt)
 	}
 
 	link.SetDir(dir);
-	link.Update(dt, floor);
+	link.Update(dt);
+	blob.Update(dt);
 }
 
 
 void Game::ComposeFrame()
 {
-	gfx.DrawRect(Rect<int>(0, 0, 100, 200), Colors::Cyan);
-	gfx.DrawRect(Rect<int>(0, 0, 200, 100), Colors::Cyan);
-
-//	if (wnd.kbd.KeyIsPressed(VK_CONTROL) || link.GetCollBox().CollWith(floor.GetRect()))
 	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
 	{
 		gfx.DrawRect(link.GetCollBox(), Colors::Blue);
@@ -82,7 +79,8 @@ void Game::ComposeFrame()
 	{
 		link.Draw(gfx);
 	}
-	font.DrawText("It's alone to be dangerous. . . \nTake-a a-dis!", { 100, 175 }, Color(255, 255, 255), gfx);
 
-	floor.Draw(gfx);
+	blob.Draw(gfx);
+
+	font.DrawText("It's alone to be dangerous. . . \nTake-a a-dis!", { 100, 175 }, Color(255, 255, 255), gfx);
 }

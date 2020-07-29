@@ -21,6 +21,7 @@
 #include "Sound.h"
 #include <random>
 #include "Character.h"
+#include "Enemy.h"
 #include "Ground.h"
 #include "Font.h"
 
@@ -35,6 +36,7 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel(float dt);
+
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -55,6 +57,7 @@ private:
 	GameState gameState = GameState::Title;
 
 	Character link = Character({ 100.0f, 100.0f });
-	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
+	Enemy blob = Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f });
+//	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
 	Font font = "Images//Fixedsys16x28.bmp";
 };
