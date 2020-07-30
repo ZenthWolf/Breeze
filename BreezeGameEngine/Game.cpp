@@ -61,6 +61,10 @@ void Game::UpdateModel(float dt)
 	{
 		dir.X += 1.0f;
 	}
+	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	{
+		link.Attack();
+	}
 
 	link.SetDir(dir);
 	link.Update(dt);
@@ -70,6 +74,10 @@ void Game::UpdateModel(float dt)
 
 void Game::ComposeFrame()
 {
+	if (link.GetSwing())
+	{
+		gfx.DrawRect(link.GetSwingBox(), Colors::Red);
+	}
 	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
 	{
 		gfx.DrawRect(link.GetCollBox(), Colors::Blue);
