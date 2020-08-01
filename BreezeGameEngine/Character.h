@@ -19,6 +19,13 @@ private:
 		StandingDown,
 		Count
 	};
+
+	enum class Action
+	{
+		Move,
+		Attack,
+		Jump
+	};
 public:
 	Character(const Vec<float>& pos);
 	void Draw(Graphics& gfx) const;
@@ -39,5 +46,6 @@ private:
 	float swingcool;
 	std::vector<Animation> animation;
 	Sequence curSeq = Sequence::StandingDown;
+	Action curAct = Action::Move;
 	float speed = 100.0f;
 };
