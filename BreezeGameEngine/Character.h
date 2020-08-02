@@ -27,12 +27,12 @@ private:
 	};
 public:
 	Character(const Vec<float>& pos);
-	void Draw(Graphics& gfx) const;
+	void Draw(Graphics& gfx) const override;
 	void Draw(Graphics& gfx, Color sub) const;
 	void SetDir( const Vec<float>& dir );
 	void Attack();
 	bool GetSwing() const;
-	void Update(float const dt);
+	void Update(float const dt) override;
 	Rect<float> GetCollBox() const;
 	Rect<float> GetSwingBox() const;
 

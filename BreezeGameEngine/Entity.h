@@ -12,18 +12,20 @@ private:
 	};
 
 public:
-	void Update(float const dt);
+	virtual void Update(float const dt) = 0;
+	virtual void Draw(Graphics& gfx) const = 0;
+
 	Vec<float> GetPos() const;
 	Rect<float> GetCollBox() const;
-	void Draw(Graphics& gfx) const;
 
 protected:
+	virtual ~Entity() = default;
+
 	Entity(Vec<float> pos);
 	Entity(Vec<float> pos, int health);
 	Entity(Vec<float> pos, Vec<float> vel, int health);
-
 	int health;
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
-	//Rect<float> collBox;
+	Vec<float> collBoxSize = { 0.0f, 0.0f };
 };

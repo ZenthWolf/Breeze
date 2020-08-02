@@ -23,9 +23,9 @@ Vec<float> Entity::GetPos() const
 	return pos;
 }
 
-/*
+
 Rect<float> Entity::GetCollBox() const
 {
-	return collBox;
+	return Rect<float>(pos, pos+collBoxSize);
 }
-*/
+

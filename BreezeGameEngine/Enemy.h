@@ -7,8 +7,8 @@ class Enemy : Entity
 {
 public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);
-	void Update(const float dt);
-	void Draw(Graphics& gfx) const;
+	void Update(const float dt) override;
+	void Draw(Graphics& gfx) const override;
 private:
 	void BounceX();
 	void BounceY();
