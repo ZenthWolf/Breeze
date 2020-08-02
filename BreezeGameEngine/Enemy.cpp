@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(const Vec<float> pos, const Vec<float> vel)
-	:pos(pos), vel(vel), health(3), col(Colors::Cyan), size(15)
+	:Entity(pos, vel, 3), col(Colors::Cyan), size(15)
 {
 }
 
@@ -37,6 +37,11 @@ void Enemy::Update(const float dt)
 void Enemy::Draw(Graphics& gfx) const
 {
 	gfx.DrawCirc(pos, size, col);
+	for (int i = 3; i < 9; i++)
+	{
+		gfx.PutPixel(pos.X + i, pos.Y - i + 1, Colors::Black);
+		gfx.PutPixel(pos.X - i, pos.Y - i + 1, Colors::Black);
+	}
 }
 
 void Enemy::BounceX()

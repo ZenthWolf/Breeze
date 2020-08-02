@@ -1,7 +1,7 @@
 #include "Character.h"
 
 Character::Character(const Vec<float>& pos)
-	:pos(pos), sprite("Images//link90x90.bmp")
+	:Entity(pos), sprite("Images//link90x90.bmp")
 {
 	for (int i = 0; i < (int)Sequence::StandingLeft; i++)
 	{
@@ -73,11 +73,6 @@ void Character::Attack()
 bool Character::GetSwing() const
 {
 	return swingstate;
-}
-
-Vec<float> Character::GetPos() const
-{
-	return pos;
 }
 
 void Character::Update(float const dt)

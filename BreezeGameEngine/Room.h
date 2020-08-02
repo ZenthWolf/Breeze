@@ -11,11 +11,13 @@
 class Room
 {
 private:
+	Room();
+	~Room();
 	void Update(float dt);
 	void CheckObstacles(); //Check entities are not colliding with obstacles
 	void EnemyCollision(); //Check if Ava is in contact with an enemy
 	void HitDetection(); //Detect Collision of attacks
-	bool IsColliding(const Rect<float> box1, const Rect<float> box2 ) const; //Do these objects collide?
+	bool IsColliding(const Rect<float> box1, const Rect<float> box2) const; //Do these objects collide?
 
 private:
 	Character& Ava; //Does Ava properly belong to the "Room" she is in? Or do rooms just "know" about her?

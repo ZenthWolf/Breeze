@@ -1,10 +1,9 @@
 #pragma once
 
+#include "Entity.h"
 #include "Animation.h"
-#include "Vec.h"
-#include "Ground.h"
 
-class Character
+class Character : Entity
 {
 private:
 	enum class Sequence
@@ -33,19 +32,16 @@ public:
 	void SetDir( const Vec<float>& dir );
 	void Attack();
 	bool GetSwing() const;
-	Vec<float> GetPos() const;
 	void Update(float const dt);
 	Rect<float> GetCollBox() const;
 	Rect<float> GetSwingBox() const;
 
 private:
 	Surface sprite;
-	Vec<float> pos;
-	Vec<float> vel = { 0.0f, 0.0f };
 	bool swingstate = false;
-	float swingcool;
+	float swingcool = 0.0f;
 	std::vector<Animation> animation;
 	Sequence curSeq = Sequence::StandingDown;
 	Action curAct = Action::Move;
-	float speed = 100.0f;
+	float speed = 120.0f;
 };

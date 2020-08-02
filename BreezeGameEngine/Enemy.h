@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Vec.h"
+#include "Entity.h"
 #include "Colors.h"
-#include "Graphics.h"
 
-class Enemy
+class Enemy : Entity
 {
 public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);
@@ -14,9 +13,6 @@ private:
 	void BounceX();
 	void BounceY();
 
-	int health;
-	Vec<float> pos;
-	Vec<float> vel;
 	Color col;
 	float size;
 };

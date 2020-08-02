@@ -1,5 +1,5 @@
 #include "Room.h"
-
+/*
 void Room::Update(float dt)
 {
 	// Inform dynamic objects that it is time to update!
@@ -14,7 +14,7 @@ void Room::Update(float dt)
 		// WHat if their "update" just calls on their source to "fix" them?
 	// Disjoint hitbox:
 		// Can be self contained entities, with their own "update" function.
-	
+
 
 	//Do the collisiony type stuff
 	EnemyCollision(); // Interesting question- which ought be first? Minor detail, however.
@@ -96,3 +96,4 @@ bool Room::IsColliding(const Rect<float> box1, const Rect<float> box2) const
 		return false;
 	}
 }
+*/
