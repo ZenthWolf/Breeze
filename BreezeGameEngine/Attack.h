@@ -2,20 +2,20 @@
 //Playground to identify needed interactions
 //Eventual baseline for "Room" class, but don't take this shit seriously.
 
-#include "Character.h"
+#include "Entity.h"
 
 class Attack
 {
-private:
-	Attack();
+	Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type, Entity& source);
 	~Attack();
 	void Update(float dt);
-	void Afflict(Character& targ);
+	void Afflict(Entity& targ);
 	Rect<float> GetCollBox();
 
 private:
-	Character& source; //Reference to the source which created this attack - More evidence for Ava/NME sharing a parent class?
+	Entity& source; //Reference to the source which created this attack - More evidence for Ava/NME sharing a parent class?
 	Vec<float> pos;
-	Rect<float> hitBox;
-	float strength;
+	Vec<float> hitBoxSize;
+	Entity::AttackType type;
+	Entity::Allegiance allegiance;
 };

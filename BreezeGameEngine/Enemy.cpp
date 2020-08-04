@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(const Vec<float> pos, const Vec<float> vel)
-	:Entity(pos, vel, 3), col(Colors::Cyan), size(15)
+	:Entity(pos, vel, 3, Allegiance::Enemy), col(Colors::Cyan), size(15)
 {
 }
 

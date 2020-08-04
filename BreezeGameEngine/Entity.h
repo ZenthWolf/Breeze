@@ -5,27 +5,35 @@
 
 class Entity
 {
-private:
+public:
 	enum class AttackType
 	{
 		Blade
 	};
 
-public:
+	enum class Allegiance
+	{
+		Ava,
+		Enemy,
+		None
+	};
 	virtual void Update(float const dt) = 0;
 	virtual void Draw(Graphics& gfx) const = 0;
 
 	Vec<float> GetPos() const;
+	Allegiance GetAllegiance() const;
 	Rect<float> GetCollBox() const;
 
 protected:
 	virtual ~Entity() = default;
 
-	Entity(Vec<float> pos);
+	Entity(Vec<float> pos, Allegiance allegiance );
 	Entity(Vec<float> pos, int health);
-	Entity(Vec<float> pos, Vec<float> vel, int health);
+	Entity(Vec<float> pos, Vec<float> vel, int health, Allegiance allegiance);
 	int health;
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
 	Vec<float> collBoxSize = { 0.0f, 0.0f };
+
+	Allegiance allegiance;
 };

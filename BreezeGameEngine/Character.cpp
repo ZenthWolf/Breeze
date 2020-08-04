@@ -1,7 +1,7 @@
 #include "Character.h"
 
 Character::Character(const Vec<float>& pos)
-	:Entity(pos), sprite("Images//link90x90.bmp")
+	:Entity(pos, Allegiance::Ava), sprite("Images//link90x90.bmp")
 {
 	for (int i = 0; i < (int)Sequence::StandingLeft; i++)
 	{
