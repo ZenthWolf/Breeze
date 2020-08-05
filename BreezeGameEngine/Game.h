@@ -19,11 +19,13 @@
 #include "FrameTimer.h"
 #include <chrono>
 #include "Sound.h"
+#include "Font.h"
 #include <random>
+
 #include "Character.h"
 #include "Enemy.h"
 #include "Ground.h"
-#include "Font.h"
+#include "Attack.h"
 
 
 class Game
@@ -60,4 +62,6 @@ private:
 	Enemy blob = Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f });
 //	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
 	Font font = "Images//Fixedsys16x28.bmp";
+
+	std::vector<Attack> Attack;
 };

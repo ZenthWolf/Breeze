@@ -4,7 +4,7 @@
 
 #include "Character.h"
 #include "Enemy.h"
-#include "Rect.h"
+#include "Attack.h"
 #include <vector>
 
 
@@ -23,5 +23,5 @@ private:
 	Character& Ava; //Does Ava properly belong to the "Room" she is in? Or do rooms just "know" about her?
 	std::vector<Enemy> Enemy; // Should have a list of enemies- ALL ENEMIES ARE REQUIRED TO DO ANYTHING STATED HERE, SO BASIS FOR SUBCLASS!
 	std::vector<Rect<float>> Obstacle; // List of obstacles- which will eventually be a class like "ground" once was.
-	std::vector<Rect<float>> Attack; // List of attacks? Are these to be handled by their sources? Is that even possible?
+	std::vector<Attack> Attack; // List of attacks? Are these to be handled by their sources? Is that even possible?
 };

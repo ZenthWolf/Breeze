@@ -61,10 +61,15 @@ void Game::UpdateModel(float dt)
 	{
 		dir.X += 1.0f;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	while (!wnd.kbd.KeyIsEmpty())
 	{
-		link.Attack();
+		const Keyboard::Event e = wnd.kbd.ReadKey();
+		if (e.IsPress() && e.GetCode() == ' ')
+		{
+			link.Attack();
+		}
 	}
+
 
 	link.SetDir(dir);
 	link.Update(dt);

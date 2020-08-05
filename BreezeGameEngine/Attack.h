@@ -7,7 +7,6 @@
 class Attack
 {
 	Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type, Entity& source);
-	~Attack();
 	void Update(float dt);
 	void Afflict(Entity& targ);
 	Rect<float> GetCollBox();

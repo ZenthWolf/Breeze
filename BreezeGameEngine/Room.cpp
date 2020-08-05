@@ -1,4 +1,5 @@
 #include "Room.h"
+
 /*
 void Room::Update(float dt)
 {
@@ -9,19 +10,20 @@ void Room::Update(float dt)
 		Enemy[i].Update(dt);
 	}
 
-	// Should Attacks be updated? How to reconcile joined vs disjoint?
-	// Joined hitbox:
-		// WHat if their "update" just calls on their source to "fix" them?
-	// Disjoint hitbox:
-		// Can be self contained entities, with their own "update" function.
-
+	for (int i = 0; i < Attack.size(); i++)
+	{
+//		Attack[i].Update(dt);
+	}
 
 	//Do the collisiony type stuff
-	EnemyCollision(); // Interesting question- which ought be first? Minor detail, however.
-	HitDetection();
-	CheckObstacles(); // end with all characters in good locations
+	CheckObstacles();
+	HitDetection();      //Active hits have preference over passive hits
+	EnemyCollision();
+	
 }
+*/
 
+/*
 void Room::CheckObstacles()
 {
 	for (int i = 0; i < Obstacle.size(); i++)
@@ -47,7 +49,9 @@ void Room::CheckObstacles()
 		}
 	}
 }
+*/
 
+/*
 void Room::EnemyCollision()
 {
 	//Check Ava/Enemy Collision
@@ -73,7 +77,9 @@ void Room::EnemyCollision()
 		}
 	}
 }
+*/
 
+/*
 void Room::HitDetection()
 {
 	//
@@ -84,7 +90,9 @@ void Room::HitDetection()
 		// Attacks may need a reference to their particular source (for recoil) or "side" at least
 	//
 }
+*/
 
+/*
 bool Room::IsColliding(const Rect<float> box1, const Rect<float> box2) const
 {
 	if ("box 1 collides with box 2")
