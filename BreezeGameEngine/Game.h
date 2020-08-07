@@ -62,6 +62,4 @@ private:
 	Enemy blob = Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f });
 //	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
 	Font font = "Images//Fixedsys16x28.bmp";
-
-	std::vector<Attack> Attack;
 };

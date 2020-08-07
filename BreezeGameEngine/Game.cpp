@@ -79,10 +79,7 @@ void Game::UpdateModel(float dt)
 
 void Game::ComposeFrame()
 {
-	if (link.GetSwing())
-	{
-		gfx.DrawRect(link.GetSwingBox(), Colors::Red);
-	}
+	
 	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
 	{
 		gfx.DrawRect(link.GetCollBox(), Colors::Blue);

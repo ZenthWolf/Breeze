@@ -1,7 +1,20 @@
-#include "Attack.h"
+#include "Entity.h"
 
-Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type, Entity& source)
-	:pos(pos), hitBoxSize(hBoxSize), type(type), source(source)
+Entity::Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type)
+	:pos(pos), hitBoxSize(hBoxSize), type(type)
 {
-	allegiance = source.GetAllegiance();
+}
+
+void Entity::Attack::Update(float dt)
+{
+}
+
+void Entity::Attack::Draw(Graphics& gfx, Color col) const
+{
+	gfx.DrawRect(GetCollBox(), col);
+}
+
+Rect<float> Entity::Attack::GetCollBox() const
+{
+	return Rect<float>(pos, hitBoxSize);
 }

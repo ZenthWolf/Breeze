@@ -17,57 +17,119 @@ Character::Character(const Vec<float>& pos)
 void Character::Draw(Graphics& gfx) const
 {
 	animation[(int)curSeq].Draw( Vec<int>(pos), gfx );
+
+	for (int i = 0; i < attack.size(); i++)
+	{
+		attack[i].Draw(gfx, Colors::Red);
+	}
 }
 
 void Character::Draw(Graphics& gfx, Color sub) const
 {
 	animation[(int)curSeq].Draw(Vec<int>(pos), gfx, sub);
+
+	for (int i = 0; i < attack.size(); i++)
+	{
+		attack[i].Draw(gfx, Colors::Red);
+	}
 }
 
 void Character::SetDir(const Vec<float>& dir)
 {
-	if (dir.X > 0.0f)
+	if (curAct == Action::Move)
 	{
-		curSeq = Sequence::WalkingRight;
-	}
-	else if (dir.X < 0.0f)
-	{
-		curSeq = Sequence::WalkingLeft;
-	}
-	else if (dir.Y > 0.0f)
-	{
-		curSeq = Sequence::WalkingDown;
-	}
-	else if (dir.Y < 0.0f)
-	{
-		curSeq = Sequence::WalkingUp;
-	}
-	else
-	{
-		if (vel.X > 0.0f)
+		if (dir.X > 0.0f)
 		{
-			curSeq = Sequence::StandingRight;
+			curSeq = Sequence::WalkingRight;
 		}
-		else if (vel.X < 0.0f)
+		else if (dir.X < 0.0f)
 		{
-			curSeq = Sequence::StandingLeft;
+			curSeq = Sequence::WalkingLeft;
 		}
-		else if (vel.Y > 0.0f)
+		else if (dir.Y > 0.0f)
 		{
-			curSeq = Sequence::StandingDown;
+			curSeq = Sequence::WalkingDown;
 		}
-		else if (vel.Y < 0.0f)
+		else if (dir.Y < 0.0f)
 		{
-			curSeq = Sequence::StandingUp;
+			curSeq = Sequence::WalkingUp;
 		}
+		else
+		{
+			if (vel.X > 0.0f)
+			{
+				curSeq = Sequence::StandingRight;
+			}
+			else if (vel.X < 0.0f)
+			{
+				curSeq = Sequence::StandingLeft;
+			}
+			else if (vel.Y > 0.0f)
+			{
+				curSeq = Sequence::StandingDown;
+			}
+			else if (vel.Y < 0.0f)
+			{
+				curSeq = Sequence::StandingUp;
+			}
+		}
+		vel = dir * speed;
 	}
-	vel = dir * speed;
 }
 
 void Character::Attack()
 {
-	swingstate = true;
-	swingcool = 0.0f;
+	if (curAct != Action::Attack)
+	{
+		swingstate = true;
+		curAct = Action::Attack;
+
+		Rect<float> edge = GetCollBox();
+		Vec<float> cent = { 0.0f, 0.0f };
+		Vec<float> half = { 0.0f, 0.0f };
+
+		if (curSeq == Sequence::StandingRight || curSeq == Sequence::WalkingRight)
+		{
+			curSeq = Sequence::StandingRight;
+
+			half = { 25.0f, 5.0f };
+			cent = { edge.X1 + half.X, (edge.Y0 + edge.Y1) / 2 };
+		}
+
+		else if (curSeq == Sequence::StandingLeft || curSeq == Sequence::WalkingLeft)
+		{
+			curSeq = Sequence::StandingLeft;
+
+			half = { 25.0f, 5.0f };
+			cent = { edge.X0 - half.X, (edge.Y0 + edge.Y1) / 2 };
+		}
+
+		else if (curSeq == Sequence::StandingUp || curSeq == Sequence::WalkingUp)
+		{
+			curSeq = Sequence::StandingUp;
+
+			half = { 5.0f, 25.0f };
+			cent = { (edge.X0 + edge.X1) / 2, edge.Y0 - half.Y };
+		}
+
+		else if (curSeq == Sequence::StandingDown || curSeq == Sequence::WalkingDown)
+		{
+			curSeq = Sequence::StandingDown;
+
+			half = { 5.0f, 25.0f };
+			cent = { (edge.X0 + edge.X1) / 2, edge.Y1 + half.Y };
+		}
+
+		else
+		{
+			cent = { 35.0f, 15.0f };
+			half = { 25.0f, 5.0f };
+		}
+
+		attack.emplace_back(cent - half, cent + half, Entity::AttackType::Blade);
+
+		swingcool = 0.0f;
+	}
 }
 
 bool Character::GetSwing() const
@@ -77,7 +139,15 @@ bool Character::GetSwing() const
 
 void Character::Update(float const dt)
 {
-	pos += vel * dt;
+	if (curAct == Action::Move)
+	{
+		pos += vel * dt;
+	}
+
+	for (int i = 0; i < attack.size(); i++)
+	{
+		attack[i].Update(dt);
+	}
 
 	if (swingstate)
 	{
@@ -85,6 +155,8 @@ void Character::Update(float const dt)
 		if (swingcool >= 0.5f)
 		{
 			swingstate = false;
+			curAct = Action::Move;
+			attack.erase(attack.begin(), attack.begin()+1);
 		}
 	}
 
