@@ -9,12 +9,13 @@ Room::Room(Character& Ava, int scenario, Keyboard& kbd)
 	}
 }
 
+// The purpose here is to throw out irrelevant keys without feeding them to any entities.
 void Room::ReadInput() const
 {
 	while (!kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = kbd.ReadKey();
-		if (e.IsPress() && e.GetCode() == ' ')
+		if (e.GetCode() == ' ' || abs(e.GetCode() - 37) <= 4) // Arrow Keys are 37-40
 		{
 			Ava.Input(e);
 		}
