@@ -6,6 +6,8 @@ Room::Room(Character& Ava, int scenario, Keyboard& kbd)
 	if (scenario == 0)
 	{
 		enemy.emplace_back(Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f }));
+		obstacle.emplace_back(Obstacle({ 560.0f, 540.0f }, { 600.0f, 580.0f }));
+		obstacle.emplace_back(Obstacle({ 320.0f, 50.0f }, { 360.0f, 90.0f }));
 	}
 }
 
@@ -35,7 +37,7 @@ void Room::Update(float dt)
 	}
 
 	//Do the collisiony type stuff
-//	CheckObstacles();
+	CheckObstacles();
 	HitDetection();      //Active hits have preference over passive hits
 //	EnemyCollision();
 	
@@ -43,41 +45,43 @@ void Room::Update(float dt)
 
 void Room::Draw(Graphics& gfx)
 {
+	for (int i = 0; i < obstacle.size(); i++)
+	{
+		obstacle[i].Draw(gfx);
+	}
 	Ava.Draw(gfx);
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i].Draw(gfx);
+		enemy[i].Draw2(gfx);
 	}
 }
 
-
-/*
 void Room::CheckObstacles()
 {
-	for (int i = 0; i < Obstacle.size(); i++)
+	for (int i = 0; i < obstacle.size(); i++)
 	{
 		//STATIC COLLISION
 
-		Rect<float> staticBox = Obstacle[i].GetCollBox();
+		Rect<float> staticBox = obstacle[i].GetCollBox();
 
 		//Check Ava/Obstacle Collision
-		if ( IsColliding( Ava.GetCollBox(), staticBox) )
+		if ( staticBox.CollWith( Ava.GetCollBox() ) )
 		{
 			Ava.PushBox( staticBox ); // A function which replaces Ava to end collision
 		}
 
 		//Check Enemy/Obstacle Collision
-		for (int j = 0; j < Enemy.size(); j++)
+		for (int j = 0; j < enemy.size(); j++)
 		{
-			Rect<float> enemyBox = Enemy[j].GetCollBox();
-			if (IsColliding( enemyBox, staticBox ))
+			Rect<float> enemyBox = enemy[j].GetCollBox();
+
+			if ( staticBox.CollWith(enemyBox) )
 			{
-				Enemy.PushBox( staticBox ); // A function which replaces Enemy to end collision- may also alter behavior
+				enemy[j].PushBox( staticBox ); // A function which replaces Enemy to end collision- may also alter behavior
 			}
 		}
 	}
 }
-*/
 
 /*
 void Room::EnemyCollision()
@@ -120,18 +124,3 @@ void Room::HitDetection()
 		}
 	}
 }
-
-
-/*
-bool Room::IsColliding(const Rect<float> box1, const Rect<float> box2) const
-{
-	if ("box 1 collides with box 2")
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-*/

@@ -4,12 +4,12 @@
 #include "Colors.h"
 #include "Graphics.h"
 
-class Ground
+class Obstacle
 {
 public:
-	Ground(const Vec<float> v0, const Vec<float> v1);
+	Obstacle(const Vec<float> v0, const Vec<float> v1);
 	void Draw(Graphics& gfx) const;
-	Rect<float> GetRect();
+	Rect<float> GetCollBox();
 
 private:
 	Rect<float> box;

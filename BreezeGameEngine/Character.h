@@ -34,7 +34,7 @@ public:
 	bool GetSwing() const;
 	void Update(float const dt) override;
 	void Input(Keyboard::Event e);
-	Rect<float> GetCollBox() const;
+	Rect<float> GetCollBox() const override;
 	Rect<float> GetAttackBox(int atindex) const;
 
 	void OnHit(Entity& attacker, int atindex) override

@@ -9,7 +9,10 @@ public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);
 	void Update(const float dt) override;
 	void Draw(Graphics& gfx) const override;
+	void Draw2(Graphics& gfx);
 	void OnHit(Entity& attacker, int atindex);
+	virtual void PushBox(Rect<float> wall) override;
+	void fixpos(float dr);
 
 private:
 	void BounceX();
@@ -17,4 +20,5 @@ private:
 
 	Color col;
 	float size;
+	bool flash;
 };

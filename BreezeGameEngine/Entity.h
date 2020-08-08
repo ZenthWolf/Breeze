@@ -24,9 +24,9 @@ public:
 	virtual void OnHit(Entity& attacker, int atindex) = 0;
 
 	Vec<float> GetPos() const;
-	void PushBox(Rect<float> wall);
+	virtual void PushBox(Rect<float> wall);
 	Allegiance GetAllegiance() const;
-	Rect<float> GetCollBox() const;
+	virtual Rect<float> GetCollBox() const;
 	int GetAttackNum() const;
 	
 

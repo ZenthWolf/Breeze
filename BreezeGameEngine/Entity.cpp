@@ -37,11 +37,10 @@ Vec<float> Entity::GetPos() const
 	return pos;
 }
 
-/*
 void Entity::PushBox(Rect<float> wall)
 {
 	float Deviance[4] = { 0.0f }; //0-4 Left, Up, Right, Down
-	float MinDev = -1.0f;
+	float MinDev = 0.0f;
 
 	Rect<float> entcoll = GetCollBox();
 
@@ -88,7 +87,6 @@ void Entity::PushBox(Rect<float> wall)
 		//There probably should be an error or something here...
 	}
 }
-*/
 
 Entity::Allegiance Entity::GetAllegiance() const
 {

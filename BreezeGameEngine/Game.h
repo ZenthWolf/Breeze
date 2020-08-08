@@ -24,7 +24,6 @@
 
 #include "Character.h"
 #include "Enemy.h"
-#include "Ground.h"
 #include "Room.h"
 
 
@@ -60,6 +59,5 @@ private:
 
 	Character link = Character({ 100.0f, 100.0f }, wnd.kbd);
 	Room room = Room(link, 0, wnd.kbd);
-//	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
 	Font font = "Images//Fixedsys16x28.bmp";
 };
