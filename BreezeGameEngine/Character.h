@@ -35,7 +35,10 @@ public:
 	void Update(float const dt) override;
 	void Input(Keyboard::Event e);
 	Rect<float> GetCollBox() const;
-	Rect<float> GetSwingBox() const;
+	Rect<float> GetAttackBox(int atindex) const;
+
+	void OnHit(Entity& attacker, int atindex) override
+	{}
 
 private:
 	void Attack();

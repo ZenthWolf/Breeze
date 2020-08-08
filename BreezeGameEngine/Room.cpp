@@ -36,7 +36,7 @@ void Room::Update(float dt)
 
 	//Do the collisiony type stuff
 //	CheckObstacles();
-//	HitDetection();      //Active hits have preference over passive hits
+	HitDetection();      //Active hits have preference over passive hits
 //	EnemyCollision();
 	
 }
@@ -105,19 +105,22 @@ void Room::EnemyCollision()
 		}
 	}
 }
+*/
 
-/*
 void Room::HitDetection()
 {
-	//
-		// What even is an "Attack"?
-		// Some attacks are affixed to their source (Ava's swing) and will recoil on their source
-		// Some attacks are disjoint from their source (a fireball or energy beam, which cannot affect their source
-		// Some attacks should play sides (Enemies don't hurt each other; *most* of Ava's attacks should not affect her
-		// Attacks may need a reference to their particular source (for recoil) or "side" at least
-	//
+	for (int i = 0; i < Ava.GetAttackNum(); i++)
+	{
+		for (int j = 0; j < enemy.size(); j++)
+		{
+			if (Ava.GetAttackBox(i).CollWith(enemy[j].GetCollBox()))
+			{
+				enemy[j].OnHit(Ava, i);
+			}
+		}
+	}
 }
-*/
+
 
 /*
 bool Room::IsColliding(const Rect<float> box1, const Rect<float> box2) const

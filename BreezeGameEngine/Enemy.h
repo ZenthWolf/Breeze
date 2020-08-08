@@ -9,6 +9,8 @@ public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);
 	void Update(const float dt) override;
 	void Draw(Graphics& gfx) const override;
+	void OnHit(Entity& attacker, int atindex);
+
 private:
 	void BounceX();
 	void BounceY();

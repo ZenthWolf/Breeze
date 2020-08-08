@@ -7,6 +7,8 @@ Enemy::Enemy(const Vec<float> pos, const Vec<float> vel)
 
 void Enemy::Update(const float dt)
 {
+	VulnerableTimer(dt);
+
 	pos += vel*dt;
 
 	if (pos.Y - size <= 0.0f)
@@ -36,11 +38,24 @@ void Enemy::Update(const float dt)
 
 void Enemy::Draw(Graphics& gfx) const
 {
-	gfx.DrawCirc(pos, size, col);
-	for (int i = 3; i < 9; i++)
+	if (health > 0)
 	{
-		gfx.PutPixel(pos.X + i, pos.Y - i + 1, Colors::Black);
-		gfx.PutPixel(pos.X - i, pos.Y - i + 1, Colors::Black);
+		gfx.DrawCirc(pos, size, col);
+		for (int i = 3; i < 9; i++)
+		{
+			gfx.PutPixel(pos.X + i, pos.Y - i + 1, Colors::Black);
+			gfx.PutPixel(pos.X - i, pos.Y - i + 1, Colors::Black);
+		}
+	}
+}
+
+void Enemy::OnHit(Entity& attacker, int atindex)
+{
+	if (attacker.GetAllegiance() != Allegiance::Enemy && vulnerable)
+	{
+		health -= 1;
+		vulnerable = false;
+		invultime = -0.5f;
 	}
 }
 

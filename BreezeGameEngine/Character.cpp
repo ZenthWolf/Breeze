@@ -178,7 +178,7 @@ void Character::Update(float const dt)
 	if (swingstate)
 	{
 		swingcool += dt;
-		if (swingcool >= 0.5f)
+		if (swingcool >= 0.25f)
 		{
 			swingstate = false;
 			curAct = Action::Move;
@@ -204,40 +204,14 @@ Rect<float> Character::GetCollBox() const
 	return Rect<float>( pos + Vec<float>(25.0f, 20.0f), pos + Vec<float>(65.0f, 70.0f) );
 }
 
-Rect<float> Character::GetSwingBox() const
+Rect<float> Character::GetAttackBox(int atindex) const
 {
-	Rect<float> edge = GetCollBox();
-
-	if (curSeq == Sequence::StandingRight)
+	if (atindex < attack.size())
 	{
-		Vec<float> half = { 25.0f, 5.0f };
-		Vec<float> cent = { edge.X1 + half.X, (edge.Y0 + edge.Y1)/2 };
-		return Rect<float>(cent - half, cent + half);
+		return attack[atindex].GetCollBox();
 	}
-
-	else if (curSeq == Sequence::StandingLeft)
-	{
-		Vec<float> half = { 25.0f, 5.0f };
-		Vec<float> cent = { edge.X0 - half.X, (edge.Y0 + edge.Y1) / 2 };
-		return Rect<float>(cent - half, cent + half);
-	}
-
-	else if (curSeq == Sequence::StandingUp)
-	{
-		Vec<float> half = { 5.0f, 25.0f };
-		Vec<float> cent = { (edge.X0 + edge.X1) / 2, edge.Y0 - half.Y };
-		return Rect<float>(cent - half, cent + half);
-	}
-
-	else if (curSeq == Sequence::StandingDown)
-	{
-		Vec<float> half = { 5.0f, 25.0f };
-		Vec<float> cent = { (edge.X0 + edge.X1) / 2, edge.Y1 + half.Y };
-		return Rect<float>(cent - half, cent + half);
-	}
-
 	else
 	{
-		return Rect<float> {10.0f, 10.0f, 60.0f, 20.0f };
+		return Rect<float>(0.0f, 0.0f, 0.0f, 0.0f);
 	}
 }

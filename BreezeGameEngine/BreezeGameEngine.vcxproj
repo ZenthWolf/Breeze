@@ -130,7 +130,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Attack.h" />
     <ClInclude Include="Beveler.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="COMInitializer.h" />

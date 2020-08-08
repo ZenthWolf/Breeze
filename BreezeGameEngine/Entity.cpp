@@ -17,6 +17,20 @@ Entity::Entity(Vec<float> pos, Vec<float> vel, int health, Allegiance allegiance
 {
 }
 
+void Entity::VulnerableTimer(float dt)
+{
+	if (!vulnerable)
+	{
+		invultime += dt;
+
+		if (invultime >= 0.0f)
+		{
+			invultime = 0.0f;
+			vulnerable = true;
+		}
+	}
+}
+
 
 Vec<float> Entity::GetPos() const
 {
