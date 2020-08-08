@@ -26,6 +26,7 @@ public:
 	void PushBox(Rect<float> wall);
 	Allegiance GetAllegiance() const;
 	Rect<float> GetCollBox() const;
+	int GetAttackNum() const;
 
 protected:
 	class Attack

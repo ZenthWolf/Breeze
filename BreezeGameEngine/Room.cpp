@@ -1,27 +1,54 @@
 #include "Room.h"
 
-/*
+Room::Room(Character& Ava, int scenario, Keyboard& kbd)
+	:Ava(Ava), kbd(kbd)
+{
+	if (scenario == 0)
+	{
+		enemy.emplace_back(Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f }));
+	}
+}
+
+void Room::ReadInput() const
+{
+	while (!kbd.KeyIsEmpty())
+	{
+		const Keyboard::Event e = kbd.ReadKey();
+		if (e.IsPress() && e.GetCode() == ' ')
+		{
+			Ava.Input(e);
+		}
+	}
+}
+
 void Room::Update(float dt)
 {
-	// Inform dynamic objects that it is time to update!
-	Ava.Update(dt);
-	for (int i = 0; i < Enemy.size(); i++)
-	{
-		Enemy[i].Update(dt);
-	}
+	ReadInput();
 
-	for (int i = 0; i < Attack.size(); i++)
+	// Inform dynamic objects that it is time to update!
+	// Characters and Enemies should update their attacks at this time.
+	Ava.Update(dt);
+	for (int i = 0; i < enemy.size(); i++)
 	{
-//		Attack[i].Update(dt);
+		enemy[i].Update(dt);
 	}
 
 	//Do the collisiony type stuff
-	CheckObstacles();
-	HitDetection();      //Active hits have preference over passive hits
-	EnemyCollision();
+//	CheckObstacles();
+//	HitDetection();      //Active hits have preference over passive hits
+//	EnemyCollision();
 	
 }
-*/
+
+void Room::Draw(Graphics& gfx)
+{
+	Ava.Draw(gfx);
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		enemy[i].Draw(gfx);
+	}
+}
+
 
 /*
 void Room::CheckObstacles()
@@ -77,7 +104,6 @@ void Room::EnemyCollision()
 		}
 	}
 }
-*/
 
 /*
 void Room::HitDetection()

@@ -44,53 +44,22 @@ void Game::Play()
 
 void Game::UpdateModel(float dt)
 {
-	Vec<float> dir = { 0.0f, 0.0f };
-	if (wnd.kbd.KeyIsPressed(VK_UP))
-	{
-		dir.Y -= 1.0f;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		dir.Y += 1.0f;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		dir.X -= 1.0f;
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
-	{
-		dir.X += 1.0f;
-	}
-	while (!wnd.kbd.KeyIsEmpty())
-	{
-		const Keyboard::Event e = wnd.kbd.ReadKey();
-		if (e.IsPress() && e.GetCode() == ' ')
-		{
-			link.Attack();
-		}
-	}
-
-
-	link.SetDir(dir);
-	link.Update(dt);
-	blob.Update(dt);
+	room.Update(dt);
 }
 
 
 void Game::ComposeFrame()
 {
-	
-	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
-	{
-		gfx.DrawRect(link.GetCollBox(), Colors::Blue);
-		link.Draw(gfx, Colors::Red);
-	}
-	else
-	{
-		link.Draw(gfx);
-	}
-
-	blob.Draw(gfx);
+	room.Draw(gfx);
+//	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
+//	{
+//		gfx.DrawRect(link.GetCollBox(), Colors::Blue);
+//		link.Draw(gfx, Colors::Red);
+//	}
+//	else
+//	{
+//		link.Draw(gfx);
+//	}
 
 	font.DrawText("It's alone to be dangerous. . . \nTake-a a-dis!", { 100, 175 }, Color(255, 255, 255), gfx);
 }

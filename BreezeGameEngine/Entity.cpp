@@ -87,3 +87,8 @@ Rect<float> Entity::GetCollBox() const
 	return Rect<float>(pos, pos+collBoxSize);
 }
 
+int Entity::GetAttackNum() const
+{
+	return attack.size();
+}
+

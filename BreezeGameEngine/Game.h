@@ -25,7 +25,7 @@
 #include "Character.h"
 #include "Enemy.h"
 #include "Ground.h"
-#include "Attack.h"
+#include "Room.h"
 
 
 class Game
@@ -58,8 +58,8 @@ private:
 	std::mt19937 rng;
 	GameState gameState = GameState::Title;
 
-	Character link = Character({ 100.0f, 100.0f });
-	Enemy blob = Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f });
+	Character link = Character({ 100.0f, 100.0f }, wnd.kbd);
+	Room room = Room(link, 0, wnd.kbd);
 //	Ground floor = Ground({ 300.0f, 300.0f }, { 500.f, 500.0f });
 	Font font = "Images//Fixedsys16x28.bmp";
 };

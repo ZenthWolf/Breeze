@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include "Colors.h"
 
-class Enemy : Entity
+class Enemy : public Entity
 {
 public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);

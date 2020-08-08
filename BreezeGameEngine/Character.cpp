@@ -1,7 +1,7 @@
 #include "Character.h"
 
-Character::Character(const Vec<float>& pos)
-	:Entity(pos, Allegiance::Ava), sprite("Images//link90x90.bmp")
+Character::Character(const Vec<float>& pos, Keyboard& kbd)
+	:Entity(pos, Allegiance::Ava), sprite("Images//link90x90.bmp"), kbd(kbd)
 {
 	for (int i = 0; i < (int)Sequence::StandingLeft; i++)
 	{
@@ -132,6 +132,30 @@ void Character::Attack()
 	}
 }
 
+void Character::SetVel()
+{
+	Vec<float> dir = { 0.0f, 0.0f };
+	if (kbd.KeyIsPressed(VK_UP))
+	{
+		dir.Y -= 1.0f;
+	}
+	if (kbd.KeyIsPressed(VK_DOWN))
+	{
+		dir.Y += 1.0f;
+	}
+	if (kbd.KeyIsPressed(VK_LEFT))
+	{
+		dir.X -= 1.0f;
+	}
+	if (kbd.KeyIsPressed(VK_RIGHT))
+	{
+		dir.X += 1.0f;
+	}
+
+
+	SetDir(dir);
+}
+
 bool Character::GetSwing() const
 {
 	return swingstate;
@@ -139,6 +163,8 @@ bool Character::GetSwing() const
 
 void Character::Update(float const dt)
 {
+	SetVel();
+
 	if (curAct == Action::Move)
 	{
 		pos += vel * dt;
@@ -161,6 +187,14 @@ void Character::Update(float const dt)
 	}
 
 	animation[(int)curSeq].Update(dt);
+}
+
+void Character::Input(Keyboard::Event e)
+{
+	if (e.IsPress() && e.GetCode() == ' ')
+	{
+		Attack();
+	}
 }
 
 
