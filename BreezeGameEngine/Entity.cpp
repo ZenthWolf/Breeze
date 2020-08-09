@@ -51,19 +51,28 @@ void Entity::PushBox(Rect<float> wall)
 	}
 
 	float LeftDeviance = entcoll.X1 - wall.X0;
-	if (LeftDeviance > 0.0f && LeftDeviance < MinDev)
+	if (LeftDeviance > 0.0f)
 	{
-		MinDev = LeftDeviance;
+		if (MinDev == 0.0f || LeftDeviance < MinDev)
+		{
+			MinDev = LeftDeviance;
+		}
 	}
 	float DownDeviance = wall.Y1 - entcoll.Y0;
-	if (DownDeviance > 0.0f && DownDeviance < MinDev)
+	if (DownDeviance > 0.0f)
 	{
-		MinDev = DownDeviance;
+		if (MinDev == 0.0f || DownDeviance < MinDev)
+		{
+			MinDev = DownDeviance;
+		}
 	}
 	float RightDeviance = wall.X1 - entcoll.X0;
-	if (RightDeviance > 0.0f && RightDeviance < MinDev)
+	if (RightDeviance > 0.0f)
 	{
-		MinDev = RightDeviance;
+		if (MinDev == 0.0f || RightDeviance < MinDev)
+		{
+			MinDev = RightDeviance;
+		}
 	}
 
 	if (MinDev == UpDeviance)

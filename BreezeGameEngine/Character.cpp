@@ -16,11 +16,19 @@ Character::Character(const Vec<float>& pos, Keyboard& kbd)
 
 void Character::Draw(Graphics& gfx) const
 {
-	animation[(int)curSeq].Draw( Vec<int>(pos), gfx );
-
-	for (int i = 0; i < attack.size(); i++)
+	if (!kbd.KeyIsPressed(VK_CONTROL))
 	{
-		attack[i].Draw(gfx, Colors::Red);
+		animation[(int)curSeq].Draw(Vec<int>(pos), gfx);
+
+		for (int i = 0; i < attack.size(); i++)
+		{
+			attack[i].Draw(gfx, Colors::Red);
+		}
+	}
+	else
+	{
+		gfx.DrawRect(GetCollBox(), Colors::White);
+//		Draw(gfx, Colors::Red);
 	}
 }
 
