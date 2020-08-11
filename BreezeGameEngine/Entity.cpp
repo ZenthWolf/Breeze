@@ -77,19 +77,19 @@ void Entity::PushBox(Rect<float> wall)
 
 	if (MinDev == UpDeviance)
 	{
-		pos.Y -= UpDeviance;
+		pos.Y = round(pos.Y - UpDeviance);
 	}
 	else if (MinDev == LeftDeviance)
 	{
-		pos.X -= LeftDeviance;
+		pos.X = round(pos.X - LeftDeviance);
 	}
 	else if (MinDev == DownDeviance)
 	{
-		pos.Y += DownDeviance;
+		pos.Y = round(pos.Y + DownDeviance);
 	}
 	else if (MinDev == RightDeviance)
 	{
-		pos.X += RightDeviance;
+		pos.X = round(pos.X + RightDeviance);
 	}
 	else
 	{

@@ -27,6 +27,15 @@ void Character::Draw(Graphics& gfx) const
 	}
 	else
 	{
+		if (kbd.KeyIsPressed('Z'))
+		{
+			Rect<float> dummy = GetCollBox();
+
+			if (dummy.Y1 - dummy.Y0 != 50.0f)
+			{
+				int oops = 1;
+			}
+		}
 		gfx.DrawRect(GetCollBox(), Colors::White);
 //		Draw(gfx, Colors::Red);
 	}
@@ -209,7 +218,9 @@ void Character::Input(Keyboard::Event e)
 
 Rect<float> Character::GetCollBox() const
 {
-	return Rect<float>( pos + Vec<float>(25.0f, 20.0f), pos + Vec<float>(65.0f, 70.0f) );
+	Vec<float> v0 = pos + Vec<float>(25.0f, 20.0f);
+	Vec<float> v1 = pos + Vec<float>(65.0f, 70.0f);
+	return Rect<float>( v0, v1 );
 }
 
 Rect<float> Character::GetAttackBox(int atindex) const

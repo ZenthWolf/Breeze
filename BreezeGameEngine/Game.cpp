@@ -14,6 +14,7 @@
 
 #include "MainWindow.h"
 #include "Game.h"
+#include<iostream>
 
 
 Game::Game(MainWindow& wnd)
@@ -35,6 +36,7 @@ void Game::Play()
 		float dt = std::min(0.0025f, elapseTime);
 		UpdateModel(dt);
 		elapseTime -= dt;
+		std::cout << dt << std::endl;
 	}
 
 	ComposeFrame();
