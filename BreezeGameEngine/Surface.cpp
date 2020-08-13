@@ -4,7 +4,7 @@
 #include <fstream>
 #include <math.h>
 
-Surface::Surface(const std::string filename)
+Surface::Surface(const std::string& filename)
 {
 
 	/* Uncompressed RGB bitmap */

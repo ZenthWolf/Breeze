@@ -4,11 +4,12 @@
 #include <string>
 #include<vector>
 #include "Rect.h"
+#include <cassert>
 
 class Surface
 {
 public:
-	Surface(const std::string filename);
+	Surface(const std::string& filename);
 	Surface(int width, int height);
 	Surface(Surface&& donor);
 	Surface(const Surface&) = default;

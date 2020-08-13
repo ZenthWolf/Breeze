@@ -241,12 +241,6 @@ Graphics::~Graphics()
 	if (pImmediateContext) pImmediateContext->ClearState();
 }
 
-void Graphics::BeginFrame()
-{
-	// clear the sysbuffer
-	memset(pSysBuffer, 0u, sizeof(Color) * Graphics::ScreenHeight * Graphics::ScreenWidth);
-}
-
 void Graphics::EndFrame()
 {
 	HRESULT hr;
@@ -294,28 +288,6 @@ void Graphics::EndFrame()
 			throw BREEZE_GFX_EXCEPTION(hr, L"Presenting back buffer");
 		}
 	}
-}
-
-void Graphics::PutPixel(int x, int y, Color c)
-{
-//	assert(x >= 0);
-//	assert(x < int(Graphics::ScreenWidth));
-//	assert(y >= 0);
-//	assert(y < int(Graphics::ScreenHeight));
-	if (x > 0 && x < ScreenWidth && y>0 && y < ScreenHeight)
-	{
-		pSysBuffer[Graphics::ScreenWidth * y + x] = c;
-	}
-}
-
-Color Graphics::GetPixel(int x, int y) const
-{
-	assert(x >= 0);
-	assert(x < int(Graphics::ScreenWidth));
-	assert(y >= 0);
-	assert(y < int(Graphics::ScreenHeight));
-
-	return pSysBuffer[Graphics::ScreenWidth * y + x];
 }
 
 /* Draws rectangle from Point0 to Point 1 */

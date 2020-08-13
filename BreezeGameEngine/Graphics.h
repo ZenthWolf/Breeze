@@ -140,3 +140,13 @@ public:
 	static constexpr int ScreenWidth = 800;
 	static constexpr int ScreenHeight = 600;
 };
+
+#include "SpriteEffect.h"
+#ifndef SPRITE_OPTIMIZE
+extern template
+void Graphics::DrawSprite<SpriteEffect::Copy>(int x, int y, Rect<int> srcRect, const Rect<int>& clip, const Surface& S, SpriteEffect::Copy effect);
+extern template
+void Graphics::DrawSprite<SpriteEffect::Chroma>(int x, int y, Rect<int> srcRect, const Rect<int>& clip, const Surface& S, SpriteEffect::Chroma effect);
+extern template
+void Graphics::DrawSprite<SpriteEffect::Substitute>(int x, int y, Rect<int> srcRect, const Rect<int>& clip, const Surface& S, SpriteEffect::Substitute effect);
+#endif // !SPRITE_OPTIMIZE

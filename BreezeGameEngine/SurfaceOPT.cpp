@@ -1,3 +1,6 @@
+/* These functions are optimized in compilation for
+   better performance while debugging */
+
 #include "Surface.h"
 #include <cassert>
 
