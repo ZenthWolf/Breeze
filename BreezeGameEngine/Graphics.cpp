@@ -308,7 +308,7 @@ void Graphics::PutPixel(int x, int y, Color c)
 	}
 }
 
-Color Graphics::GetPixel(int x, int y)
+Color Graphics::GetPixel(int x, int y) const
 {
 	assert(x >= 0);
 	assert(x < int(Graphics::ScreenWidth));
