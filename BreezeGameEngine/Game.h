@@ -35,7 +35,7 @@ public:
 	Game& operator=(const Game&) = delete;
 	void Play();
 private:
-	void ComposeFrame();
+	void ComposeFrame(int iter);
 	void UpdateModel(float dt);
 
 	/********************************/

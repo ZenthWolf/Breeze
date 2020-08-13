@@ -30,16 +30,20 @@ void Game::Play()
 {
 	gfx.BeginFrame();
 
+	int iter = 0;
+
 	float elapseTime = ft.Mark();
+
 	while (elapseTime > 0.0f)
 	{
 		float dt = std::min(0.0025f, elapseTime);
 		UpdateModel(dt);
 		elapseTime -= dt;
-		std::cout << dt << std::endl;
+
+		iter++;
 	}
 
-	ComposeFrame();
+	ComposeFrame(iter);
 	gfx.EndFrame();
 }
 
@@ -50,7 +54,7 @@ void Game::UpdateModel(float dt)
 }
 
 
-void Game::ComposeFrame()
+void Game::ComposeFrame(int iter)
 {
 	room.Draw(gfx);
 //	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
@@ -63,5 +67,8 @@ void Game::ComposeFrame()
 //		link.Draw(gfx);
 //	}
 
-	font.DrawText("It's alone to be dangerous. . . \nTake-a a-dis!", { 100, 175 }, Color(255, 255, 255), gfx);
+
+	std::string text = "It's alone to be dangerous. . . \nTake-a a-dis!\nNumber Iterations: ";
+	text += std::to_string(iter);
+	font.DrawText(text, { 100, 175 }, Color(255, 255, 255), gfx);
 }
