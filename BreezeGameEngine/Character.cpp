@@ -143,7 +143,7 @@ void Character::Attack()
 			half = { 25.0f, 5.0f };
 		}
 
-		attack.emplace_back(cent - half, cent + half, Entity::AttackType::Blade);
+		attack.emplace_back(cent - half, cent + half, Attack::AttackType::Blade);
 
 		swingcool = 0.0f;
 	}

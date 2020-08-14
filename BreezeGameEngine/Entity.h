@@ -8,11 +8,6 @@
 class Entity
 {
 public:
-	enum class AttackType
-	{
-		Blade
-	};
-
 	enum class Allegiance
 	{
 		Ava,
@@ -31,21 +26,6 @@ public:
 	
 
 protected:
-	class Attack
-	{
-	public:
-		Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type);
-		void Update(float dt);
-		void Draw(Graphics& gfx, Color col) const;
-		void Afflict(Entity& targ);
-		Rect<float> GetCollBox() const;
-
-	private:
-		Vec<float> pos;
-		Vec<float> hitBoxSize;
-		Entity::AttackType type;
-	};
-
 	virtual ~Entity() = default;
 
 	Entity(Vec<float> pos, Allegiance allegiance );

@@ -1,20 +1,20 @@
-#include "Entity.h"
+#include "Attack.h"
 
-Entity::Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize, const Entity::AttackType type)
+Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize, const AttackType type)
 	:pos(pos), hitBoxSize(hBoxSize), type(type)
 {
 }
 
-void Entity::Attack::Update(float dt)
+void Attack::Update(float dt)
 {
 }
 
-void Entity::Attack::Draw(Graphics& gfx, Color col) const
+void Attack::Draw(Graphics& gfx, Color col) const
 {
 	gfx.DrawRect(GetCollBox(), col);
 }
 
-Rect<float> Entity::Attack::GetCollBox() const
+Rect<float> Attack::GetCollBox() const
 {
 	return Rect<float>(pos, hitBoxSize);
 }
