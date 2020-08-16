@@ -6,7 +6,11 @@ template<typename T>
 class Vec
 {
 public:
-//	Vec() = default;
+	Vec()
+	{
+		X = T(0);
+		Y = T(0);
+	}
 
 	Vec(T x, T y)
 	{

@@ -41,7 +41,7 @@ public:
 	{}
 
 private:
-	void Attack();
+	void MakeAttack();
 	void SetVel();
 
 	Surface sprite;

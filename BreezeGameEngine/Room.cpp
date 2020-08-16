@@ -5,9 +5,19 @@ Room::Room(Character& Ava, int scenario, Keyboard& kbd)
 {
 	if (scenario == 0)
 	{
-		enemy.emplace_back(Enemy({ 600.0f, 200.0f }, { 0.0f, -70.0f }));
-		obstacle.emplace_back(Obstacle({ 560.0f, 540.0f }, { 600.0f, 580.0f }));
-		obstacle.emplace_back(Obstacle({ 320.0f, 50.0f }, { 360.0f, 90.0f }));
+		Vec<float> p = { 600.0f, 200.0f };
+		Vec<float> v = { 0.0f, -70.0f };
+
+		enemy.push_back(
+			std::make_unique<Enemy>(p, v)
+		);
+
+		obstacle.push_back(
+			std::make_unique<Obstacle>(Vec<float>(560.0f, 540.0f), Vec<float>(600.0f, 580.0f))
+		);
+		obstacle.push_back(
+			std::make_unique<Obstacle>(Vec<float>(320.0f, 50.0f), Vec<float>(360.0f, 90.0f))
+		);
 	}
 }
 
@@ -33,26 +43,32 @@ void Room::Update(float dt)
 	Ava.Update(dt);
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i].Update(dt);
+		enemy[i]->Update(dt);
 	}
 
 	//Do the collisiony type stuff
 	CheckObstacles();
 	HitDetection();      //Active hits have preference over passive hits
 //	EnemyCollision();
-	
+	 
+	if (kbd.KeyIsPressed('Q'))
+	{
+		auto e = kbd.ReadKey();
+
+		Enemy tENEMY = Enemy({ 0,0 }, { 0,0 });
+	}
 }
 
 void Room::Draw(Graphics& gfx)
 {
 	for (int i = 0; i < obstacle.size(); i++)
 	{
-		obstacle[i].Draw(gfx);
+		obstacle[i]->Draw(gfx);
 	}
 	Ava.Draw(gfx);
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i].Draw2(gfx);
+		enemy[i]->Draw2(gfx);
 	}
 }
 
@@ -62,7 +78,7 @@ void Room::CheckObstacles()
 	{
 		//STATIC COLLISION
 
-		Rect<float> staticBox = obstacle[i].GetCollBox();
+		Rect<float> staticBox = obstacle[i]->GetCollBox();
 
 		//Check Ava/Obstacle Collision
 		if ( staticBox.CollWith( Ava.GetCollBox() ) )
@@ -73,11 +89,11 @@ void Room::CheckObstacles()
 		//Check Enemy/Obstacle Collision
 		for (int j = 0; j < enemy.size(); j++)
 		{
-			Rect<float> enemyBox = enemy[j].GetCollBox();
+			Rect<float> enemyBox = enemy[j]->GetCollBox();
 
 			if ( staticBox.CollWith(enemyBox) )
 			{
-				enemy[j].PushBox( staticBox ); // A function which replaces Enemy to end collision- may also alter behavior
+				enemy[j]->PushBox( staticBox ); // A function which replaces Enemy to end collision- may also alter behavior
 			}
 		}
 	}
@@ -117,9 +133,9 @@ void Room::HitDetection()
 	{
 		for (int j = 0; j < enemy.size(); j++)
 		{
-			if (Ava.GetAttackBox(i).CollWith(enemy[j].GetCollBox()))
+			if (Ava.GetAttackBox(i).CollWith(enemy[j]->GetCollBox()))
 			{
-				enemy[j].OnHit(Ava, i);
+				enemy[j]->OnHit(Ava, i);
 			}
 		}
 	}

@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Attack.h"
 #include<vector>
+#include<memory>
 
 class Entity
 {
@@ -40,5 +41,5 @@ protected:
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
 	Vec<float> collBoxSize = { 0.0f, 0.0f };
-	std::vector<Attack> attack = {};
+	std::vector<std::unique_ptr<Attack>> attack;
 };

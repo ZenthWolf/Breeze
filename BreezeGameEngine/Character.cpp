@@ -22,7 +22,7 @@ void Character::Draw(Graphics& gfx) const
 
 		for (int i = 0; i < attack.size(); i++)
 		{
-			attack[i].Draw(gfx, Colors::Red);
+			attack[i]->Draw(gfx, Colors::Red);
 		}
 	}
 	else
@@ -47,7 +47,7 @@ void Character::Draw(Graphics& gfx, Color sub) const
 
 	for (int i = 0; i < attack.size(); i++)
 	{
-		attack[i].Draw(gfx, Colors::Red);
+		attack[i]->Draw(gfx, Colors::Red);
 	}
 }
 
@@ -94,7 +94,7 @@ void Character::SetDir(const Vec<float>& dir)
 	}
 }
 
-void Character::Attack()
+void Character::MakeAttack()
 {
 	if (curAct != Action::Attack)
 	{
@@ -143,7 +143,9 @@ void Character::Attack()
 			half = { 25.0f, 5.0f };
 		}
 
-		attack.emplace_back(cent - half, cent + half, Attack::AttackType::Blade);
+		attack.push_back(
+			std::make_unique<Attack>(cent - half, cent + half, Attack::AttackType::Melee)
+		);
 
 		swingcool = 0.0f;
 	}
@@ -189,7 +191,7 @@ void Character::Update(float const dt)
 
 	for (int i = 0; i < attack.size(); i++)
 	{
-		attack[i].Update(dt);
+		attack[i]->Update(dt);
 	}
 
 	if (swingstate)
@@ -210,7 +212,7 @@ void Character::Input(Keyboard::Event e)
 {
 	if (e.IsPress() && e.GetCode() == ' ')
 	{
-		Attack();
+		MakeAttack();
 	}
 }
 
@@ -227,7 +229,7 @@ Rect<float> Character::GetAttackBox(int atindex) const
 {
 	if (atindex < attack.size())
 	{
-		return attack[atindex].GetCollBox();
+		return attack[atindex]->GetCollBox();
 	}
 	else
 	{

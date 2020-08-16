@@ -7,6 +7,7 @@ template<typename T>
 class Rect
 {
 public:
+	Rect() = default;
 	Rect(T x0, T y0, T x1, T y1)
 	{
 		X0 = x0;
@@ -61,8 +62,8 @@ public:
 	}
 
 public:
-	T X0;
-	T Y0;
-	T X1;
-	T Y1;
+	T X0 = T(0);
+	T Y0 = T(0);
+	T X1 = T(0);
+	T Y1 = T(0);
 };

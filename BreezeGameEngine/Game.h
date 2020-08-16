@@ -55,7 +55,7 @@ private:
 	/*  User Variables              */
 	/********************************/
 	std::mt19937 rng;
-	GameState gameState = GameState::Title;
+	GameState gameState = GameState::Play;
 
 	Character link = Character({ 100.0f, 100.0f }, wnd.kbd);
 	Room room = Room(link, 0, wnd.kbd);
