@@ -57,16 +57,6 @@ void Game::UpdateModel(float dt)
 void Game::ComposeFrame(int iter)
 {
 	room.Draw(gfx);
-//	if (wnd.kbd.KeyIsPressed(VK_CONTROL) )
-//	{
-//		gfx.DrawRect(link.GetCollBox(), Colors::Blue);
-//		link.Draw(gfx, Colors::Red);
-//	}
-//	else
-//	{
-//		link.Draw(gfx);
-//	}
-
 
 	std::string text = "It's alone to be dangerous. . . \nTake-a a-dis!\nNumber Iterations: ";
 	text += std::to_string(iter);

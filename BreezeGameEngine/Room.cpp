@@ -27,7 +27,8 @@ void Room::ReadInput() const
 	while (!kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = kbd.ReadKey();
-		if (e.GetCode() == ' ' || abs(e.GetCode() - 37) <= 4) // Arrow Keys are 37-40
+		if (e.GetCode() == ' ' || abs(e.GetCode() - 37) <= 3) // Arrow Keys are 37-40
+															  // This passes 34 -> 40... oops?
 		{
 			Ava.Input(e);
 		}
@@ -50,13 +51,6 @@ void Room::Update(float dt)
 	CheckObstacles();
 	HitDetection();      //Active hits have preference over passive hits
 //	EnemyCollision();
-	 
-	if (kbd.KeyIsPressed('Q'))
-	{
-		auto e = kbd.ReadKey();
-
-		Enemy tENEMY = Enemy({ 0,0 }, { 0,0 });
-	}
 }
 
 void Room::Draw(Graphics& gfx)

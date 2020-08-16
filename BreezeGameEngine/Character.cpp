@@ -27,17 +27,8 @@ void Character::Draw(Graphics& gfx) const
 	}
 	else
 	{
-		if (kbd.KeyIsPressed('Z'))
-		{
-			Rect<float> dummy = GetCollBox();
-
-			if (dummy.Y1 - dummy.Y0 != 50.0f)
-			{
-				int oops = 1;
-			}
-		}
 		gfx.DrawRect(GetCollBox(), Colors::White);
-//		Draw(gfx, Colors::Red);
+		Draw(gfx, Colors::Red);
 	}
 }
 
