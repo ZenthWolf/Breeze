@@ -15,15 +15,35 @@ public:
 		Enemy,
 		None
 	};
+	enum DefType
+	{
+		UNDEF  = 0b1,
+		Melee  = 0b10,
+		Ranged = 0b100,
+		Magic  = 0b1000
+	};
+
 	virtual void Update(float const dt) = 0;
 	virtual void Draw(Graphics& gfx) const = 0;
 	virtual void OnHit(Entity& attacker, int atindex) = 0;
+
+	/* VCOMBAT MANAGERV */
+	unsigned short int TakeDamage(int damage);
+	void Stun();
+	void StatusUpdate(float dt);
+	/* ^COMBAT MANAGER^ */
 
 	Vec<float> GetPos() const;
 	virtual void PushBox(Rect<float> wall);
 	Allegiance GetAllegiance() const;
 	virtual Rect<float> GetCollBox() const;
 	int GetAttackNum() const;
+	unsigned short int GetDefSignature();
+
+	const unsigned short int typemask = 0b1111;
+	const unsigned short int typeshift = 0;
+	const unsigned short int statmask = 0b111100;
+	const unsigned short int statshift = 2;
 	
 
 protected:
@@ -38,6 +58,9 @@ protected:
 	int health;
 	bool vulnerable = true;
 	float invultime = 0.0f;
+	bool stun = false;
+	bool stuntime = 0.0f;
+	unsigned short int defsignature = 0b111111;
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
 	Vec<float> collBoxSize = { 0.0f, 0.0f };
