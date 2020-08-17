@@ -16,31 +16,35 @@ void Enemy::fixpos(float dr)
 void Enemy::Update(const float dt)
 {
 	VulnerableTimer(dt);
+	StatusUpdate(dt);
 
-	pos += vel*dt;
-
-	if (pos.Y - size <= 0.0f)
+	if (!stun)
 	{
-		pos.Y = size;
-		BounceY();
-	}
+		pos += vel * dt;
 
-	else if (pos.Y + size >= 600.0f)
-	{
-		pos.Y = 600.0f - size;
-		BounceY();
-	}
+		if (pos.Y - size <= 0.0f)
+		{
+			pos.Y = size;
+			BounceY();
+		}
 
-	else if (pos.X - size <= 0.0f)
-	{
-		pos.X = size;
-		BounceX();
-	}
+		else if (pos.Y + size >= 600.0f)
+		{
+			pos.Y = 600.0f - size;
+			BounceY();
+		}
 
-	else if (pos.X + size >= 800.0f - size)
-	{
-		pos.Y = 800.0f;
-		BounceX();
+		else if (pos.X - size <= 0.0f)
+		{
+			pos.X = size;
+			BounceX();
+		}
+
+		else if (pos.X + size >= 800.0f - size)
+		{
+			pos.Y = 800.0f;
+			BounceX();
+		}
 	}
 }
 

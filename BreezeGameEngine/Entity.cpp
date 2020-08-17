@@ -35,14 +35,19 @@ void Entity::VulnerableTimer(float dt)
 unsigned short int Entity::TakeDamage(int damage)
 {
 	health -= damage;
-
+	vulnerable = false;
+	invultime = -0.5f;
+	
 	return 0;
 }
 
 void Entity::Stun()
 {
-	stun = true;
-	stuntime -= 2.0f;
+	if (!stun)
+	{
+		stun = true;
+		stuntime -= 2.0f;
+	}
 }
 
 void Entity::StatusUpdate(float dt)
@@ -57,6 +62,11 @@ void Entity::StatusUpdate(float dt)
 			stuntime = 0.0f;
 		}
 	}
+}
+
+const Attack& Entity::GetAttack(int atindex)
+{
+	return *attack[atindex];
 }
 
 Vec<float> Entity::GetPos() const
@@ -143,5 +153,10 @@ int Entity::GetAttackNum() const
 unsigned short int Entity::GetDefSignature()
 {
 	return defsignature;
+}
+
+bool Entity::IsVulnerable()
+{
+	return vulnerable;
 }
 

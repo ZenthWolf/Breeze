@@ -129,7 +129,8 @@ void Room::HitDetection()
 		{
 			if (Ava.GetAttackBox(i).CollWith(enemy[j]->GetCollBox()))
 			{
-				enemy[j]->OnHit(Ava, i);
+				Combat.AttackOn(Ava.GetAttack(i), *enemy[j]);
+				//enemy[j]->OnHit(Ava, i);
 			}
 		}
 	}

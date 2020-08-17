@@ -31,6 +31,7 @@ public:
 	unsigned short int TakeDamage(int damage);
 	void Stun();
 	void StatusUpdate(float dt);
+	const Attack& GetAttack(int atindex);
 	/* ^COMBAT MANAGER^ */
 
 	Vec<float> GetPos() const;
@@ -39,11 +40,12 @@ public:
 	virtual Rect<float> GetCollBox() const;
 	int GetAttackNum() const;
 	unsigned short int GetDefSignature();
+	bool IsVulnerable();
 
 	const unsigned short int typemask = 0b1111;
 	const unsigned short int typeshift = 0;
-	const unsigned short int statmask = 0b111100;
-	const unsigned short int statshift = 2;
+	const unsigned short int statmask = 0b11110000;
+	const unsigned short int statshift = 4;
 	
 
 protected:
@@ -59,8 +61,8 @@ protected:
 	bool vulnerable = true;
 	float invultime = 0.0f;
 	bool stun = false;
-	bool stuntime = 0.0f;
-	unsigned short int defsignature = 0b111111;
+	float stuntime = 0.0f;
+	unsigned short int defsignature = 0b11111110;
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
 	Vec<float> collBoxSize = { 0.0f, 0.0f };

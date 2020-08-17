@@ -134,13 +134,13 @@ void Character::MakeAttack(Attack::Status type)
 			half = { 25.0f, 5.0f };
 		}
 
-		if (type = Attack::Status::none)
+		if (type == Attack::Status::none)
 		{
 			attack.push_back(
 				std::make_unique<Attack>(cent - half, cent + half, 2, Attack::AttackType::Melee)
 			);
 		}
-		else if (type = Attack::Status::stun)
+		else if (type == Attack::Status::stun)
 		{
 			attack.push_back(
 				std::make_unique<Attack>(cent - half, cent + half, 1, Attack::AttackType::Melee, Attack::Status::stun)

@@ -5,6 +5,6 @@
 class CombatManager
 {
 public:
-	void AttackOn(Attack& attack, Entity& target);
+	void AttackOn(const Attack& attack, Entity& target);
 private:
 };

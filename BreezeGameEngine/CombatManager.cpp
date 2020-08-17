@@ -1,6 +1,6 @@
 #include "CombatManager.h"
 
-void CombatManager::AttackOn(Attack& attack, Entity& target)
+void CombatManager::AttackOn(const Attack& attack, Entity& target)
 {
 	auto atksig = attack.GetSignature();
 	auto defsig = target.GetDefSignature();
@@ -10,12 +10,12 @@ void CombatManager::AttackOn(Attack& attack, Entity& target)
 
 	unsigned short int rebound = 0;
 
-	if (defvuln & (0b1 >> atktype))
+	if (target.IsVulnerable() && defvuln & (0b1 << atktype))
 	{
 		rebound = target.TakeDamage((atksig & attack.damagemask) >> attack.damshift);
 
 		auto statsig = (atksig & attack.statmask) >> attack.statshift;
-		auto defstat = (defvuln & target.statmask) >> target.statshift;
+		auto defstat = (defsig & target.statmask) >> target.statshift;
 
 		if (statsig & Attack::Status::stun && 
 			defstat & Attack::Status::stun)
