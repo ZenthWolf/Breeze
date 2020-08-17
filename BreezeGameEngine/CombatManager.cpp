@@ -2,24 +2,18 @@
 
 void CombatManager::AttackOn(const Attack& attack, Entity& target)
 {
-	auto atksig = attack.GetSignature();
-	auto defsig = target.GetDefSignature();
-
-	auto atktype = (atksig & attack.typemask) >> attack.typeshift;
-	auto defvuln = (defsig & target.typemask) >> target.typeshift;
+	ReadAttack(attack);
+	ReadDefense(target);
 
 	unsigned short int rebound = 0;
 
-	if (target.IsVulnerable() && defvuln & (0b1 << atktype))
+	if (targetstat.isVuln && targetstat.vultype & attackstat.typesig)
 	{
-		rebound = target.TakeDamage((atksig & attack.damagemask) >> attack.damshift);
+		rebound = target.TakeDamage(attackstat.damage);
 
-		auto statsig = (atksig & attack.statmask) >> attack.statshift;
-		auto defstat = (defsig & target.statmask) >> target.statshift;
-
-		if (statsig & Attack::Status::stun &&
-			defstat & Attack::Status::stun)
+		if (attackstat.status & targetstat.status)
 		{
+			if(attackstat.status & Attack::Status::stun)
 			target.Stun();
 		}
 
@@ -30,10 +24,6 @@ void CombatManager::AttackOn(const Attack& attack, Entity& target)
 			//Not implemented until there is a scheme that can never result in infinite rebounds
 		}
 	}
-
-	ReadAttack(attack);
-	ReadDefense(target);
-	bool truth = true;
 }
 
 void CombatManager::ReadAttack(const Attack& attack)
@@ -61,7 +51,7 @@ void CombatManager::ReadDefense(const Entity& target)
 {
 	auto defsig = target.GetDefSignature();
 
-	targetstat.vulsig = (defsig & target.typemask) >> target.typeshift;
+	targetstat.vultype = (defsig & target.typemask) >> target.typeshift;
 	targetstat.status = (defsig & target.statmask) >> target.statshift;
 	targetstat.isVuln = target.IsVulnerable();
 }

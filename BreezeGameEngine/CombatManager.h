@@ -11,9 +11,9 @@ struct AtkStats
 
 struct DefStats
 {
-	int vulsig = 0;
-	int status = 0;
 	bool isVuln = true;
+	int vultype = 0;
+	int status = 0;
 };
 
 class CombatManager
