@@ -76,7 +76,6 @@ Vec<float> Entity::GetPos() const
 
 void Entity::PushBox(Rect<float> wall)
 {
-	float Deviance[4] = { 0.0f }; //0-4 Left, Up, Right, Down
 	float MinDev = 0.0f;
 
 	Rect<float> entcoll = GetCollBox();
@@ -150,12 +149,12 @@ int Entity::GetAttackNum() const
 	return attack.size();
 }
 
-unsigned short int Entity::GetDefSignature()
+unsigned short int Entity::GetDefSignature() const
 {
 	return defsignature;
 }
 
-bool Entity::IsVulnerable()
+bool Entity::IsVulnerable() const
 {
 	return vulnerable;
 }

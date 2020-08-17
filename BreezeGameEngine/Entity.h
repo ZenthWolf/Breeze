@@ -39,8 +39,8 @@ public:
 	Allegiance GetAllegiance() const;
 	virtual Rect<float> GetCollBox() const;
 	int GetAttackNum() const;
-	unsigned short int GetDefSignature();
-	bool IsVulnerable();
+	unsigned short int GetDefSignature() const;
+	bool IsVulnerable() const;
 
 	const unsigned short int typemask = 0b1111;
 	const unsigned short int typeshift = 0;

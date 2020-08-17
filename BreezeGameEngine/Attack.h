@@ -12,7 +12,8 @@ public:
 		UNDEF,
 		Melee,
 		Ranged,
-		Magic
+		Magic,
+		LAST
 	};
 	enum Status
 	{
