@@ -16,12 +16,13 @@ public:
 	};
 	enum Status
 	{
+		none = 0b0,
 		stun = 0b1,
 		frze = 0b10,
 		burn = 0b100,
 		mpow = 0b1000
 	};
-	Attack(const Vec<float> pos, const Vec<float> hBoxSize, const int damage, const AttackType type);
+	Attack(const Vec<float> pos, const Vec<float> hBoxSize, const int damage, const AttackType type, const Status stat = Status::none);
 	Attack()
 	{
 		pos = { 0,0 };

@@ -85,7 +85,7 @@ void Character::SetDir(const Vec<float>& dir)
 	}
 }
 
-void Character::MakeAttack()
+void Character::MakeAttack(Attack::Status type)
 {
 	if (curAct != Action::Attack)
 	{
@@ -134,9 +134,18 @@ void Character::MakeAttack()
 			half = { 25.0f, 5.0f };
 		}
 
-		attack.push_back(
-			std::make_unique<Attack>(cent - half, cent + half, 2, Attack::AttackType::Melee)
-		);
+		if (type = Attack::Status::none)
+		{
+			attack.push_back(
+				std::make_unique<Attack>(cent - half, cent + half, 2, Attack::AttackType::Melee)
+			);
+		}
+		else if (type = Attack::Status::stun)
+		{
+			attack.push_back(
+				std::make_unique<Attack>(cent - half, cent + half, 1, Attack::AttackType::Melee, Attack::Status::stun)
+			);
+		}
 
 		swingcool = 0.0f;
 	}
@@ -201,10 +210,23 @@ void Character::Update(float const dt)
 
 void Character::Input(Keyboard::Event e)
 {
-	if (e.IsPress() && e.GetCode() == ' ')
+	if (e.IsPress())
 	{
-		MakeAttack();
+		int key = e.GetCode();
+		switch (key)
+		{
+		case ' ':
+		{
+			MakeAttack();
+			break;
+		}
+		case 'Z':
+		{
+			MakeAttack(Attack::Status::stun);
+		}
+		}
 	}
+
 }
 
 

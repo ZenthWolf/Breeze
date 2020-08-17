@@ -27,7 +27,7 @@ void Room::ReadInput() const
 	while (!kbd.KeyIsEmpty())
 	{
 		const Keyboard::Event e = kbd.ReadKey();
-		if (e.GetCode() == ' ' || abs(e.GetCode() - 37) <= 3) // Arrow Keys are 37-40
+		if (e.GetCode() == ' ' || e.GetCode() == 'Z' || abs(e.GetCode() - 37) <= 3) // Arrow Keys are 37-40
 															  // This passes 34 -> 40... oops?
 		{
 			Ava.Input(e);

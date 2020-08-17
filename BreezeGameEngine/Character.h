@@ -41,7 +41,7 @@ public:
 	{}
 
 private:
-	void MakeAttack();
+	void MakeAttack(Attack::Status type = Attack::Status::none);
 	void SetVel();
 
 	Surface sprite;
