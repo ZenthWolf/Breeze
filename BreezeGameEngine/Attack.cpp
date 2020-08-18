@@ -1,7 +1,7 @@
 #include "Attack.h"
 
-Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize, const AttackType type)
-	:pos(pos), hitBoxSize(hBoxSize), type(type)
+Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize)
+	:pos(pos), hitBoxSize(hBoxSize)
 {
 }
 

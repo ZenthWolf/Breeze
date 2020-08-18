@@ -31,6 +31,20 @@ void Entity::VulnerableTimer(float dt)
 	}
 }
 
+void Entity::StatusUpdate(float dt)
+{
+	if (!vulnerable)
+	{
+		invultime += dt;
+
+		if (invultime >= 0.0f)
+		{
+			invultime = 0.0f;
+			vulnerable = true;
+		}
+	}
+}
+
 
 Vec<float> Entity::GetPos() const
 {

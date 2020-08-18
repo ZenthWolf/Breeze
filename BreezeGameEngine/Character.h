@@ -37,8 +37,10 @@ public:
 	Rect<float> GetCollBox() const override;
 	Rect<float> GetAttackBox(int atindex) const;
 
-	void OnHit(Entity& attacker, int atindex) override
-	{}
+	void OnHit(class Attack& attack) override
+	{
+		attack.Afflict(*this);
+	}
 
 private:
 	void MakeAttack();

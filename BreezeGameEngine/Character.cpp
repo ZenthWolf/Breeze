@@ -135,7 +135,7 @@ void Character::MakeAttack()
 		}
 
 		attack.push_back(
-			std::make_unique<Attack>(cent - half, cent + half, Attack::AttackType::Melee)
+			std::make_unique<class SwordStrike>(cent - half, cent + half)
 		);
 
 		swingcool = 0.0f;
