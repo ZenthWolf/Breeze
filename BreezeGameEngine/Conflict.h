@@ -384,8 +384,8 @@ public:
 		col = Color(50u, 140u, 255u);
 		hitBoxSize = { 7.0f, 7.0f };
 
-		std::mt19937 rng;
-		std::uniform_real_distribution<float> comp(0.0f, 1.0f);
+		auto rng = std::mt19937(std::random_device()());
+		std::uniform_real_distribution<float> comp(-1.0f, 1.0f);
 		dir = Vec<float>(comp(rng), comp(rng));
 		dir = dir.Norm();
 	}
