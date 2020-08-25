@@ -296,6 +296,27 @@ void Graphics::DrawRect(int x0, int y0, int x1, int y1, Color c)
 	SwapIfGrtr(x0, x1);
 	SwapIfGrtr(y0, y1);
 
+	Rect<int> Screen = ScreenRect();
+
+	if (x0 < Screen.X0)
+	{
+		x0 = Screen.X0;
+	}
+	else if (x1 >= Screen.X1)
+	{
+		x1 = Screen.X1;
+	}
+
+	if (y0 < Screen.Y0)
+	{
+		y0 = Screen.Y0;
+	}
+	else if (y1 >= Screen.Y1)
+	{
+		y1 = Screen.Y1;
+	}
+
+
 	for (int x = x0; x < x1; x++)
 	{
 		for (int y = y0; y < y1; y++)
