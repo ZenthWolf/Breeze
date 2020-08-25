@@ -1,11 +1,15 @@
 #include "Conflict.h"
 
 Enemy::Enemy(const Vec<float> pos, const Vec<float> vel)
-	:Entity(pos, vel, 3, Allegiance::Enemy), col(Colors::Cyan), size(15)
+	:Entity(pos, vel, 3, Allegiance::Enemy), col(Colors::Cyan), size(15),
+	rng(std::random_device()())
 {
 	fixpos(float(size));
 	collBoxSize = { size*2 -1 , size*2 -1 };
 	size -= 1;
+
+	std::uniform_real_distribution<float> timer(4.0f, 7.0f);
+	atkTimer = -timer(rng);
 }
 
 void Enemy::fixpos(float dr)
@@ -16,8 +20,10 @@ void Enemy::fixpos(float dr)
 void Enemy::Update(const float dt)
 {
 	VulnerableTimer(dt);
+	AttackTimer(dt);
+	StateTimer(dt);
 
-	if (!stun)
+	if (!stun && state == Action::Move)
 	{
 		pos += vel * dt;
 
@@ -44,6 +50,11 @@ void Enemy::Update(const float dt)
 			pos.Y = 800.0f;
 			BounceX();
 		}
+	}
+
+	for (int i = 0; i < attack.size(); i++)
+	{
+		attack[i]->Update(dt);
 	}
 }
 
@@ -86,6 +97,10 @@ void Enemy::Draw2(Graphics& gfx)
 			gfx.PutPixel(pos.X + i + size, pos.Y + size - i + 1, Colors::Black);
 			gfx.PutPixel(pos.X - i + size, pos.Y + size - i + 1, Colors::Black);
 		}
+	}
+	for(int i = 0; i< attack.size(); i++)
+	{
+		attack[i]->Draw(gfx);
 	}
 }
 
@@ -173,4 +188,55 @@ void Enemy::BounceX()
 void Enemy::BounceY()
 {
 	vel.Y = -vel.Y;
+}
+
+void Enemy::AttackTimer(float dt)
+{
+	atkTimer += dt;
+	if (atkTimer >= 0.0f)
+	{
+		//MakeAttack
+	}
+}
+
+void Enemy::StateTimer(float dt)
+{
+	//Should stun be a state in of itself? Probably...
+	if (!stun)
+	{
+		switch (state)
+		{
+		
+		case Action::Move:
+		{
+			atkTimer += dt;
+			if (atkTimer >= 0.0f)
+			{
+				state = Action::Aim;
+				std::uniform_real_distribution<float> timer(4.0f, 7.0f);
+				atkTimer = -timer(rng);
+				aimTimer = -0.7f;
+			}
+			break;
+		}
+
+		case Action::Aim:
+		{
+			aimTimer += dt;
+			if (aimTimer >= 0.0f)
+			{
+				BlobShot();
+				state = Action::Move;
+			}
+		}
+
+		}
+	}
+}
+
+void Enemy::BlobShot()
+{
+	attack.push_back(
+		std::make_unique<class BlobShot>(pos)
+	);
 }

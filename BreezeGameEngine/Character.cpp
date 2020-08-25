@@ -22,13 +22,16 @@ void Character::Draw(Graphics& gfx) const
 
 		for (int i = 0; i < attack.size(); i++)
 		{
-			attack[i]->Draw(gfx, Colors::Red);
+			attack[i]->Draw(gfx);
 		}
 	}
 	else
 	{
 		gfx.DrawRect(GetCollBox(), Colors::White);
-		Draw(gfx, Colors::Red);
+		for (int i = 0; i < attack.size(); i++)
+		{
+			attack[i]->Draw(gfx);
+		}
 	}
 }
 
@@ -38,7 +41,7 @@ void Character::Draw(Graphics& gfx, Color sub) const
 
 	for (int i = 0; i < attack.size(); i++)
 	{
-		attack[i]->Draw(gfx, Colors::Red);
+		attack[i]->Draw(gfx);
 	}
 }
 
@@ -93,57 +96,55 @@ void Character::MakeAttack(int type)
 		curAct = Action::Attack;
 
 		Rect<float> edge = GetCollBox();
-		Vec<float> cent = { 0.0f, 0.0f };
-		Vec<float> half = { 0.0f, 0.0f };
+		Vec<float> pos0 = { 0.0f, 0.0f };
 
 		if (curSeq == Sequence::StandingRight || curSeq == Sequence::WalkingRight)
 		{
 			curSeq = Sequence::StandingRight;
-
-			half = { 25.0f, 5.0f };
-			cent = { edge.X1 + half.X, (edge.Y0 + edge.Y1) / 2 };
+			pos0 = { edge.X1, (edge.Y0 + edge.Y1) / 2};
 		}
 
 		else if (curSeq == Sequence::StandingLeft || curSeq == Sequence::WalkingLeft)
 		{
 			curSeq = Sequence::StandingLeft;
-
-			half = { 25.0f, 5.0f };
-			cent = { edge.X0 - half.X, (edge.Y0 + edge.Y1) / 2 };
+			pos0 = { edge.X0, (edge.Y0 + edge.Y1) / 2 };
 		}
 
 		else if (curSeq == Sequence::StandingUp || curSeq == Sequence::WalkingUp)
 		{
 			curSeq = Sequence::StandingUp;
-
-			half = { 5.0f, 25.0f };
-			cent = { (edge.X0 + edge.X1) / 2, edge.Y0 - half.Y };
+			pos0 = { (edge.X0 + edge.X1) / 2, edge.Y0 };
 		}
 
 		else if (curSeq == Sequence::StandingDown || curSeq == Sequence::WalkingDown)
 		{
 			curSeq = Sequence::StandingDown;
-
-			half = { 5.0f, 25.0f };
-			cent = { (edge.X0 + edge.X1) / 2, edge.Y1 + half.Y };
+			pos0 = { (edge.X0 + edge.X1) / 2, edge.Y1 };
 		}
 
 		else
 		{
-			cent = { 35.0f, 15.0f };
-			half = { 25.0f, 5.0f };
+			pos0 = { 10.0f, 10.0f };
 		}
 
 		if (type == 0)
 		{
 			attack.push_back(
-				std::make_unique<class SwordStrike>(cent - half, cent + half)
+				std::make_unique<class SwordStrike>(pos0, curSeq)
 			);
 		}
-		else
+		else if (type == 1)
 		{
 			attack.push_back(
-				std::make_unique<class SwordStun>(cent - half, cent + half)
+				std::make_unique<class SwordStun>(pos0, curSeq)
+			);
+		}
+		else if (type == 2)
+		{
+			curAct = Action::Move;
+
+			attack.push_back(
+				std::make_unique<class ArrowShot>(pos0, curSeq)
 			);
 		}
 
@@ -223,6 +224,10 @@ void Character::Input(Keyboard::Event e)
 		case 'Z':
 		{
 			MakeAttack(1);
+		}
+		case 'X':
+		{
+			MakeAttack(2);
 		}
 		}
 	}

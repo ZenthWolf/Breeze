@@ -64,9 +64,15 @@ public:
 	
 	Vec Norm() const
 	{
-		if( GetLength() != (T)0 )
-		float mag = GetLength();
-		return { X / mag, Y / mag };
+		if (GetLength() != (T)0)
+		{
+			float mag = GetLength();
+			return { X / mag, Y / mag };
+		}
+		else
+		{
+			return { 0.0f, 0.0f };
+		}
 	}
 
     template<typename U>

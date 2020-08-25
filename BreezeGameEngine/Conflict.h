@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "Vec.h"
 #include "Rect.h"
 #include "Graphics.h"
@@ -9,7 +7,7 @@
 #include "Keyboard.h"
 #include<vector>
 #include<memory>
-
+#include<random>
 
 class Attack;
 class Entity;
@@ -19,6 +17,9 @@ class Enemy;
 
 class SwordSrike;
 class SwordStun;
+class ArrowShot;
+
+class BlobShot;
 
 class Attack
 {
@@ -28,20 +29,22 @@ public:
 	virtual void Afflict(Enemy& targ) = 0;
 	//^Concrete Elements to be Visited^
 
-	Attack(const Vec<float> pos, const Vec<float> hBoxSize);
+	Attack(const Vec<float> pos, const Color col = Colors::Red);
 	Attack()
 	{
 		pos = { 0,0 };
 		hitBoxSize = { 0,0 };
 	}
 
-	void Update(float dt);
-	void Draw(Graphics& gfx, Color col) const;
+	virtual void Update(float dt);
+	void Draw(Graphics& gfx) const;
 	Rect<float> GetCollBox() const;
 
-private:
+protected:
 	Vec<float> pos;
+	float vel = 0.0f;
 	Vec<float> hitBoxSize;
+	Color col = Colors::Red;
 };
 
 class Entity
@@ -111,7 +114,7 @@ protected:
 
 class Character : public Entity
 {
-private:
+public:
 	enum class Sequence
 	{
 		WalkingLeft,
@@ -124,7 +127,7 @@ private:
 		StandingDown,
 		Count
 	};
-
+private:
 	enum class Action
 	{
 		Move,
@@ -181,26 +184,69 @@ public:
 	void fixpos(float dr);
 
 private:
+	enum class Action
+	{
+		Move,
+		Aim
+	};
+
+	Action state = Action::Move;
+	float aimTimer = 0.0f;
+
 	void BounceX();
 	void BounceY();
+	void AttackTimer(float dt);
+	void StateTimer(float dt);
+
+	void BlobShot();
 
 	Color col;
 	float size;
+
+	std::mt19937 rng;
+	float atkTimer;
 };
 
 class SwordStrike : public Attack
 {
 public:
-	SwordStrike(const Vec<float> pos, const Vec<float> hBoxSize)
-		:Attack(pos, hBoxSize)
-	{}
+	SwordStrike(const Vec<float> pos0, const Character::Sequence dir0)
+		:Attack(pos0)
+	{
+		switch (dir0)
+		{
+		case Character::Sequence::StandingLeft:
+		{
+			hitBoxSize = { 50.0f, 10.0f };
+			pos.X -= hitBoxSize.X;
+			pos.Y -= hitBoxSize.Y / 2;
+			break;
+		}
+		case Character::Sequence::StandingRight:
+		{
+			hitBoxSize = { 50.0f, 10.0f };
+			pos.Y -= hitBoxSize.Y / 2;
+			break;
+		}
+		case Character::Sequence::StandingUp:
+		{
+			hitBoxSize = { 10.0f, 50.0f };
+			pos.X -= hitBoxSize.X / 2;
+			pos.Y -= hitBoxSize.Y;
+			break;
+		}
+		case Character::Sequence::StandingDown:
+		{
+			hitBoxSize = { 10.0f, 50.0f };
+			pos.X -= hitBoxSize.X/2;
+			break;
+		}
+		}
+	}
 
 	void Afflict(Character& targ)
 	{
-		if (targ.IsVulnerable())
-		{
-			targ.TakeDamage(2);
-		}
+
 	}
 	void Afflict(Enemy& targ)
 	{
@@ -214,18 +260,45 @@ public:
 class SwordStun : public Attack
 {
 public:
-	SwordStun(const Vec<float> pos, const Vec<float> hBoxSize)
-		:Attack(pos, hBoxSize)
-	{}
+	SwordStun(const Vec<float> pos0, const Character::Sequence dir0)
+		:Attack(pos0)
+	{
+		col = Colors::Green;
+
+		switch (dir0)
+		{
+		case Character::Sequence::StandingLeft:
+		{
+			hitBoxSize = { 50.0f, 10.0f };
+			pos.X -= hitBoxSize.X;
+			pos.Y -= hitBoxSize.Y / 2;
+			break;
+		}
+		case Character::Sequence::StandingRight:
+		{
+			hitBoxSize = { 50.0f, 10.0f };
+			pos.Y -= hitBoxSize.Y / 2;
+			break;
+		}
+		case Character::Sequence::StandingUp:
+		{
+			hitBoxSize = { 10.0f, 50.0f };
+			pos.X -= hitBoxSize.X / 2;
+			pos.Y -= hitBoxSize.Y;
+			break;
+		}
+		case Character::Sequence::StandingDown:
+		{
+			hitBoxSize = { 10.0f, 50.0f };
+			pos.X -= hitBoxSize.X/2;
+			break;
+		}
+		}
+	}
 
 	void Afflict(Character& targ)
 	{
-		if (targ.IsVulnerable())
-		{
-			targ.TakeDamage(1);
-			targ.Stun();
-		}
-		
+
 	}
 	void Afflict(Enemy& targ)
 	{
@@ -236,4 +309,105 @@ public:
 			targ.Stun();
 		}
 	}
+};
+
+class ArrowShot : public Attack
+{
+public:
+	ArrowShot(const Vec<float> pos0, const Character::Sequence dir0)
+		:Attack(pos0)
+	{
+		col = Color(200u, 70u, 0u);
+
+		switch (dir0)
+		{
+		case Character::Sequence::StandingLeft:
+		{
+			hitBoxSize = { 10.0f, 5.0f };
+			pos.X -= hitBoxSize.X;
+			pos.Y -= hitBoxSize.Y / 2;
+			dir = { -1, 0 };
+			break;
+		}
+		case Character::Sequence::StandingRight:
+		{
+			hitBoxSize = { 10.0f, 5.0f };
+			pos.Y -= hitBoxSize.Y / 2;
+			dir = { 1, 0 };
+			break;
+		}
+		case Character::Sequence::StandingUp:
+		{
+			hitBoxSize = { 5.0f, 10.0f };
+			pos.X -= hitBoxSize.X / 2;
+			pos.Y -= hitBoxSize.Y;
+			dir = { 0, -1 };
+			break;
+		}
+		case Character::Sequence::StandingDown:
+		{
+			hitBoxSize = { 5.0f, 10.0f };
+			pos.X -= hitBoxSize.X/2;
+			dir = { 0, 1 };
+			break;
+		}
+		}
+		vel = 120.0f;
+	}
+
+	void Afflict(Character& targ)
+	{
+
+	}
+	void Afflict(Enemy& targ)
+	{
+		if (targ.IsVulnerable())
+		{
+			targ.TakeDamage(1);
+		}
+	}
+
+	void Update(float dt) override
+	{
+		pos += dir * vel * dt;
+	}
+private:
+	Vec<float> dir;
+};
+
+class BlobShot : public Attack
+{
+public:
+	BlobShot(const Vec<float> pos)
+		:Attack(pos)
+	{
+		col = Color(50u, 140u, 255u);
+		hitBoxSize = { 7.0f, 7.0f };
+
+		std::mt19937 rng;
+		std::uniform_real_distribution<float> comp(0.0f, 1.0f);
+		dir = Vec<float>(comp(rng), comp(rng));
+		dir = dir.Norm();
+	}
+
+	void Afflict(Character& targ)
+	{
+		if (targ.IsVulnerable())
+		{
+			targ.TakeDamage(2);
+		}
+	}
+
+	void Afflict(Enemy& targ)
+	{
+
+	}
+
+	void Update(float dt) override
+	{
+		pos += dir * vel * dt;
+	}
+private:
+	float vel = 70.0f;
+	Vec<float> dir;
 };
