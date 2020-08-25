@@ -1,4 +1,4 @@
-#include "Attack.h"
+#include "Conflict.h"
 
 Attack::Attack(const Vec<float> pos, const Vec<float> hBoxSize)
 	:pos(pos), hitBoxSize(hBoxSize)

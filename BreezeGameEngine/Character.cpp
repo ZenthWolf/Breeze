@@ -1,4 +1,4 @@
-#include "Character.h"
+#include "Conflict.h"
 
 Character::Character(const Vec<float>& pos, Keyboard& kbd)
 	:Entity(pos, Allegiance::Ava), sprite("Images//link90x90.bmp"), kbd(kbd)
@@ -85,7 +85,7 @@ void Character::SetDir(const Vec<float>& dir)
 	}
 }
 
-void Character::MakeAttack()
+void Character::MakeAttack(int type)
 {
 	if (curAct != Action::Attack)
 	{
@@ -134,9 +134,18 @@ void Character::MakeAttack()
 			half = { 25.0f, 5.0f };
 		}
 
-		attack.push_back(
-			std::make_unique<class SwordStrike>(cent - half, cent + half)
-		);
+		if (type == 0)
+		{
+			attack.push_back(
+				std::make_unique<class SwordStrike>(cent - half, cent + half)
+			);
+		}
+		else
+		{
+			attack.push_back(
+				std::make_unique<class SwordStun>(cent - half, cent + half)
+			);
+		}
 
 		swingcool = 0.0f;
 	}
@@ -201,10 +210,23 @@ void Character::Update(float const dt)
 
 void Character::Input(Keyboard::Event e)
 {
-	if (e.IsPress() && e.GetCode() == ' ')
+	if (e.IsPress())
 	{
-		MakeAttack();
+		int key = e.GetCode();
+		switch (key)
+		{
+		case ' ':
+		{
+			MakeAttack();
+			break;
+		}
+		case 'Z':
+		{
+			MakeAttack(1);
+		}
+		}
 	}
+
 }
 
 
@@ -226,4 +248,9 @@ Rect<float> Character::GetAttackBox(int atindex) const
 	{
 		return Rect<float>(0.0f, 0.0f, 0.0f, 0.0f);
 	}
+}
+
+Attack& Character::GetAttack(int atindex) const
+{
+	return *attack[atindex];
 }

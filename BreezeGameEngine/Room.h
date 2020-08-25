@@ -2,8 +2,7 @@
 //Playground to identify needed interactions
 //Eventual baseline for "Room" class, but don't take this shit seriously.
 
-#include "Character.h"
-#include "Enemy.h"
+#include "Conflict.h"
 #include "Obstacle.h"
 
 #include "Keyboard.h"

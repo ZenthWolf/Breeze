@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "Conflict.h"
 
 
 Entity::Entity(Vec<float> pos, Allegiance allegiance)
@@ -27,6 +27,17 @@ void Entity::VulnerableTimer(float dt)
 		{
 			invultime = 0.0f;
 			vulnerable = true;
+		}
+	}
+
+	if(stun)
+	{
+		stuntime += dt;
+
+		if (stuntime >= 0.0f)
+		{
+			stuntime = 0.0f;
+			stun = false;
 		}
 	}
 }
@@ -125,5 +136,10 @@ Rect<float> Entity::GetCollBox() const
 int Entity::GetAttackNum() const
 {
 	return attack.size();
+}
+
+bool Entity::IsVulnerable() const
+{
+	return vulnerable;
 }
 

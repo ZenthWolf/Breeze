@@ -22,8 +22,7 @@
 #include "Font.h"
 #include <random>
 
-#include "Character.h"
-#include "Enemy.h"
+#include "Conflict.h"
 #include "Room.h"
 
 

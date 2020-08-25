@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Conflict.h"
 
 Enemy::Enemy(const Vec<float> pos, const Vec<float> vel)
 	:Entity(pos, vel, 3, Allegiance::Enemy), col(Colors::Cyan), size(15)
@@ -17,30 +17,33 @@ void Enemy::Update(const float dt)
 {
 	VulnerableTimer(dt);
 
-	pos += vel*dt;
-
-	if (pos.Y - size <= 0.0f)
+	if (!stun)
 	{
-		pos.Y = size;
-		BounceY();
-	}
+		pos += vel * dt;
 
-	else if (pos.Y + size >= 600.0f)
-	{
-		pos.Y = 600.0f - size;
-		BounceY();
-	}
+		if (pos.Y - size <= 0.0f)
+		{
+			pos.Y = size;
+			BounceY();
+		}
 
-	else if (pos.X - size <= 0.0f)
-	{
-		pos.X = size;
-		BounceX();
-	}
+		else if (pos.Y + size >= 600.0f)
+		{
+			pos.Y = 600.0f - size;
+			BounceY();
+		}
 
-	else if (pos.X + size >= 800.0f - size)
-	{
-		pos.Y = 800.0f;
-		BounceX();
+		else if (pos.X - size <= 0.0f)
+		{
+			pos.X = size;
+			BounceX();
+		}
+
+		else if (pos.X + size >= 800.0f - size)
+		{
+			pos.Y = 800.0f;
+			BounceX();
+		}
 	}
 }
 
@@ -86,6 +89,7 @@ void Enemy::Draw2(Graphics& gfx)
 	}
 }
 
+/*
 void Enemy::OnHit(Entity& attacker, int atindex)
 {
 	if (attacker.GetAllegiance() != Allegiance::Enemy && vulnerable)
@@ -96,6 +100,7 @@ void Enemy::OnHit(Entity& attacker, int atindex)
 		flash = true;
 	}
 }
+*/
 
 void Enemy::PushBox(Rect<float> wall)
 {
