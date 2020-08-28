@@ -58,47 +58,32 @@ void Enemy::Update(const float dt)
 	}
 }
 
-void Enemy::Draw(Graphics& gfx) const
+void Enemy::Draw(Graphics& gfx)
 {
-	if (health > 0)
+	if (vulnerable)
 	{
 		gfx.DrawCirc(pos + Vec<float>(float(size), float(size)), size + 1, col);
-		for (int i = 3; i < 9; i++)
-		{
-			gfx.PutPixel(pos.X + i + size, pos.Y + size - i + 1, Colors::Black);
-			gfx.PutPixel(pos.X - i + size, pos.Y + size - i + 1, Colors::Black);
-		}
 	}
-}
-
-void Enemy::Draw2(Graphics& gfx)
-{
-	if (health > 0)
+	else
 	{
-		if (vulnerable)
+		if (!flash)
 		{
 			gfx.DrawCirc(pos + Vec<float>(float(size), float(size)), size + 1, col);
 		}
 		else
 		{
-			if (!flash)
-			{
-				gfx.DrawCirc(pos + Vec<float>(float(size), float(size)), size + 1, col);
-			}
-			else
-			{
-				gfx.DrawCirc(pos + Vec<float>(float(size), float(size)), size + 1, Colors::Red);
-			}
+			gfx.DrawCirc(pos + Vec<float>(float(size), float(size)), size + 1, Colors::Red);
+		}
 
-			flash = !flash;
-		}
-		for (int i = 3; i < 9; i++)
-		{
-			gfx.PutPixel(pos.X + i + size, pos.Y + size - i + 1, Colors::Black);
-			gfx.PutPixel(pos.X - i + size, pos.Y + size - i + 1, Colors::Black);
-		}
+		flash = !flash;
 	}
-	for(int i = 0; i< attack.size(); i++)
+	for (int i = 3; i < 9; i++)
+	{
+		gfx.PutPixel(pos.X + i + size, pos.Y + size - i + 1, Colors::Black);
+		gfx.PutPixel(pos.X - i + size, pos.Y + size - i + 1, Colors::Black);
+	}
+
+	for (int i = 0; i < attack.size(); i++)
 	{
 		attack[i]->Draw(gfx);
 	}

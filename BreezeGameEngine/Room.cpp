@@ -1,4 +1,5 @@
 #include "Room.h"
+#include <algorithm>
 
 Room::Room(Character& Ava, int scenario, Keyboard& kbd)
 	:Ava(Ava), kbd(kbd)
@@ -51,6 +52,7 @@ void Room::Update(float dt)
 	CheckObstacles();
 	HitDetection();      //Active hits have preference over passive hits
 //	EnemyCollision();
+	Cull();
 }
 
 void Room::Draw(Graphics& gfx)
@@ -62,7 +64,7 @@ void Room::Draw(Graphics& gfx)
 	Ava.Draw(gfx);
 	for (int i = 0; i < enemy.size(); i++)
 	{
-		enemy[i]->Draw2(gfx);
+		enemy[i]->Draw(gfx);
 	}
 }
 
@@ -133,4 +135,11 @@ void Room::HitDetection()
 			}
 		}
 	}
+}
+
+void Room::Cull()
+{
+	enemy.erase(std::remove_if(enemy.begin(), enemy.end(), 
+		[](std::unique_ptr<Enemy>& i) {return i->Cull(); }
+		), enemy.end());
 }

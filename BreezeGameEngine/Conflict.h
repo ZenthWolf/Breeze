@@ -60,6 +60,10 @@ public:
 		vulnerable = false;
 		invultime = -0.5f;
 		flash = true;
+		if (health <= 0)
+		{
+			cull = true;
+		}
 	}
 
 	void Stun(float duration = 2.0f)
@@ -79,7 +83,7 @@ public:
 		None
 	};
 	virtual void Update(float const dt) = 0;
-	virtual void Draw(Graphics& gfx) const = 0;
+	virtual void Draw(Graphics& gfx) = 0;
 	//virtual void OnHit(Entity& attacker, int atindex) = 0;
 
 	Vec<float> GetPos() const;
@@ -88,6 +92,7 @@ public:
 	virtual Rect<float> GetCollBox() const;
 	int GetAttackNum() const;
 	bool IsVulnerable() const;
+	virtual bool Cull();
 
 
 protected:
@@ -106,6 +111,7 @@ protected:
 	bool stun = false;
 	float stuntime = 0.0f;
 	bool flash = false;
+	bool cull = false;
 	Vec<float> pos;
 	Vec<float> vel = { 0.0f, 0.0f };
 	Vec<float> collBoxSize = { 0.0f, 0.0f };
@@ -136,7 +142,7 @@ private:
 	};
 public:
 	Character(const Vec<float>& pos, Keyboard& kbd);
-	void Draw(Graphics& gfx) const override;
+	void Draw(Graphics& gfx) override;
 	void Draw(Graphics& gfx, Color sub) const;
 	void SetDir(const Vec<float>& dir);
 	bool GetSwing() const;
@@ -172,8 +178,7 @@ public:
 	Enemy(const Vec<float> pos, const Vec<float> vel);
 
 	void Update(const float dt) override;
-	void Draw(Graphics& gfx) const override;
-	void Draw2(Graphics& gfx);
+	void Draw(Graphics& gfx) override;
 	void OnHit(class Attack& attack) override
 	{
 		attack.Afflict(*this);

@@ -143,3 +143,8 @@ bool Entity::IsVulnerable() const
 	return vulnerable;
 }
 
+bool Entity::Cull()
+{
+	return cull;
+}
+

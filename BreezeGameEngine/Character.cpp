@@ -14,7 +14,7 @@ Character::Character(const Vec<float>& pos, Keyboard& kbd)
 	}
 }
 
-void Character::Draw(Graphics& gfx) const
+void Character::Draw(Graphics& gfx)
 {
 	if (!kbd.KeyIsPressed(VK_CONTROL))
 	{
