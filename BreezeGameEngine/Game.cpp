@@ -79,25 +79,27 @@ void Game::UpdateModel()
 		else
 		{
 			if ((wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed(VK_DOWN) ||
-				wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed(VK_RIGHT))
+				wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed(VK_RIGHT) ||
+				wnd.kbd.KeyIsPressed('W') || wnd.kbd.KeyIsPressed('S') || 
+				wnd.kbd.KeyIsPressed('A') || wnd.kbd.KeyIsPressed('D') )
 				&& !brd.Goal.isPlaced())
 			{
 				brd.Goal.Spawn(rng, brd, Snake);
 			}
 
-			if (wnd.kbd.KeyIsPressed(VK_UP))
+			if (wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed('W'))
 			{
 				Snake.SetMoveBuffer({ 0,-1 });
 			}
-			else if (wnd.kbd.KeyIsPressed(VK_DOWN))
+			else if (wnd.kbd.KeyIsPressed(VK_DOWN) || wnd.kbd.KeyIsPressed('S'))
 			{
 				Snake.SetMoveBuffer({ 0,1 });
 			}
-			else if (wnd.kbd.KeyIsPressed(VK_LEFT))
+			else if (wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed('A'))
 			{
 				Snake.SetMoveBuffer({ -1,0 });
 			}
-			else if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+			else if (wnd.kbd.KeyIsPressed(VK_RIGHT) || wnd.kbd.KeyIsPressed('D'))
 			{
 				Snake.SetMoveBuffer({ 1,0 });
 			}
