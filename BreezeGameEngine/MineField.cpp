@@ -176,7 +176,13 @@ void MineField::Draw(Graphics& gfx)
 			}
 		}
 	}
-
+	
+	for (int x = 50; x < 54 * 9; x += 54)
+	{
+		Vec<int> loc = { x,560 };
+		gfx.DrawRect(Rect<int>{ loc, loc + TileSize }.GetExpand(1), NumColor[0]);
+		gfx.DrawRect(Rect<int>{ loc, loc + TileSize }.GetExpand(-1), NumColor[(x-50)/54]);
+	}
 	Bev.DrawBevBorder(Rect<int>({ (Graphics::ScreenWidth - Columns * TileSize.X) / 2, (Graphics::ScreenHeight - Rows * TileSize.Y) / 2 },
 		                    { (Graphics::ScreenWidth + Columns * TileSize.X) / 2, (Graphics::ScreenHeight + Rows * TileSize.Y) / 2 }), 3, gfx);
 }

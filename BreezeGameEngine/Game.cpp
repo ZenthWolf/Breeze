@@ -211,6 +211,10 @@ void Game::ComposeFrame()
 			font.DrawText(prog, { 600,25 }, Colors::White, gfx);
 		}
 
+		for (int i = 0; i < 9; i++)
+		{
+			font.DrawText(std::to_string(i), { 55 + 54 * i, 520 }, Colors::White, gfx);
+		}
 		font.DrawText("Quit", { 720,570 }, Colors::White, gfx);
 
 		break;
