@@ -136,5 +136,13 @@
     <None Include="FramebufferVS.shh">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="MineSweeper_1.0.0_Release.exe">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="MineSweeper_README.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

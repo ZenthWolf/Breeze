@@ -120,6 +120,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -171,6 +172,10 @@
   <ItemGroup>
     <None Include="FramebufferPS.shh" />
     <None Include="FramebufferVS.shh" />
+    <None Include="MineSweeper_1.0.0_Release.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="MineSweeper_README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
