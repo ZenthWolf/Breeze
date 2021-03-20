@@ -55,9 +55,9 @@ void Board::DrawCell(const Location& loc, Color c, bool bevel)
 	if (bevel)
 	{
 		//  If you want to re-enable bevelling on tiles. Might be good on snek, or not.
-		RectF Rect = RectF{ float(loc.x * CellDim + StartingX + buff), float(loc.y * CellDim + StartingY + buff), float(loc.x * CellDim + StartingX + buff + CellDim - buff - 1), float(loc.y * CellDim + StartingY + buff + CellDim - buff - 1) };
+		Rect<float> rect = Rect<float>{ float(loc.x * CellDim + StartingX + buff), float(loc.y * CellDim + StartingY + buff), float(loc.x * CellDim + StartingX + buff + CellDim - buff - 1), float(loc.y * CellDim + StartingY + buff + CellDim - buff - 1) };
 		Bev.ChangeBaseColor(c);
-		Bev.DrawBevBrick(Rect, 4, gfx);
+		Bev.DrawBevBrick(rect, 4, gfx);
 	}
 	else
 	{

@@ -16,7 +16,10 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{47bde5e8-1749-4ea5-ad2c-e162c52447ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Configs">
+    <Filter Include="Images">
+      <UniqueIdentifier>{79a3123a-d5de-4e82-a65a-628ff372cfec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documents">
       <UniqueIdentifier>{9aae9199-4948-4b76-8036-06172c8be08d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -66,9 +69,6 @@
     <ClInclude Include="FrameTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RectF.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,15 +84,24 @@
     <ClInclude Include="Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
@@ -122,19 +131,25 @@
     <ClCompile Include="FrameTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RectF.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Beveler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsOPT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Surface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SurfaceOPT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -148,7 +163,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="configs.txt">
-      <Filter>Configs</Filter>
+      <Filter>Documents</Filter>
     </Text>
+    <Text Include="SnekGame_README.txt">
+      <Filter>Documents</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\Fixedsys16x28.bmp">
+      <Filter>Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

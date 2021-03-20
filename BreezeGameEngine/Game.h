@@ -19,6 +19,7 @@
 #include "FrameTimer.h"
 #include <random>
 
+#include "Font.h"
 #include "Settings.h"
 #include "Board.h"
 #include "Snake.h"
@@ -47,6 +48,8 @@ private:
 	FrameTimer ft;
 	float dt = 0.0f;
 	std::mt19937 rng;
+	Font font = "Images//Fixedsys16x28.bmp";
+
 	Board brd;
 	Snake Snake;
 	Location dLoc = { 1, 0 };

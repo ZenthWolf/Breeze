@@ -145,12 +145,24 @@ void Game::ComposeFrame()
 	if (AtTitle)
 	{
 		SpriteCodex::DrawTitle(200, 200, gfx);
+
+		font.DrawText("SNEK", { 360, 20 }, Colors::White, gfx);
+
+		font.DrawText("  Press Enter/Space\n\nEat Food; Avoid Doom!", { 250, 245 }, Colors::White, gfx);
+
+		font.DrawText("GAME", { 360, 560 }, Colors::White, gfx);
 	}
 	else
 	{
 		if (Death)
 		{
 			SpriteCodex::DrawGameOver(200, 200, gfx);
+
+			font.DrawText("GAME OVER\n\nTry Again?", { 330, 245 }, Colors::White, gfx);
+		}
+		else
+		{
+			font.DrawText("Eats: " + std::to_string(Eats), { 650,0 }, Colors::White, gfx);
 		}
 	}
 }

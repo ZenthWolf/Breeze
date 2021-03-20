@@ -2,52 +2,64 @@
 #include <fstream>
 
 Settings::Settings(std::string& filename)
-	: initWidth(false), initHeight(false), initMinMove(false),
+	: initWidth(false), initHeight(false),
       initRainbow(false), initBevel(false)
 {
 	std::ifstream config(filename);
 
 	while (config.good())
 	{
-
 		std::string line;
 		std::getline(config, line);
 
 		if (line == "[Board Size]")
 		{
-			config >> boardWidth;
-			config >> boardHeight;
-			initWidth = true;
-			initHeight = true;
-		}
+			if ( isdigit(config.peek()) )
+			{
+				config >> boardWidth;
+				config >> std::ws;
+				if ( isdigit(config.peek()) )
+				{
+					config >> boardHeight;
 
-		else if (line == "[Min Move Period]")
-		{
-			config >> minMovePeriod;
-			initMinMove = true;
+					if (boardWidth <= 38 && boardHeight <= 26)
+					{
+						initWidth = true;
+						initHeight = true;
+					}
+				}
+			}
+
 		}
 
 		else if (line == "[Snake Color : 0 - Natural, 1 - Rainbow]")
 		{
-			config >> rainbowSnake;
-			initRainbow = true;
+			if (isdigit(config.peek()))
+			{
+				config >> rainbowSnake;
+				initRainbow = true;
+			}
 		}
 
 		else if (line == "[Snake Shape : 0 - Flat, 1 - 3D]")
 		{
-			config >> bevelSnake;
-			initBevel = true;
+			if (isdigit(config.peek()))
+			{
+				config >> bevelSnake;
+				initBevel = true;
+			}
 		}
+		config >> std::ws;
 	}
 	config.close();
 
-	if ( !(initWidth || initHeight || initMinMove || initRainbow || initBevel) )
+	if ( !initWidth || !initHeight || !initRainbow || !initBevel )
 	{
 		MakeConfig();
 	}
 }
 
-void Settings::MakeConfig() const
+void Settings::MakeConfig()
 {
 	std::ofstream config("configs.txt");
 
@@ -58,17 +70,8 @@ void Settings::MakeConfig() const
 	}
 	else
 	{
-		config << 20 << " " << 20 << "\n" << "\n";
-	}
-
-	config << "[Min Move Period]\n";
-	if (initMinMove)
-	{
-		config << minMovePeriod << "\n\n";
-	}
-	else
-	{
-		config << 15.0f << "\n\n";
+		boardWidth = 30; boardHeight = 20;
+		config << boardWidth << " " << boardHeight<< "\n" << "\n";
 	}
 
 	config << "[Snake Color : " << 0 << " - Natural, 1 - Rainbow]\n";
@@ -78,6 +81,7 @@ void Settings::MakeConfig() const
 	}
 	else
 	{
+		rainbowSnake = 0;
 		config << 0 << "\n\n";
 	}
 
@@ -88,6 +92,7 @@ void Settings::MakeConfig() const
 	}
 	else
 	{
+		bevelSnake = 0;
 		config << 0 << "\n\n";
 	}
 }
@@ -100,11 +105,6 @@ int Settings::GetWidth() const
 int Settings::GetHeight() const
 {
 	return boardHeight;
-}
-
-float Settings::GetMovePeriod() const
-{
-	return minMovePeriod;
 }
 
 bool Settings::IsSnakeRainbow() const
