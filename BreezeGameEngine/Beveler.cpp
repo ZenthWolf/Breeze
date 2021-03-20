@@ -40,62 +40,62 @@ Beveler::Beveler(Color base)
 	);
 }
 
-void Beveler::DrawOuterBev(RectF& Rect, int size, Graphics& gfx)
+void Beveler::DrawOuterBev(Rect<int>& rect, int size, Graphics& gfx)
 {
 	/* LeftSide */
-	gfx.DrawDLIsoTri(int(Rect.X0), int(Rect.Y0), size, LeftColor);
-	gfx.DrawRect(RectF(Rect.X0, Rect.Y0 + float(size), Rect.X0 + float(size) - 1.0f, Rect.Y1 - float(size)), LeftColor);
-	gfx.DrawULIsoTri(int(Rect.X0), int(Rect.Y1) - size + 1, size, LeftColor);
+	gfx.DrawDLIsoTri((rect.X0), (rect.Y0), size, LeftColor);
+	gfx.DrawRect(Rect<int>(rect.X0, rect.Y0 + (size), rect.X0 + (size) - 1, rect.Y1 - (size)), LeftColor);
+	gfx.DrawULIsoTri((rect.X0), (rect.Y1) - size + 1, size, LeftColor);
 
 	/* TopSide */
-	gfx.DrawURIsoTri(int(Rect.X0), int(Rect.Y0), size, TopColor);
-	gfx.DrawRect(RectF(Rect.X0 + float(size), Rect.Y0, Rect.X1 - float(size), Rect.Y0 + float(size) - 1.0f), TopColor);
-	gfx.DrawULIsoTri(int(Rect.X1) - size, int(Rect.Y0), size, TopColor);
+	gfx.DrawURIsoTri((rect.X0), (rect.Y0), size, TopColor);
+	gfx.DrawRect(Rect<int>(rect.X0 + (size), rect.Y0, rect.X1 - (size), rect.Y0 + (size) - 1), TopColor);
+	gfx.DrawULIsoTri((rect.X1) - size, (rect.Y0), size, TopColor);
 
 	/* RightSide */
-	gfx.DrawDRIsoTri(int(Rect.X1) - size, int(Rect.Y0), size, RightColor);
-	gfx.DrawRect(RectF(Rect.X1 - float(size) + 1.0f, Rect.Y0 + float(size), Rect.X1, Rect.Y1 - float(size)), RightColor);
-	gfx.DrawURIsoTri(int(Rect.X1) - size + 1, int(Rect.Y1) - size, size, RightColor);
+	gfx.DrawDRIsoTri((rect.X1) - size, (rect.Y0), size, RightColor);
+	gfx.DrawRect(Rect<int>(rect.X1 - (size) + 1, rect.Y0 + (size), rect.X1, rect.Y1 - (size)), RightColor);
+	gfx.DrawURIsoTri((rect.X1) - size + 1, (rect.Y1) - size, size, RightColor);
 
 	/* BotSide */
-	gfx.DrawDRIsoTri(int(Rect.X0), int(Rect.Y1) - size + 1, size, BotColor);
-	gfx.DrawRect(RectF(Rect.X0 + float(size), Rect.Y1 - float(size) + 1.0f, Rect.X1 - float(size), Rect.Y1 ), BotColor);
-	gfx.DrawDLIsoTri(int(Rect.X1) - size + 1, int(Rect.Y1) - size + 1, size, BotColor);
+	gfx.DrawDRIsoTri((rect.X0), (rect.Y1) - size + 1, size, BotColor);
+	gfx.DrawRect(Rect<int>(rect.X0 + (size), rect.Y1 - (size) + 1, rect.X1 - (size), rect.Y1 ), BotColor);
+	gfx.DrawDLIsoTri((rect.X1) - size + 1, (rect.Y1) - size + 1, size, BotColor);
 }
 
-void Beveler::DrawInnerBev(RectF& Rect, int size, Graphics& gfx)
+void Beveler::DrawInnerBev(Rect<int>& rect, int size, Graphics& gfx)
 {
 	/* LeftSide */
-	gfx.DrawDLIsoTri(int(Rect.X0), int(Rect.Y0), size, RightColor);
-	gfx.DrawRect(RectF(Rect.X0, Rect.Y0 + float(size), Rect.X0 + float(size) - 1.0f, Rect.Y1 - float(size)), RightColor);
-	gfx.DrawULIsoTri(int(Rect.X0), int(Rect.Y1) - size + 1, size, RightColor);
+	gfx.DrawDLIsoTri((rect.X0), (rect.Y0), size, RightColor);
+	gfx.DrawRect(Rect<int>(rect.X0, rect.Y0 + (size), rect.X0 + (size) - 1, rect.Y1 - (size)), RightColor);
+	gfx.DrawULIsoTri((rect.X0), (rect.Y1) - size + 1, size, RightColor);
 
 	/* TopSide */
-	gfx.DrawURIsoTri(int(Rect.X0), int(Rect.Y0), size, BotColor);
-	gfx.DrawRect(RectF(Rect.X0 + float(size), Rect.Y0, Rect.X1 - float(size), Rect.Y0 + float(size) - 1.0f), BotColor);
-	gfx.DrawULIsoTri(int(Rect.X1) - size, int(Rect.Y0), size, BotColor);
+	gfx.DrawURIsoTri((rect.X0), (rect.Y0), size, BotColor);
+	gfx.DrawRect(Rect<int>(rect.X0 + (size), rect.Y0, rect.X1 - (size), rect.Y0 + (size) - 1), BotColor);
+	gfx.DrawULIsoTri((rect.X1) - size, (rect.Y0), size, BotColor);
 
 	/* RightSide */
-	gfx.DrawDRIsoTri(int(Rect.X1) - size, int(Rect.Y0), size, LeftColor);
-	gfx.DrawRect(RectF(Rect.X1 - float(size) + 1.0f, Rect.Y0 + float(size), Rect.X1, Rect.Y1 - float(size)), LeftColor);
-	gfx.DrawURIsoTri(int(Rect.X1) - size + 1, int(Rect.Y1) - size, size, LeftColor);
+	gfx.DrawDRIsoTri((rect.X1) - size, (rect.Y0), size, LeftColor);
+	gfx.DrawRect(Rect<int>(rect.X1 - (size) + 1, rect.Y0 + (size), rect.X1, rect.Y1 - (size)), LeftColor);
+	gfx.DrawURIsoTri((rect.X1) - size + 1, (rect.Y1) - size, size, LeftColor);
 
 	/* BotSide */
-	gfx.DrawDRIsoTri(int(Rect.X0), int(Rect.Y1) - size + 1, size, TopColor);
-	gfx.DrawRect(RectF(Rect.X0 + float(size), Rect.Y1 - float(size) + 1.0f, Rect.X1 - float(size), Rect.Y1), TopColor);
-	gfx.DrawDLIsoTri(int(Rect.X1) - size + 1, int(Rect.Y1) - size + 1, size, TopColor);
+	gfx.DrawDRIsoTri((rect.X0), (rect.Y1) - size + 1, size, TopColor);
+	gfx.DrawRect(Rect<int>(rect.X0 + (size), rect.Y1 - (size) + 1, rect.X1 - (size), rect.Y1), TopColor);
+	gfx.DrawDLIsoTri((rect.X1) - size + 1, (rect.Y1) - size + 1, size, TopColor);
 }
 
-void Beveler::DrawBevBrick(RectF& Rect, int size, Graphics& gfx)
+void Beveler::DrawBevBrick(Rect<int>& rect, int size, Graphics& gfx)
 {
-	DrawInnerBev(Rect, size, gfx);
-	gfx.DrawRect(Rect.GetExpand(-float(size)), BaseColor);
+	DrawInnerBev(rect, size, gfx);
+	gfx.DrawRect(rect.GetExpand(-(size)), BaseColor);
 }
 
-void Beveler::DrawBevBorder(RectF& Rect, int size, Graphics& gfx)
+void Beveler::DrawBevBorder(Rect<int>& rect, int size, Graphics& gfx)
 {
-	DrawOuterBev(Rect.GetExpand(float(2 * size)), size, gfx);
-	DrawInnerBev(Rect.GetExpand(float(size)), size, gfx);
+	DrawOuterBev(rect.GetExpand((2 * size)), size, gfx);
+	DrawInnerBev(rect.GetExpand((size)), size, gfx);
 }
 
 void Beveler::ChangeBaseColor(Color newbase)
